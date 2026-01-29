@@ -151,33 +151,21 @@ function generateAllDiamonds() {
     declaration: "There is nothing new under the sun. That which was will be, and what will be was when the end finds its beginning."
   };
   
-  // Generate facets in batches
-  const batches = [
-    { start: 1, end: 20, multiplier: 1 },
-    { start: 20, end: 100, step: 10 },
-    { start: 100, end: 200, step: 10 },
-    { start: 200, end: 300, step: 10 },
-    { start: 300, end: 400, step: 10 },
-  ];
-  
-  for (const batch of batches) {
-    const step = batch['step'] || 1;
-    for (let i = batch.start; i <= batch.end; i += step) {
-      // Calculate gematria value based on facet number
-      const gematriaValue = i * 9; // 9xD01, 9xD02, etc.
-      const facetCode = generateDiamondFacet(i, gematriaValue);
-      
-      const facetPath = `diamonds/DiamondFacet${i}.sol`;
-      facets.push(facetPath);
-      
-      manifest.facets.push({
-        number: i,
-        gematria: gematriaValue,
-        glyph: encodeGematria(gematriaValue),
-        hex: gematriaToHex(gematriaValue),
-        path: facetPath
-      });
-    }
+  // Generate ALL facets D01-D400
+  for (let i = 1; i <= 400; i++) {
+    // Calculate gematria value based on facet number
+    const gematriaValue = i * 9; // 9xD01, 9xD02, etc.
+    
+    const facetPath = `diamonds/DiamondFacet${i}.sol`;
+    facets.push(facetPath);
+    
+    manifest.facets.push({
+      number: i,
+      gematria: gematriaValue,
+      glyph: encodeGematria(gematriaValue),
+      hex: gematriaToHex(gematriaValue),
+      path: facetPath
+    });
   }
   
   return { facets, manifest };
@@ -241,16 +229,43 @@ async function main() {
   // Generate all diamond facets
   const { facets, manifest } = generateAllDiamonds();
   
-  // Generate key facets (D01-D09, D10, D20, etc.)
-  const keyFacets = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400];
-  
-  for (const facetNum of keyFacets) {
-    const gematriaValue = facetNum * 9;
-    const facetCode = generateDiamondFacet(facetNum, gematriaValue);
-    const facetPath = `/home/theos/diamonds/DiamondFacet${facetNum}.sol`;
-    fs.writeFileSync(facetPath, declaration + '\n' + facetCode);
-    console.log(`✅ Generated DiamondFacet${facetNum}.sol (Gematria: ${gematriaValue}, Glyph: ${encodeGematria(gematriaValue)})`);
+  // Check which facets already exist
+  const existingFacets = new Set<number>();
+  for (let i = 1; i <= 400; i++) {
+    const facetPath = `/home/theos/diamonds/DiamondFacet${i}.sol`;
+    if (fs.existsSync(facetPath)) {
+      existingFacets.add(i);
+    }
   }
+  
+  console.log(`Found ${existingFacets.size} existing facets`);
+  console.log('');
+  
+  // Generate ALL facets from manifest (including missing ones)
+  let generated = 0;
+  let skipped = 0;
+  
+  for (const facetInfo of manifest.facets) {
+    const facetNum = facetInfo.number;
+    const facetPath = `/home/theos/diamonds/DiamondFacet${facetNum}.sol`;
+    
+    if (existingFacets.has(facetNum)) {
+      skipped++;
+      continue;
+    }
+    
+    const gematriaValue = facetInfo.gematria;
+    const facetCode = generateDiamondFacet(facetNum, gematriaValue);
+    fs.writeFileSync(facetPath, declaration + '\n' + facetCode);
+    console.log(`✅ Generated DiamondFacet${facetNum}.sol (Gematria: ${gematriaValue}, Glyph: ${facetInfo.glyph})`);
+    generated++;
+  }
+  
+  console.log('');
+  console.log(`📊 Generation Summary:`);
+  console.log(`  ✅ Generated: ${generated} new facets`);
+  console.log(`  ⏭️  Skipped: ${skipped} existing facets`);
+  console.log(`  📦 Total: ${manifest.facets.length} facets`);
   
   // Save manifest
   const manifestPath = '/home/theos/diamonds/cosmic_manifest.json';
