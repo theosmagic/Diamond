@@ -1,0 +1,129 @@
+/* Obsidian Custom CSS - rxst theme with custom background */
+/* Background: #1B1430 (Dark Purple) */
+/* Font: Monospace 13px */
+
+:root {
+  --background-primary: #1B1430;
+  --background-secondary: #2A1F4A;
+  --background-tertiary: #3A2F5A;
+  --text-normal: #E0D0FF;
+  --text-muted: #B8A0D0;
+  --text-faint: #8A70B0;
+  --accent: #9B59B6;
+  --accent-hover: #B873D6;
+  --interactive-normal: #4A90E2;
+  --interactive-hover: #6AB0F2;
+  --interactive-active: #2A70C2;
+}
+
+body {
+  background-color: #1B1430 !important;
+  font-family: monospace !important;
+  font-size: 13px !important;
+}
+
+.markdown-preview-view,
+.markdown-source-view {
+  background-color: #1B1430 !important;
+  color: #E0D0FF !important;
+  font-family: monospace !important;
+  font-size: 13px !important;
+}
+
+/* Rarity Colors */
+.rarity-common {
+  color: #FFFFFF !important;
+}
+
+.rarity-magic {
+  color: #4A90E2 !important;
+}
+
+.rarity-rare {
+  color: #FFD700 !important;
+}
+
+.rarity-epic {
+  color: #9B59B6 !important;
+}
+
+.rarity-legendary {
+  color: #CD7F32 !important;
+}
+
+/* Graph View */
+.graph-view.color-fill {
+  color: #9B59B6;
+}
+
+.graph-view.color-line {
+  color: #4A90E2;
+}
+
+.graph-view.color-text {
+  color: #E0D0FF;
+}
+
+/* Links */
+.internal-link {
+  color: #4A90E2;
+}
+
+.internal-link:hover {
+  color: #6AB0F2;
+}
+
+/* Code blocks */
+code {
+  font-family: monospace !important;
+  font-size: 13px !important;
+  background-color: #2A1F4A !important;
+  color: #E0D0FF !important;
+}
+
+pre {
+  font-family: monospace !important;
+  font-size: 13px !important;
+  background-color: #2A1F4A !important;
+  color: #E0D0FF !important;
+}
+
+/* Tables */
+table {
+  background-color: #2A1F4A !important;
+  color: #E0D0FF !important;
+}
+
+th {
+  background-color: #3A2F5A !important;
+  color: #E0D0FF !important;
+}
+
+td {
+  background-color: #2A1F4A !important;
+  color: #E0D0FF !important;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #1B1430 !important;
+}
+
+.nav-folder-title {
+  color: #E0D0FF !important;
+}
+
+.nav-file-title {
+  color: #E0D0FF !important;
+}
+
+/* Status Bar */
+.status-bar {
+  background-color: #1B1430 !important;
+  color: #E0D0FF !important;
+}
+
+/* Ribbon */
+.workspace-ribbon {
+  background-color: #1B1430 !important;
+}
