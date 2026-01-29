@@ -213,6 +213,21 @@ class LucyAgent:
             'error': result.stderr if result.returncode != 0 else None
         }
 
+    def cloudflare_sync(self) -> Dict:
+        """
+        Execute Cloudflare Gateway synchronization.
+
+        Returns:
+            dict: Sync status
+        """
+        result = self._run_lucy('cloudflare_sync')
+
+        return {
+            'success': result.returncode == 0,
+            'output': result.stdout,
+            'error': result.stderr if result.returncode != 0 else None
+        }
+
     def calculate(self, logic: str, value: str, mode: str = 'lock') -> Dict:
         """
         Execute 4D Rossetta Calculation.

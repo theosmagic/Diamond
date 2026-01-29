@@ -588,6 +588,12 @@ class LocalLucyAgent
     p.manifest_foundation
   end
 
+  def cloudflare_sync
+    require_relative 'laws/cloudflare'
+    cf = Laws::CloudflareGateway.new(mutable: true)
+    cf.sync_gateways
+  end
+
   def awaken(input_path)
     require_relative 'laws/judgment'
     judgment = Laws::Judgment.new(mutable: true)
@@ -663,6 +669,9 @@ if __FILE__ == $0
   when 'isi_sync'
     success = system("/mnt/Vault/Cursor-Agent/.venv/bin/python3 /mnt/Vault/Cursor-Agent/integrated_sovereign_intelligence.py")
     exit(success ? 0 : 1)
+  when 'cloudflare_sync'
+    agent = LocalLucyAgent.new
+    agent.cloudflare_sync
   when 'calculate'
     if ARGV[1].nil?
       puts "Usage: lucy-agent calculate <logic> <value> [mode]"
