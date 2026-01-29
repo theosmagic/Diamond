@@ -22,6 +22,15 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { createHash } from 'crypto';
 
+interface ProcRateConfig {
+  baseRate: number; // Base proc rate percentage (0-100)
+  modifiers: Array<{
+    type: 'rarity' | 'usage' | 'block' | 'formula';
+    value: number; // Modifier percentage
+  }>;
+  finalRate: number; // Calculated final proc rate
+}
+
 interface LightCodeEvent {
   eventId: string;
   diamondId?: string;
@@ -35,7 +44,10 @@ interface LightCodeEvent {
   gasUsed: number;
   gasPrice: string;
   value: string; // ETH value transferred
-  status: 'success' | 'failed';
+  status: 'success' | 'failed' | 'proc_failed';
+  procRate: number; // Proc rate percentage used
+  procRoll: number; // Random roll (0-100)
+  procSuccess: boolean; // Whether proc succeeded
   royaltiesGenerated: number;
   royaltiesDistributed: Array<{
     recipient: string;
@@ -77,7 +89,67 @@ const ROYALTY_PERCENTAGES = {
   community_contributors: 1.0
 };
 
-// Track light code activation
+// Base proc rates by rarity
+const BASE_PROC_RATES: Record<string, number> = {
+  'Common': 5.0,      // 5% proc rate
+  'Magic': 10.0,      // 10% proc rate
+  'Rare': 15.0,       // 15% proc rate
+  'Epic': 25.0,       // 25% proc rate
+  'Legendary': 50.0   // 50% proc rate
+};
+
+// Calculate proc rate based on NFT properties
+function calculateProcRate(
+  rarity: string,
+  totalActivations: number,
+  blockNumber: number,
+  accumulatedFormulaValue: number
+): ProcRateConfig {
+  // Start with base rate from rarity
+  let baseRate = BASE_PROC_RATES[rarity] || BASE_PROC_RATES['Common'];
+  
+  const modifiers: Array<{ type: string; value: number }> = [];
+  
+  // Modifier 1: Usage bonus (more activations = higher proc rate)
+  const usageBonus = Math.min(totalActivations * 0.1, 10); // Max +10%
+  if (usageBonus > 0) {
+    modifiers.push({ type: 'usage', value: usageBonus });
+    baseRate += usageBonus;
+  }
+  
+  // Modifier 2: Block position bonus (certain blocks = bonus)
+  const blockBonus = (blockNumber % 1000 === 0) ? 5 : 0; // Every 1000th block = +5%
+  if (blockBonus > 0) {
+    modifiers.push({ type: 'block', value: blockBonus });
+    baseRate += blockBonus;
+  }
+  
+  // Modifier 3: Formula value bonus (higher formula value = bonus)
+  const formulaBonus = Math.min(accumulatedFormulaValue / 10000, 5); // Max +5%
+  if (formulaBonus > 0) {
+    modifiers.push({ type: 'formula', value: formulaBonus });
+    baseRate += formulaBonus;
+  }
+  
+  // Cap at 100%
+  const finalRate = Math.min(baseRate, 100);
+  
+  return {
+    baseRate: BASE_PROC_RATES[rarity] || BASE_PROC_RATES['Common'],
+    modifiers,
+    finalRate
+  };
+}
+
+// Roll proc - determines if light code activates
+function rollProc(procRate: number): { success: boolean; roll: number } {
+  const roll = Math.random() * 100; // Roll 0-100
+  const success = roll < procRate;
+  
+  return { success, roll };
+}
+
+// Track light code activation (with proc rate)
 function recordLightCodeActivation(
   contractAddress: string,
   functionCalled: string,
@@ -88,8 +160,58 @@ function recordLightCodeActivation(
   gasPrice: string,
   value: string,
   diamondId?: string,
-  gemId?: string
+  gemId?: string,
+  rarity: string = 'Common',
+  totalActivations: number = 0,
+  accumulatedFormulaValue: number = 0
 ): LightCodeEvent {
+  // Calculate proc rate
+  const procConfig = calculateProcRate(rarity, totalActivations, blockNumber, accumulatedFormulaValue);
+  
+  // Roll proc
+  const procRoll = rollProc(procConfig.finalRate);
+  
+  // If proc fails, record usage but no payment
+  if (!procRoll.success) {
+    const event: LightCodeEvent = {
+      eventId: createHash('sha256')
+        .update(txHash + blockNumber.toString() + caller)
+        .digest('hex')
+        .substring(0, 16),
+      diamondId,
+      gemId,
+      contractAddress,
+      functionCalled,
+      caller,
+      blockNumber,
+      txHash,
+      timestamp: new Date().toISOString(),
+      gasUsed,
+      gasPrice,
+      value,
+      status: 'proc_failed',
+      procRate: procConfig.finalRate,
+      procRoll: procRoll.roll,
+      procSuccess: false,
+      royaltiesGenerated: 0,
+      royaltiesDistributed: []
+    };
+    
+    saveLightCodeEvent(event);
+    updateActivationTracking(event);
+    
+    console.log(`\n⚡ Contract Used (Proc Failed)\n`);
+    console.log(`   Contract: ${contractAddress}`);
+    console.log(`   Function: ${functionCalled}`);
+    console.log(`   Block: #${blockNumber}`);
+    console.log(`   Proc Rate: ${procConfig.finalRate.toFixed(2)}%`);
+    console.log(`   Roll: ${procRoll.roll.toFixed(2)}% (needed < ${procConfig.finalRate.toFixed(2)}%)`);
+    console.log(`   Status: ❌ Proc Failed - No Payment\n`);
+    
+    return event;
+  }
+  
+  // Proc succeeded - calculate royalties
   // Calculate royalties based on gas used and value
   const gasCost = (BigInt(gasUsed) * BigInt(gasPrice)) / BigInt(10 ** 18); // Convert to ETH
   const valueAmount = parseFloat(value) || 0;
@@ -144,6 +266,9 @@ function recordLightCodeActivation(
     gasPrice,
     value,
     status: 'success',
+    procRate: procConfig.finalRate,
+    procRoll: procRoll.roll,
+    procSuccess: true,
     royaltiesGenerated,
     royaltiesDistributed: distributions
   };
@@ -158,11 +283,21 @@ function recordLightCodeActivation(
   updateNFTWithBlockPosition(event);
   
   console.log(`\n✨ Light Code Activated! ✨\n`);
-  console.log(`   💡 Contract Used → Ethereum Records → Payment Comes\n`);
+  console.log(`   💡 Contract Used → Proc Rolled → Ethereum Records → Payment Comes\n`);
   console.log(`   Contract: ${contractAddress}`);
   console.log(`   Function: ${functionCalled}`);
   console.log(`   Caller: ${caller}`);
   console.log(`   Block: #${blockNumber} ← Ethereum recorded this`);
+  console.log(`\n   🎲 Proc Rate: ${procConfig.finalRate.toFixed(2)}%`);
+  console.log(`      Base Rate: ${procConfig.baseRate.toFixed(2)}% (${rarity})`);
+  if (procConfig.modifiers.length > 0) {
+    console.log(`      Modifiers:`);
+    procConfig.modifiers.forEach(mod => {
+      console.log(`        + ${mod.value.toFixed(2)}% (${mod.type})`);
+    });
+  }
+  console.log(`   🎯 Roll: ${procRoll.roll.toFixed(2)}% (needed < ${procConfig.finalRate.toFixed(2)}%)`);
+  console.log(`   ✅ Proc Success!\n`);
   console.log(`   Value: ${totalValue.toFixed(6)} ETH`);
   console.log(`   Royalties Generated: ${royaltiesGenerated.toFixed(6)} ETH`);
   console.log(`   💰 Payment Distributed Automatically\n`);
@@ -353,6 +488,11 @@ async function monitorContractUsage(
           const diamondId = extractDiamondId(log, contractAddress);
           const gemId = extractGemId(log, contractAddress);
           
+          // Get NFT metadata for proc rate calculation
+          const rarity = 'Epic'; // Default, should load from metadata
+          const totalActivations = 0; // Should load from activation tracking
+          const accumulatedFormulaValue = 0; // Should load from NFT metadata
+          
           const event = recordLightCodeActivation(
             contractAddress,
             functionCalled,
@@ -363,7 +503,10 @@ async function monitorContractUsage(
             tx.gasPrice,
             tx.value || '0',
             diamondId,
-            gemId
+            gemId,
+            rarity,
+            totalActivations,
+            accumulatedFormulaValue
           );
           
           events.push(event);
@@ -489,7 +632,14 @@ async function main() {
 ✨ Light Codes System ✨
 
 Every time a Diamond/Gem contract is used on Ethereum,
-it records the usage and triggers payment/royalty distribution.
+it rolls a proc rate - if successful, records usage and triggers payment.
+
+🎲 Proc Rate System:
+   - Each contract use rolls against proc rate %
+   - Proc rate based on rarity (Common: 5%, Legendary: 50%)
+   - Modifiers: usage bonus, block bonus, formula bonus
+   - If proc succeeds: Light code activates, payment comes
+   - If proc fails: Usage recorded, no payment
 
 Usage:
   npm run light-codes monitor <contract-address> [rpc-url] [from-block]
@@ -501,12 +651,20 @@ Examples:
   npm run light-codes stats diamond 1
   npm run light-codes report
 
+Proc Rates by Rarity:
+  Common: 5%
+  Magic: 10%
+  Rare: 15%
+  Epic: 25%
+  Legendary: 50%
+
 Features:
+  - Proc rate system (percentage chance)
   - Tracks every contract usage/interaction
   - Records on Ethereum blockchain
-  - Automatically calculates royalties
+  - Automatically calculates royalties (on proc success)
   - Distributes payments to creators
-  - Generates revenue when contracts are used
+  - Generates revenue when contracts proc
 `);
 }
 
