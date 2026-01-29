@@ -56,6 +56,15 @@ interface LightCodeEvent {
   }>;
 }
 
+interface CooldownTracker {
+  caller: string;
+  contractAddress: string;
+  lastProcAttempt: number; // Timestamp in milliseconds
+  cooldownSeconds: number; // Cooldown duration (default 2.0)
+  cooldownActive: boolean;
+  nextProcAvailable: number; // Timestamp when next proc can be attempted
+}
+
 interface LightCodeActivation {
   activationId: string;
   nftId: string;
@@ -88,6 +97,77 @@ const ROYALTY_PERCENTAGES = {
   developers: 2.5,
   community_contributors: 1.0
 };
+
+// Cooldown configuration
+const DEFAULT_COOLDOWN_SECONDS = 2.0; // Default 2.0 second cooldown
+const COOLDOWN_TRACKER_FILE = path.join(process.cwd(), 'light_codes', 'cooldowns.json');
+
+// Check and update cooldown
+function checkCooldown(caller: string, contractAddress: string): {
+  onCooldown: boolean;
+  timeRemaining: number;
+  cooldownTracker: CooldownTracker;
+} {
+  // Load cooldown tracker
+  let cooldowns: Record<string, CooldownTracker> = {};
+  
+  if (fs.existsSync(COOLDOWN_TRACKER_FILE)) {
+    cooldowns = JSON.parse(fs.readFileSync(COOLDOWN_TRACKER_FILE, 'utf-8'));
+  }
+  
+  const key = `${caller}_${contractAddress}`;
+  const now = Date.now();
+  
+  let tracker: CooldownTracker;
+  
+  if (cooldowns[key]) {
+    tracker = cooldowns[key];
+    const timeSinceLastAttempt = (now - tracker.lastProcAttempt) / 1000; // Convert to seconds
+    
+    if (timeSinceLastAttempt < tracker.cooldownSeconds) {
+      // Still on cooldown
+      tracker.cooldownActive = true;
+      tracker.nextProcAvailable = tracker.lastProcAttempt + (tracker.cooldownSeconds * 1000);
+      return {
+        onCooldown: true,
+        timeRemaining: tracker.cooldownSeconds - timeSinceLastAttempt,
+        cooldownTracker: tracker
+      };
+    } else {
+      // Cooldown expired
+      tracker.cooldownActive = false;
+      tracker.lastProcAttempt = now;
+      tracker.nextProcAvailable = now + (tracker.cooldownSeconds * 1000);
+    }
+  } else {
+    // First attempt - no cooldown
+    tracker = {
+      caller,
+      contractAddress,
+      lastProcAttempt: now,
+      cooldownSeconds: DEFAULT_COOLDOWN_SECONDS,
+      cooldownActive: false,
+      nextProcAvailable: now + (DEFAULT_COOLDOWN_SECONDS * 1000)
+    };
+  }
+  
+  // Update tracker
+  cooldowns[key] = tracker;
+  
+  // Ensure directory exists
+  const cooldownDir = path.dirname(COOLDOWN_TRACKER_FILE);
+  if (!fs.existsSync(cooldownDir)) {
+    fs.mkdirSync(cooldownDir, { recursive: true });
+  }
+  
+  fs.writeFileSync(COOLDOWN_TRACKER_FILE, JSON.stringify(cooldowns, null, 2));
+  
+  return {
+    onCooldown: false,
+    timeRemaining: 0,
+    cooldownTracker: tracker
+  };
+}
 
 // Base proc rates by rarity
 const BASE_PROC_RATES: Record<string, number> = {
@@ -149,7 +229,7 @@ function rollProc(procRate: number): { success: boolean; roll: number } {
   return { success, roll };
 }
 
-// Track light code activation (with proc rate)
+// Track light code activation (with proc rate and cooldown)
 function recordLightCodeActivation(
   contractAddress: string,
   functionCalled: string,
@@ -164,7 +244,55 @@ function recordLightCodeActivation(
   rarity: string = 'Common',
   totalActivations: number = 0,
   accumulatedFormulaValue: number = 0
-): LightCodeEvent {
+): LightCodeEvent | null {
+  // Check cooldown first
+  const cooldownCheck = checkCooldown(caller, contractAddress);
+  
+  if (cooldownCheck.onCooldown) {
+    const event: LightCodeEvent = {
+      eventId: createHash('sha256')
+        .update(txHash + blockNumber.toString() + caller)
+        .digest('hex')
+        .substring(0, 16),
+      diamondId,
+      gemId,
+      contractAddress,
+      functionCalled,
+      caller,
+      blockNumber,
+      txHash,
+      timestamp: new Date().toISOString(),
+      gasUsed,
+      gasPrice,
+      value,
+      status: 'proc_failed',
+      procRate: 0,
+      procRoll: 0,
+      procSuccess: false,
+      royaltiesGenerated: 0,
+      royaltiesDistributed: []
+    };
+    
+    console.log(`\n⏳ Contract Used (On Cooldown)\n`);
+    console.log(`   Contract: ${contractAddress}`);
+    console.log(`   Function: ${functionCalled}`);
+    console.log(`   Caller: ${caller}`);
+    console.log(`   Block: #${blockNumber}`);
+    console.log(`   ⏱️  Cooldown: ${cooldownCheck.timeRemaining.toFixed(2)}s remaining`);
+    console.log(`   Next Proc Available: ${new Date(cooldownCheck.cooldownTracker.nextProcAvailable).toISOString()}`);
+    console.log(`   Status: ❌ On Cooldown - No Proc Roll\n`);
+    console.log(`   💡 Note: 2.0s cooldown prevents spam/abuse\n`);
+    
+    // Still record the attempt (but no proc roll)
+    saveLightCodeEvent(event);
+    
+    return null; // Return null to indicate cooldown prevented proc
+  }
+  
+  // Cooldown passed - proceed with proc roll
+  // Update last proc attempt timestamp
+  const cooldownCheck2 = checkCooldown(caller, contractAddress);
+  
   // Calculate proc rate
   const procConfig = calculateProcRate(rarity, totalActivations, blockNumber, accumulatedFormulaValue);
   
@@ -204,9 +332,11 @@ function recordLightCodeActivation(
     console.log(`   Contract: ${contractAddress}`);
     console.log(`   Function: ${functionCalled}`);
     console.log(`   Block: #${blockNumber}`);
+    console.log(`   ⏱️  Cooldown: ${cooldownCheck2.cooldownTracker.cooldownSeconds}s (active)`);
     console.log(`   Proc Rate: ${procConfig.finalRate.toFixed(2)}%`);
     console.log(`   Roll: ${procRoll.roll.toFixed(2)}% (needed < ${procConfig.finalRate.toFixed(2)}%)`);
-    console.log(`   Status: ❌ Proc Failed - No Payment\n`);
+    console.log(`   Status: ❌ Proc Failed - No Payment`);
+    console.log(`   Next Proc Available: ${new Date(cooldownCheck2.cooldownTracker.nextProcAvailable).toISOString()}\n`);
     
     return event;
   }
@@ -283,12 +413,13 @@ function recordLightCodeActivation(
   updateNFTWithBlockPosition(event);
   
   console.log(`\n✨ Light Code Activated! ✨\n`);
-  console.log(`   💡 Contract Used → Proc Rolled → Ethereum Records → Payment Comes\n`);
+  console.log(`   💡 Contract Used → Cooldown Check → Proc Rolled → Ethereum Records → Payment Comes\n`);
   console.log(`   Contract: ${contractAddress}`);
   console.log(`   Function: ${functionCalled}`);
   console.log(`   Caller: ${caller}`);
   console.log(`   Block: #${blockNumber} ← Ethereum recorded this`);
-  console.log(`\n   🎲 Proc Rate: ${procConfig.finalRate.toFixed(2)}%`);
+  console.log(`   ⏱️  Cooldown: ${cooldownCheck2.cooldownTracker.cooldownSeconds}s (passed)\n`);
+  console.log(`   🎲 Proc Rate: ${procConfig.finalRate.toFixed(2)}%`);
   console.log(`      Base Rate: ${procConfig.baseRate.toFixed(2)}% (${rarity})`);
   if (procConfig.modifiers.length > 0) {
     console.log(`      Modifiers:`);
@@ -297,7 +428,8 @@ function recordLightCodeActivation(
     });
   }
   console.log(`   🎯 Roll: ${procRoll.roll.toFixed(2)}% (needed < ${procConfig.finalRate.toFixed(2)}%)`);
-  console.log(`   ✅ Proc Success!\n`);
+  console.log(`   ✅ Proc Success!`);
+  console.log(`   ⏱️  Cooldown Started: ${cooldownCheck2.cooldownTracker.cooldownSeconds}s until next proc\n`);
   console.log(`   Value: ${totalValue.toFixed(6)} ETH`);
   console.log(`   Royalties Generated: ${royaltiesGenerated.toFixed(6)} ETH`);
   console.log(`   💰 Payment Distributed Automatically\n`);
@@ -632,7 +764,13 @@ async function main() {
 ✨ Light Codes System ✨
 
 Every time a Diamond/Gem contract is used on Ethereum,
-it rolls a proc rate - if successful, records usage and triggers payment.
+it checks cooldown, rolls proc rate - if successful, records usage and triggers payment.
+
+⏱️  Cooldown System:
+   - Default 2.0 second cooldown between proc attempts
+   - Prevents spam/abuse ("1 button smash spin to win")
+   - Per caller + contract address
+   - Cooldown must pass before proc roll
 
 🎲 Proc Rate System:
    - Each contract use rolls against proc rate %
@@ -651,6 +789,9 @@ Examples:
   npm run light-codes stats diamond 1
   npm run light-codes report
 
+Cooldown:
+  Default: 2.0 seconds (configurable, may change in future)
+
 Proc Rates by Rarity:
   Common: 5%
   Magic: 10%
@@ -659,6 +800,7 @@ Proc Rates by Rarity:
   Legendary: 50%
 
 Features:
+  - Cooldown system (prevents spam)
   - Proc rate system (percentage chance)
   - Tracks every contract usage/interaction
   - Records on Ethereum blockchain
