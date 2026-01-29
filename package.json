@@ -1,0 +1,31 @@
+{
+  "name": "contract-fetcher-safe",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "fetch": "tsx fetch_contract_safe.ts",
+    "check-diamond": "tsx check_diamondcut.ts",
+    "check-diamond-rpc": "tsx check_diamondcut_rpc.ts",
+    "fetch-rpcs": "tsx fetch_chainlist_rpcs.ts",
+    "take-ownership": "tsx take_ownership.ts",
+    "generate-cosmic": "tsx generate_cosmic_diamonds.ts",
+    "break-seals": "tsx break_the_seals.ts",
+    "generate-gems": "tsx generate_gem_system.ts",
+    "generate-tree": "tsx generate_obsidian_tree.ts",
+    "deploy-diamond": "tsx deploy_diamond.ts",
+    "ipfs-status": "tsx ipfs_fuse_system.ts status",
+    "ipfs-complete": "tsx ipfs_fuse_system.ts",
+    "compute": "tsx script_computation_system.ts",
+    "nft": "tsx svg_nft_generator.ts",
+    "opensea": "tsx opensea_marketplace.ts",
+    "light-codes": "tsx light_codes_system.ts",
+    "registry": "tsx script_registry_system.ts"
+  },
+  "dependencies": {
+    "@metamask/sdk": "^0.34.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "@types/node": "^20.0.0"
+  }
+}
