@@ -1,11 +1,22 @@
 /**
  * IPFS FUSE + rsync System
  * 
+ * Human-Readable Glyph System:
+ * Instead of remembering 5 long IPFS CIDs like:
+ *   Qm1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+ *   Qm9876543210fedcba9876543210fedcba9876543210fedcba9876543210fedcba
+ *   Qmabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
+ *   Qmfedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210
+ *   Qm1122334455667788990011223344556677889900112233445566778899001122
+ * 
+ * You remember 5 simple Aramaic glyphs:
+ *   𐡀  𐡄  𐡉  𐡔𐡎𐡈  𐡕𐡉𐡃
+ * 
  * When Diamonds are deployed:
  * 1. Each IPFS CID becomes an IPFS node
- * 2. Each CID gets assigned an Imperial Aramaic Glyph/Rune
+ * 2. Each CID gets assigned an Imperial Aramaic Glyph/Rune (human-readable alias)
  * 3. FUSE mounts IPFS as filesystem
- * 4. rsync syncs between IPFS nodes (CIDs)
+ * 4. rsync syncs between IPFS nodes (using glyphs as identifiers)
  * 5. System completes when 5 Diamonds are deployed
  */
 
@@ -171,9 +182,13 @@ function createIPFSNode(deployment: any, index: number): IPFSNode {
 
 // Mount IPFS node using FUSE
 function mountIPFSNode(node: IPFSNode): void {
-  console.log(`📁 Mounting IPFS node ${node.diamondId} (CID: ${node.cid})...`);
+  console.log(`📁 Mounting IPFS node ${node.glyph} (Diamond ${node.diamondId})...`);
+  console.log(`   CID: ${node.cid.substring(0, 12)}... (remember as: ${node.glyph})`);
 
-  // Ensure mount point exists
+  // Ensure mount point exists (use glyph in path for human readability)
+  const glyphMountPoint = path.join(FUSE_MOUNT_BASE, `glyph_${node.glyph.replace(/[^a-zA-Z0-9]/g, '_')}`);
+  node.mountPoint = glyphMountPoint; // Update mount point to use glyph
+  
   if (!fs.existsSync(node.mountPoint)) {
     fs.mkdirSync(node.mountPoint, { recursive: true });
   }
@@ -189,7 +204,7 @@ function mountIPFSNode(node: IPFSNode): void {
         { stdio: 'inherit' }
       );
       
-      console.log(`✅ Mounted IPFS node ${node.diamondId} at ${node.mountPoint}`);
+      console.log(`✅ Mounted IPFS node ${node.glyph} at ${node.mountPoint}`);
     } catch {
       // Fallback: Use ipfs mount (if available)
       try {
@@ -199,14 +214,14 @@ function mountIPFSNode(node: IPFSNode): void {
         const localPath = path.join(node.mountPoint, 'content');
         execSync(`ipfs get ${node.cid} -o ${localPath}`, { stdio: 'inherit' });
         
-        console.log(`✅ Retrieved IPFS content for node ${node.diamondId}`);
+        console.log(`✅ Retrieved IPFS content for node ${node.glyph}`);
         console.log(`⚠️  Note: Full FUSE mounting requires ipfs-fuse. Content available at ${localPath}`);
       } catch {
         console.log(`⚠️  IPFS/FUSE tools not available. Creating symbolic mount point.`);
-        // Create a marker file
+        // Create a marker file with glyph as primary identifier
         fs.writeFileSync(
-          path.join(node.mountPoint, 'cid.txt'),
-          `${node.cid}\nGlyph: ${node.glyph}\nDiamond: ${node.diamondId}`
+          path.join(node.mountPoint, 'node_info.txt'),
+          `Glyph: ${node.glyph}\nCID: ${node.cid}\nDiamond: ${node.diamondId}\n\nRemember this node as: ${node.glyph}`
         );
       }
     }
@@ -216,26 +231,28 @@ function mountIPFSNode(node: IPFSNode): void {
   }
 }
 
-// Sync between IPFS nodes using rsync
+// Sync between IPFS nodes using rsync (using glyphs as identifiers)
 function syncIPFSNodes(sourceNode: IPFSNode, targetNode: IPFSNode): void {
-  console.log(`🔄 Syncing ${sourceNode.diamondId} (${sourceNode.glyph}) → ${targetNode.diamondId} (${targetNode.glyph})...`);
+  console.log(`🔄 Syncing ${sourceNode.glyph} → ${targetNode.glyph}...`);
+  console.log(`   (Instead of: ${sourceNode.cid.substring(0, 20)}... → ${targetNode.cid.substring(0, 20)}...)`);
 
   try {
-    // Use rsync to sync between mount points
+    // Use rsync to sync between mount points (using glyph in sync directory name)
+    const syncDirName = `sync_from_${sourceNode.glyph.replace(/[^a-zA-Z0-9]/g, '_')}`;
     execSync(
-      `rsync -avz --progress ${sourceNode.mountPoint}/ ${targetNode.mountPoint}/sync_from_${sourceNode.diamondId}/`,
+      `rsync -avz --progress ${sourceNode.mountPoint}/ ${targetNode.mountPoint}/${syncDirName}/`,
       { stdio: 'inherit' }
     );
 
-    // Update sync relationships
-    if (!targetNode.syncedWith.includes(sourceNode.cid)) {
-      targetNode.syncedWith.push(sourceNode.cid);
+    // Update sync relationships (track by glyph for human readability)
+    if (!targetNode.syncedWith.includes(sourceNode.glyph)) {
+      targetNode.syncedWith.push(sourceNode.glyph);
     }
-    if (!sourceNode.syncedWith.includes(targetNode.cid)) {
-      sourceNode.syncedWith.push(targetNode.cid);
+    if (!sourceNode.syncedWith.includes(targetNode.glyph)) {
+      sourceNode.syncedWith.push(targetNode.glyph);
     }
 
-    console.log(`✅ Synced ${sourceNode.glyph} → ${targetNode.glyph}`);
+    console.log(`✅ Synced ${sourceNode.glyph} → ${targetNode.glyph} (much easier than CIDs!)`);
   } catch (error) {
     console.error(`❌ Error syncing nodes: ${error}`);
     throw error;
@@ -327,11 +344,16 @@ async function checkAndCompleteSystem(): Promise<void> {
   console.log(`   Deployments: ${deployed.length}/${REQUIRED_DEPLOYMENTS}`);
   console.log(`   IPFS Nodes: ${nodes.length}`);
   console.log(`   Main Mount: ${mainMountPoint}`);
-  console.log(`\n   Node Glyphs:\n`);
+  console.log(`\n   🌟 Human-Readable Node Identifiers (Glyphs):\n`);
   nodes.forEach((node, i) => {
-    console.log(`   ${i + 1}. Diamond ${node.diamondId}: ${node.glyph} (${node.cid.substring(0, 12)}...)`);
+    console.log(`   ${i + 1}. ${node.glyph} - Diamond ${node.diamondId}`);
+    console.log(`      CID: ${node.cid.substring(0, 20)}... (remember as: ${node.glyph})`);
+    console.log(`      Mount: ${node.mountPoint}`);
+    console.log(``);
   });
-  console.log(`\n   All nodes synced via rsync in mesh network.\n`);
+  console.log(`\n   💡 Remember these 5 glyphs instead of 5 long CIDs:`);
+  console.log(`      ${nodes.map(n => n.glyph).join('  ')}\n`);
+  console.log(`   ✅ All nodes synced via rsync in mesh network.\n`);
 }
 
 // Initialize system (run after each deployment)
@@ -361,14 +383,17 @@ async function main() {
     console.log(`   IPFS Nodes: ${status.nodes.length}`);
     console.log(`   FUSE Mounted: ${status.fuseMounted ? '✅ YES' : '❌ NO'}`);
     
-    if (status.nodes.length > 0) {
-      console.log(`\n   Nodes:\n`);
-      status.nodes.forEach((node, i) => {
-        console.log(`   ${i + 1}. ${node.glyph} - Diamond ${node.diamondId} (${node.network})`);
-        console.log(`      CID: ${node.cid}`);
-        console.log(`      Mount: ${node.mountPoint}`);
-      });
-    }
+  if (status.nodes.length > 0) {
+    console.log(`\n   🌟 Nodes (Human-Readable Glyphs):\n`);
+    status.nodes.forEach((node, i) => {
+      console.log(`   ${i + 1}. ${node.glyph} - Diamond ${node.diamondId} (${node.network})`);
+      console.log(`      Remember as: ${node.glyph}`);
+      console.log(`      CID: ${node.cid.substring(0, 20)}... (${node.cid.length} chars)`);
+      console.log(`      Mount: ${node.mountPoint}`);
+      console.log(``);
+    });
+    console.log(`   💡 Tip: Use glyphs (${status.nodes.map(n => n.glyph).join(', ')}) instead of CIDs!`);
+  }
     return;
   }
 
