@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# DeepSeek-OCR-2 Wrapper for Cursor-Agent
+# Part of the Sovereign Vision System
+
+SOVEREIGN_AGENT_DIR="/mnt/Vault/Cursor-Agent"
+LOGFILE="/mnt/Vault/Cursor-Agent/logs/ocr-$(date +%Y%m%d).log"
+mkdir -p "$(dirname "$LOGFILE")"
+
+echo "[$(date -Iseconds)] OCR Operation: $@" >> "$LOGFILE"
+
+if [ -f "$SOVEREIGN_AGENT_DIR/deepseek_ocr.py" ]; then
+    "$SOVEREIGN_AGENT_DIR/.venv/bin/python3" "$SOVEREIGN_AGENT_DIR/deepseek_ocr.py" "$@" 2>&1 | tee -a "$LOGFILE"
+else
+    echo "Error: deepseek_ocr.py not found in $SOVEREIGN_AGENT_DIR"
+    exit 1
+fi

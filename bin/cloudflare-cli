@@ -1,0 +1,164 @@
+#!/usr/bin/env python3
+"""
+Cloudflare CLI
+Command-line interface for Cloudflare API
+"""
+
+import sys
+import json
+import asyncio
+sys.path.insert(0, '/mnt/Vault/Cursor-Agent')
+
+from integrations.cloudflare_api import CloudflareAPI
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Cloudflare CLI")
+        print("\nUsage: cloudflare-cli <command> [args]")
+        print("\nCommands:")
+        print("  status              - Get MCP server status")
+        print("  dns list            - List DNS records")
+        print("  dns get <id>        - Get DNS record")
+        print("  dns create <name> <type> <content> - Create DNS record")
+        print("  dns delete <id>     - Delete DNS record")
+        print("  ssl list            - List SSL certificates")
+        print("  ssl settings        - Get SSL settings")
+        print("  access list         - List Access applications")
+        print("  access get <id>     - Get Access application")
+        print("  web3 list           - List Web3 hostnames")
+        print("  zone info           - Get zone information")
+        print("\nExamples:")
+        print("  cloudflare-cli status")
+        print("  cloudflare-cli dns list")
+        print("  cloudflare-cli dns create system76.bridgeworld.lol A 192.168.1.100")
+        print("  cloudflare-cli access list")
+        sys.exit(1)
+
+    api = CloudflareAPI()
+    command = sys.argv[1]
+
+    try:
+        if command == "status":
+            result = asyncio.run(api.get_mcp_status())
+            print(json.dumps(result, indent=2))
+
+        elif command == "dns":
+            if len(sys.argv) < 3:
+                print("Usage: cloudflare-cli dns <list|get|create|delete> [args]")
+                sys.exit(1)
+
+            subcommand = sys.argv[2]
+
+            if subcommand == "list":
+                record_type = sys.argv[3] if len(sys.argv) > 3 else None
+                result = asyncio.run(api.list_dns_records(record_type))
+                print(json.dumps(result, indent=2))
+
+            elif subcommand == "get":
+                if len(sys.argv) < 4:
+                    print("Usage: cloudflare-cli dns get <record_id>")
+                    sys.exit(1)
+                record_id = sys.argv[3]
+                result = asyncio.run(api.get_dns_record(record_id))
+                print(json.dumps(result, indent=2))
+
+            elif subcommand == "create":
+                if len(sys.argv) < 6:
+                    print("Usage: cloudflare-cli dns create <name> <type> <content> [ttl] [proxied]")
+                    sys.exit(1)
+                name = sys.argv[3]
+                record_type = sys.argv[4]
+                content = sys.argv[5]
+                ttl = int(sys.argv[6]) if len(sys.argv) > 6 else 1
+                proxied = sys.argv[7].lower() == 'true' if len(sys.argv) > 7 else False
+                result = asyncio.run(api.create_dns_record(name, record_type, content, ttl, proxied))
+                print(json.dumps(result, indent=2))
+
+            elif subcommand == "delete":
+                if len(sys.argv) < 4:
+                    print("Usage: cloudflare-cli dns delete <record_id>")
+                    sys.exit(1)
+                record_id = sys.argv[3]
+                result = asyncio.run(api.delete_dns_record(record_id))
+                print(json.dumps(result, indent=2))
+
+        elif command == "ssl":
+            if len(sys.argv) < 3:
+                print("Usage: cloudflare-cli ssl <list|settings>")
+                sys.exit(1)
+
+            subcommand = sys.argv[2]
+
+            if subcommand == "list":
+                result = asyncio.run(api.list_ssl_certificates())
+                print(json.dumps(result, indent=2))
+
+            elif subcommand == "settings":
+                result = asyncio.run(api.get_ssl_settings())
+                print(json.dumps(result, indent=2))
+
+        elif command == "access":
+            if len(sys.argv) < 3:
+                print("Usage: cloudflare-cli access <list|get>")
+                sys.exit(1)
+
+            subcommand = sys.argv[2]
+
+            if subcommand == "list":
+                result = asyncio.run(api.list_access_applications())
+                print(json.dumps(result, indent=2))
+
+            elif subcommand == "get":
+                if len(sys.argv) < 4:
+                    print("Usage: cloudflare-cli access get <app_id>")
+                    sys.exit(1)
+                app_id = sys.argv[3]
+                result = asyncio.run(api.get_access_application(app_id))
+                print(json.dumps(result, indent=2))
+
+        elif command == "web3":
+            if len(sys.argv) < 3:
+                print("Usage: cloudflare-cli web3 <list|get>")
+                sys.exit(1)
+
+            subcommand = sys.argv[2]
+
+            if subcommand == "list":
+                result = asyncio.run(api.list_web3_hostnames())
+                print(json.dumps(result, indent=2))
+
+            elif subcommand == "get":
+                if len(sys.argv) < 4:
+                    print("Usage: cloudflare-cli web3 get <hostname_id>")
+                    sys.exit(1)
+                hostname_id = sys.argv[3]
+                result = asyncio.run(api.get_web3_hostname(hostname_id))
+                print(json.dumps(result, indent=2))
+
+        elif command == "zone":
+            if len(sys.argv) < 3:
+                print("Usage: cloudflare-cli zone <info|settings>")
+                sys.exit(1)
+
+            subcommand = sys.argv[2]
+
+            if subcommand == "info":
+                result = asyncio.run(api.get_zone_info())
+                print(json.dumps(result, indent=2))
+
+            elif subcommand == "settings":
+                result = asyncio.run(api.get_zone_settings())
+                print(json.dumps(result, indent=2))
+
+        else:
+            print(f"Unknown command: {command}")
+            sys.exit(1)
+
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

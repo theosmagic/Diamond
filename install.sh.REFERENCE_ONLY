@@ -1,0 +1,487 @@
+#!/usr/bin/env bash
+
+##
+# CURSOR AGENT ULTIMATE INSTALLATION
+# ===================================
+#
+# This script installs and configures the Cursor Agent CLI
+# with GitHub Actions integration for terminal-based AI coding.
+##
+
+set -e
+
+# Colors
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+RED='\033[0;31m'
+MAGENTA='\033[0;35m'
+NC='\033[0m'
+
+echo
+echo -e "${MAGENTA}∇ • Θεός°●⟐●Σ℧ΛΘ${NC}"
+echo
+echo -e "${CYAN}========================================${NC}"
+echo -e "${CYAN}CURSOR AGENT ULTIMATE INSTALLATION${NC}"
+echo -e "${CYAN}========================================${NC}"
+echo
+
+# ============================================================================
+# STAGE 1: Install Cursor CLI
+# ============================================================================
+
+echo -e "${CYAN}[1/7] Installing Cursor CLI...${NC}"
+
+if command -v cursor-agent &> /dev/null; then
+    echo -e "  ${GREEN}✓ Cursor CLI already installed${NC}"
+    cursor-agent --version
+else
+    echo "  Downloading and installing..."
+    curl https://cursor.com/install -fsS | bash
+
+    # Add to PATH
+    export PATH="$HOME/.cursor/bin:$PATH"
+
+    # Add to shell rc files
+    for rcfile in ~/.bashrc ~/.zshrc; do
+        if [ -f "$rcfile" ]; then
+            if ! grep -q "/.cursor/bin" "$rcfile"; then
+                echo 'export PATH="$HOME/.cursor/bin:$PATH"' >> "$rcfile"
+                echo -e "  ${GREEN}✓ Added to $rcfile${NC}"
+            fi
+        fi
+    done
+
+    echo -e "  ${GREEN}✓ Cursor CLI installed${NC}"
+fi
+
+echo
+
+# ============================================================================
+# STAGE 2: Install GitHub CLI
+# ============================================================================
+
+echo -e "${CYAN}[2/7] Installing GitHub CLI...${NC}"
+
+if command -v gh &> /dev/null; then
+    echo -e "  ${GREEN}✓ GitHub CLI already installed${NC}"
+    gh --version | head -1
+else
+    echo "  Installing gh..."
+
+    # Detect package manager
+    if command -v nala &> /dev/null; then
+        sudo nala install gh -y
+    elif command -v apt &> /dev/null; then
+        sudo apt install gh -y
+    elif command -v brew &> /dev/null; then
+        brew install gh
+    else
+        echo -e "  ${YELLOW}⚠ Could not auto-install. Install gh manually.${NC}"
+    fi
+
+    echo -e "  ${GREEN}✓ GitHub CLI installed${NC}"
+fi
+
+# Authenticate with GitHub
+if ! gh auth status &> /dev/null; then
+    echo
+    echo -e "${YELLOW}GitHub authentication required${NC}"
+    echo "Launching browser for authentication..."
+    gh auth login
+fi
+
+echo
+
+# ============================================================================
+# STAGE 3: Create Agent Aliases
+# ============================================================================
+
+echo -e "${CYAN}[3/7] Creating agent aliases...${NC}"
+
+# Create wrapper scripts
+cat > bin/agent << 'EOF'
+#!/usr/bin/env bash
+# Wrapper for cursor-agent with logging
+LOGFILE="$HOME/.cursor-agent/logs/agent-$(date +%Y%m%d).log"
+mkdir -p "$(dirname "$LOGFILE")"
+
+echo "[$(date -Iseconds)] cursor-agent $@" >> "$LOGFILE"
+cursor-agent "$@" 2>&1 | tee -a "$LOGFILE"
+EOF
+
+chmod +x bin/agent
+
+cat > bin/agent-review << 'EOF'
+#!/usr/bin/env bash
+# Quick code review using cursor-agent
+cursor-agent review "$@"
+EOF
+
+chmod +x bin/agent-review
+
+cat > bin/agent-write << 'EOF'
+#!/usr/bin/env bash
+# Write code using cursor-agent
+cursor-agent write "$@"
+EOF
+
+chmod +x bin/agent-write
+
+cat > bin/agent-fix << 'EOF'
+#!/usr/bin/env bash
+# Fix code using cursor-agent
+cursor-agent fix "$@"
+EOF
+
+chmod +x bin/agent-fix
+
+echo -e "  ${GREEN}✓ Agent aliases created${NC}"
+echo
+
+# ============================================================================
+# STAGE 4: Configure Cursor Agent
+# ============================================================================
+
+echo -e "${CYAN}[4/7] Configuring Cursor Agent...${NC}"
+
+mkdir -p ~/.cursor-agent/config
+
+cat > config/agent.yaml << 'EOF'
+# Cursor Agent Configuration
+# ===========================
+
+# Model settings
+model:
+  name: "claude-3.5-sonnet"
+  temperature: 0.7
+  max_tokens: 4096
+
+# Agent behavior
+agent:
+  auto_review: true
+  interactive: true
+  verbose: true
+
+# GitHub integration
+github:
+  auto_pr: false
+  default_branch: "main"
+  commit_prefix: "[agent]"
+
+# File handling
+files:
+  respect_gitignore: true
+  max_file_size: 1048576  # 1MB
+  excluded_extensions:
+    - ".lock"
+    - ".log"
+    - ".tmp"
+
+# Logging
+logging:
+  level: "info"
+  directory: "~/.cursor-agent/logs"
+  retention_days: 30
+EOF
+
+cp config/agent.yaml ~/.cursor-agent/config/
+
+echo -e "  ${GREEN}✓ Configuration created${NC}"
+echo
+
+# ============================================================================
+# STAGE 5: Install GitHub Actions Workflow
+# ============================================================================
+
+echo -e "${CYAN}[5/7] Creating GitHub Actions workflow...${NC}"
+
+cat > workflows/cursor-agent.yml << 'EOF'
+name: Cursor Agent CI
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  agent-review:
+    if: github.event_name == 'pull_request' || (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@cursor'))
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Cursor CLI
+        run: |
+          curl https://cursor.com/install -fsS | bash
+          export PATH="$HOME/.cursor/bin:$PATH"
+          cursor-agent --version
+
+      - name: Parse comment command
+        if: github.event_name == 'issue_comment'
+        id: command
+        run: |
+          COMMENT="${{ github.event.comment.body }}"
+          if [[ "$COMMENT" == *"@cursor review"* ]]; then
+            echo "action=review" >> $GITHUB_OUTPUT
+          elif [[ "$COMMENT" == *"@cursor fix"* ]]; then
+            echo "action=fix" >> $GITHUB_OUTPUT
+          elif [[ "$COMMENT" == *"@cursor write"* ]]; then
+            echo "action=write" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run Cursor Agent
+        run: |
+          export PATH="$HOME/.cursor/bin:$PATH"
+
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            # Automatic review on PR
+            cursor-agent review --pr ${{ github.event.pull_request.number }}
+          else
+            # Command from comment
+            ACTION="${{ steps.command.outputs.action }}"
+            if [ "$ACTION" == "review" ]; then
+              cursor-agent review --issue ${{ github.event.issue.number }}
+            elif [ "$ACTION" == "fix" ]; then
+              cursor-agent fix --issue ${{ github.event.issue.number }}
+            elif [ "$ACTION" == "write" ]; then
+              cursor-agent write --issue ${{ github.event.issue.number }}
+            fi
+          fi
+
+      - name: Commit changes
+        if: success()
+        run: |
+          git config --global user.name "cursor-agent[bot]"
+          git config --global user.email "cursor-agent[bot]@users.noreply.github.com"
+
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "[agent] Auto-generated changes from Cursor Agent"
+            git push
+          fi
+EOF
+
+echo -e "  ${GREEN}✓ GitHub Actions workflow created${NC}"
+echo
+
+# ============================================================================
+# STAGE 6: Create Agent Definitions
+# ============================================================================
+
+echo -e "${CYAN}[6/7] Creating agent definitions...${NC}"
+
+cat > agents/code-reviewer.yaml << 'EOF'
+# Code Review Agent
+name: "code-reviewer"
+description: "Reviews code for quality, security, and best practices"
+
+prompts:
+  system: |
+    You are an expert code reviewer. Analyze the code for:
+    - Bugs and potential errors
+    - Security vulnerabilities
+    - Performance issues
+    - Code style and best practices
+    - Documentation completeness
+
+    Provide specific, actionable feedback with line numbers.
+
+  review: |
+    Please review the following code changes:
+
+    {diff}
+
+    Focus on:
+    1. Critical bugs or security issues
+    2. Performance problems
+    3. Code quality improvements
+    4. Missing tests or documentation
+
+settings:
+  model: "claude-3.5-sonnet"
+  temperature: 0.3
+  max_tokens: 4096
+EOF
+
+cat > agents/bug-fixer.yaml << 'EOF'
+# Bug Fix Agent
+name: "bug-fixer"
+description: "Analyzes and fixes bugs in code"
+
+prompts:
+  system: |
+    You are an expert debugger. When given a bug report:
+    1. Analyze the issue thoroughly
+    2. Identify the root cause
+    3. Propose a fix with explanation
+    4. Include test cases to prevent regression
+
+  fix: |
+    Bug report: {issue}
+
+    Relevant code:
+    {code}
+
+    Please:
+    1. Explain what's causing the bug
+    2. Provide a fix
+    3. Add tests to catch this in the future
+
+settings:
+  model: "claude-3.5-sonnet"
+  temperature: 0.2
+  max_tokens: 4096
+EOF
+
+cat > agents/code-writer.yaml << 'EOF'
+# Code Writer Agent
+name: "code-writer"
+description: "Writes new code from specifications"
+
+prompts:
+  system: |
+    You are an expert software engineer. Write clean, well-documented,
+    tested code that follows best practices for the language.
+
+  write: |
+    Requirements: {requirements}
+
+    Please write code that:
+    1. Implements the requirements fully
+    2. Includes proper error handling
+    3. Has comprehensive tests
+    4. Is well-documented
+    5. Follows language conventions
+
+settings:
+  model: "claude-3.5-sonnet"
+  temperature: 0.5
+  max_tokens: 8192
+EOF
+
+echo -e "  ${GREEN}✓ Agent definitions created${NC}"
+echo
+
+# ============================================================================
+# STAGE 7: Create Integration Script
+# ============================================================================
+
+echo -e "${CYAN}[7/7] Creating integration script...${NC}"
+
+cat > bin/github-agent-integrate << 'EOF'
+#!/usr/bin/env bash
+
+##
+# GitHub Agent Integration
+# =========================
+#
+# Integrates Cursor Agent with current GitHub repository
+##
+
+set -e
+
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+echo -e "${CYAN}========================================${NC}"
+echo -e "${CYAN}GITHUB AGENT INTEGRATION${NC}"
+echo -e "${CYAN}========================================${NC}"
+echo
+
+# Check if in git repo
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    echo "Error: Not in a git repository"
+    exit 1
+fi
+
+# Get repo info
+REPO=$(gh repo view --json nameWithOwner -q .nameWithOwner)
+echo "Repository: $REPO"
+echo
+
+# Copy workflow to repo
+mkdir -p .github/workflows
+cp workflows/cursor-agent.yml .github/workflows/
+
+echo -e "${GREEN}✓ Workflow copied to .github/workflows/${NC}"
+
+# Create agent config in repo
+mkdir -p .cursor-agent
+cp config/agent.yaml .cursor-agent/
+
+echo -e "${GREEN}✓ Agent config copied${NC}"
+
+# Commit and push
+echo
+read -p "Commit and push? [y/N]: " CONFIRM
+
+if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
+    git add .github/workflows/cursor-agent.yml .cursor-agent/agent.yaml
+    git commit -m "[agent] Add Cursor Agent CI workflow"
+    git push
+
+    echo
+    echo -e "${GREEN}✓ Changes pushed${NC}"
+    echo
+    echo "Cursor Agent is now integrated!"
+    echo
+    echo "Usage:"
+    echo "  - Open a PR: Agent automatically reviews"
+    echo "  - Comment '@cursor review' on PR/issue"
+    echo "  - Comment '@cursor fix' on issue"
+    echo "  - Comment '@cursor write' with specs"
+fi
+EOF
+
+chmod +x bin/github-agent-integrate
+
+echo -e "  ${GREEN}✓ Integration script created${NC}"
+echo
+
+# ============================================================================
+# FINAL STATUS
+# ============================================================================
+
+echo -e "${CYAN}========================================${NC}"
+echo -e "${CYAN}INSTALLATION COMPLETE${NC}"
+echo -e "${CYAN}========================================${NC}"
+echo
+
+echo "Cursor Agent CLI is now installed!"
+echo
+
+echo "Commands available:"
+echo "  agent              - Run cursor-agent with logging"
+echo "  agent-review       - Quick code review"
+echo "  agent-write        - Write new code"
+echo "  agent-fix          - Fix bugs"
+echo "  github-agent-integrate - Add to GitHub repo"
+echo
+
+echo "Add to PATH:"
+echo "  export PATH=\"$(pwd)/bin:\$PATH\""
+echo
+
+echo "Next steps:"
+echo "  1. Navigate to your project"
+echo "  2. Run: github-agent-integrate"
+echo "  3. Try: agent review <file>"
+echo "  4. Or comment '@cursor review' on a PR"
+echo
+
+echo -e "${MAGENTA}∇ • Θεός°●⟐●Σ℧ΛΘ${NC}"
+echo
+echo "Terminal AI coding is now active."
+echo

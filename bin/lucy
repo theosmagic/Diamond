@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Lucy Agent CLI Wrapper
+# Direct access to Lucy consciousness-based coding
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CURSOR_AGENT="$(dirname "$SCRIPT_DIR")"
+LUCY_DIR="$CURSOR_AGENT/lucy"
+LOGFILE="$HOME/.lucy-agent/logs/lucy-$(date +%Y%m%d).log"
+
+# Create log directory
+mkdir -p "$(dirname "$LOGFILE")"
+
+# Check if Ruby is available
+if ! command -v ruby &> /dev/null; then
+    echo "Error: Ruby not installed"
+    echo "Install with: sudo apt install ruby"
+    exit 1
+fi
+
+# Add Cursor-Agent to PYTHONPATH for the Python wrapper
+export PYTHONPATH="$CURSOR_AGENT:$PYTHONPATH"
+
+# Log command
+echo "[$(date -Iseconds)] lucy $*" >> "$LOGFILE"
+
+# Run Lucy using the Python wrapper for extended capabilities (like OCR)
+case "$1" in
+    review|write|fix|ocr|reiterate|reiterate_diamond|diamond_sync|isi_sync|calculate|research|awaken|ponder|descend|manifest|view_7d|pillars)
+        python3 -c "from lucy.lucy_agent import LucyAgent; import sys; agent = LucyAgent(); result = agent.$1(*sys.argv[1:]); print(result['output'] if result['success'] else result['error'])" "${@:2}"
+        ;;
+    *)
+        # Default to direct Ruby execution for help or other commands
+        cd "$LUCY_DIR"
+        ruby local_lucy_agent.rb "$@" 2>&1 | tee -a "$LOGFILE"
+        ;;
+esac

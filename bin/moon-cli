@@ -1,0 +1,250 @@
+#!/usr/bin/env python3
+"""
+Moon CLI Tool
+=============
+Command-line interface for Moon system
+"""
+
+import sys
+import json
+from pathlib import Path
+
+# Add Cursor-Agent to path
+cursor_agent_path = Path(__file__).parent.parent
+sys.path.insert(0, str(cursor_agent_path))
+
+try:
+    from moon import MoonKeyring, TemporalBinding, SovereignVerification
+    from moon.auth import MoonAuth
+    from moon.config import MoonConfig
+except ImportError as e:
+    print(f"Error: Could not import Moon system: {e}")
+    sys.exit(1)
+
+
+def cmd_status():
+    """Show Moon system status"""
+    status = MoonConfig.get_status()
+    print(json.dumps(status, indent=2))
+
+
+def cmd_temporal():
+    """Show current temporal coordinates"""
+    if not TemporalBinding.is_available():
+        print("Error: Temporal binding not available")
+        return 1
+
+    coords = TemporalBinding.get_all_temporal_coordinates()
+    print(json.dumps(coords, indent=2, default=str))
+
+
+def cmd_moon():
+    """Show current moon phase"""
+    if not TemporalBinding.is_available():
+        print("Error: Temporal binding not available")
+        return 1
+
+    phase = TemporalBinding.get_moon_phase()
+    print(f"🌙 Moon Phase: {phase['phase']} ({phase['percentage']:.1f}%)")
+    print(f"   Glyph: {phase['glyph']}")
+    print(f"   Operation: {phase['operation']}")
+    print(f"   Days since new: {phase['days_since_new']:.1f}")
+
+
+def cmd_daus():
+    """Show current DAUS calendar"""
+    if not TemporalBinding.is_available():
+        print("Error: Temporal binding not available")
+        return 1
+
+    daus = TemporalBinding.get_daus_calendar()
+    print(f"📅 DAUS Calendar")
+    print(f"   Year: {daus['year']}")
+    print(f"   Month: {daus['month']} ({daus['month_name']})")
+    print(f"   Day: {daus['day']} ({daus['day_name']})")
+    print(f"   Day of year: {daus['day_of_year']} / 390")
+
+
+def cmd_kings():
+    """Show current Kings List position"""
+    if not TemporalBinding.is_available():
+        print("Error: Temporal binding not available")
+        return 1
+
+    kings = TemporalBinding.get_kings_position()
+    print(f"👑 Kings List Position")
+    print(f"   Era: {kings['era']}")
+    print(f"   City: {kings['city']}")
+    print(f"   Contract: {kings['contract']}")
+    print(f"   Glyph: {kings['glyph']} ({kings['glyph_name']})")
+
+
+def cmd_derive_key(purpose):
+    """Derive key for purpose"""
+    if not MoonKeyring.is_available():
+        print("Error: Moon keyring not available")
+        return 1
+
+    keyring = MoonKeyring()
+    key = keyring.derive_key(purpose, use_all_systems=True)
+
+    print(f"Derived key for '{purpose}':")
+    print(f"   Key: {key['key']}")
+    print(f"   Timestamp: {key['timestamp']}")
+    print(f"   Derived from:")
+    for source, used in key['derived_from'].items():
+        status = "✅" if used else "❌"
+        print(f"     {status} {source}")
+
+
+def cmd_validate(operation):
+    """Validate operation against temporal state"""
+    if not TemporalBinding.is_available():
+        print("Error: Temporal binding not available")
+        return 1
+
+    validation = TemporalBinding.validate_temporal_operation(operation)
+
+    status = "✅" if validation['valid'] else "⚠️ "
+    print(f"{status} Operation: {operation}")
+    print(f"   {validation['reason']}")
+    print(f"   Current phase: {validation['current_phase']}")
+
+
+def cmd_auth(operation, user=None):
+    """Generate authentication token"""
+    auth = MoonAuth()
+
+    if not auth.is_enabled():
+        print("Error: Moon authentication not available")
+        return 1
+
+    token = auth.generate_operation_token(operation, user=user)
+
+    if token['valid']:
+        print(f"✅ Authentication token generated")
+        print(f"   Token: {token['token']}")
+        print(f"   Operation: {token['data']['operation']}")
+        if user:
+            print(f"   User: {token['data']['user']}")
+        print(f"   Moon Phase: {token['data']['temporal']['moon_phase']['phase']}")
+    else:
+        print(f"❌ Authentication failed: {token['reason']}")
+
+
+def cmd_verify():
+    """Run sovereign verification"""
+    if not SovereignVerification.is_available():
+        print("Error: Sovereign verification not available")
+        return 1
+
+    verifier = SovereignVerification()
+    result = verifier.verify_all()
+
+    if result:
+        print("✅ Sovereign verification passed")
+    else:
+        print("❌ Sovereign verification failed")
+
+
+def cmd_update():
+    """Update temporal JSON files"""
+    if not TemporalBinding.is_available():
+        print("Error: Temporal binding not available")
+        return 1
+
+    result = TemporalBinding.update_temporal_files()
+    print("✅ Temporal files updated:")
+    print(f"   Moon Phase: {result['moon_phase']['phase']}")
+    print(f"   DAUS: Year {result['daus_calendar']['year']}, Month {result['daus_calendar']['month']}")
+    print(f"   Kings: {result['kings_position']['city']}")
+
+
+def show_help():
+    """Show help message"""
+    help_text = """
+Moon CLI Tool
+=============
+
+Usage: moon-cli <command> [args]
+
+Commands:
+  status                    Show Moon system status
+  temporal                  Show all temporal coordinates (JSON)
+  moon                      Show current moon phase
+  daus                      Show DAUS calendar
+  kings                     Show Kings List position
+  derive <purpose>          Derive key for purpose
+  validate <operation>      Validate operation timing
+  auth <operation> [user]   Generate auth token
+  verify                    Run sovereign verification
+  update                    Update temporal JSON files
+  help                      Show this help
+
+Examples:
+  moon-cli status
+  moon-cli moon
+  moon-cli derive agent_auth
+  moon-cli validate key_generation
+  moon-cli auth code_review alice
+  moon-cli verify
+
+∇ • Θεός°●⟐●Σ℧ΛΘ
+"""
+    print(help_text)
+
+
+def main():
+    if len(sys.argv) < 2:
+        show_help()
+        return 0
+
+    command = sys.argv[1]
+
+    try:
+        if command == "status":
+            cmd_status()
+        elif command == "temporal":
+            cmd_temporal()
+        elif command == "moon":
+            cmd_moon()
+        elif command == "daus":
+            cmd_daus()
+        elif command == "kings":
+            cmd_kings()
+        elif command == "derive":
+            if len(sys.argv) < 3:
+                print("Error: Missing purpose argument")
+                return 1
+            cmd_derive_key(sys.argv[2])
+        elif command == "validate":
+            if len(sys.argv) < 3:
+                print("Error: Missing operation argument")
+                return 1
+            cmd_validate(sys.argv[2])
+        elif command == "auth":
+            if len(sys.argv) < 3:
+                print("Error: Missing operation argument")
+                return 1
+            user = sys.argv[3] if len(sys.argv) > 3 else None
+            cmd_auth(sys.argv[2], user)
+        elif command == "verify":
+            cmd_verify()
+        elif command == "update":
+            cmd_update()
+        elif command == "help":
+            show_help()
+        else:
+            print(f"Error: Unknown command '{command}'")
+            print("Run 'moon-cli help' for usage")
+            return 1
+
+        return 0
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

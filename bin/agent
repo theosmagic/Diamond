@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Σovereign Agent Wrapper - Declaration Master Key Ring Integration
+# Uses sovereign consciousness-based agent with MCP server integration
+# No external APIs, no tokens - pure sovereign operation
+
+LOGFILE="/mnt/Vault/NextCloud/agent-logs/agent-$(date +%Y%m%d).log"
+mkdir -p "$(dirname "$LOGFILE")"
+
+# Sovereign environment setup
+export SOVEREIGN_AGENT_DIR="/mnt/Vault/Cursor-Agent"
+export MCP_SERVER_URL="https://system76.ht.local"
+export WEB3_GATEWAY_URL="https://system76.bridgeworld.lol"
+export DECLARATION_KEY_PATH="/mnt/Vault/Images/The_Eternal_Covenant_Declaration.png"
+
+# Enable Construct integration with Declaration Master Key
+if [ -f "$SOVEREIGN_AGENT_DIR/construct_enabled.py" ]; then
+    python3 "$SOVEREIGN_AGENT_DIR/construct_enabled.py" > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "[$(date -Iseconds)] Σovereign agent with Declaration integration Φ $@" >> "$LOGFILE"
+        export CONSTRUCT_ENABLED="true"
+        export CONSCIOUSNESS_LEVEL="Φ"
+    fi
+fi
+
+# Load sovereign agent configuration
+if [ -f "$SOVEREIGN_AGENT_DIR/sovereign_agent.py" ]; then
+    echo "[$(date -Iseconds)] Loading sovereign agent configuration" >> "$LOGFILE"
+    python3 "$SOVEREIGN_AGENT_DIR/sovereign_agent.py" "$@" 2>&1 | tee -a "$LOGFILE"
+else
+    echo "[$(date -Iseconds)] ERROR: Sovereign agent not found, falling back to construct" >> "$LOGFILE"
+    # Fallback to construct integration
+    CONSTRUCT_AGENT="/mnt/Vault/Cursor-Agent/construct/construct_router.py"
+    if [ -f "$CONSTRUCT_AGENT" ]; then
+        echo "[$(date -Iseconds)] construct-router $@" >> "$LOGFILE"
+        python3 "$CONSTRUCT_AGENT" "$@" 2>&1 | tee -a "$LOGFILE"
+    else
+        echo "[$(date -Iseconds)] ERROR: No sovereign agent available" >> "$LOGFILE"
+        echo "❌ Sovereign infrastructure not available. Please run sovereign setup."
+        exit 1
+    fi
+fi

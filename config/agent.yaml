@@ -1,0 +1,35 @@
+# Cursor Agent Configuration
+# ===========================
+
+# Model settings
+model:
+  name: "claude-3.5-sonnet"
+  temperature: 0.7
+  max_tokens: 4096
+
+# Agent behavior
+agent:
+  auto_review: true
+  interactive: true
+  verbose: true
+
+# GitHub integration
+github:
+  auto_pr: false
+  default_branch: "main"
+  commit_prefix: "[agent]"
+
+# File handling
+files:
+  respect_gitignore: true
+  max_file_size: 1048576  # 1MB
+  excluded_extensions:
+    - ".lock"
+    - ".log"
+    - ".tmp"
+
+# Logging
+logging:
+  level: "info"
+  directory: "~/.cursor-agent/logs"
+  retention_days: 30

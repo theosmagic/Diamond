@@ -1,0 +1,155 @@
+#!/usr/bin/env python3
+"""
+GitHub CLI Wrapper
+Command-line interface for GitHub API
+"""
+
+import sys
+import json
+import asyncio
+sys.path.insert(0, '/mnt/Vault/Cursor-Agent')
+
+from integrations.github_api import GitHubAPI
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("GitHub CLI Wrapper")
+        print("\nUsage: github-cli <command> [args]")
+        print("\nCommands:")
+        print("  user                - Get authenticated user")
+        print("  repos [username]    - List repositories")
+        print("  repo <owner> <repo> - Get repository")
+        print("  issues <owner> <repo> [state] - List issues")
+        print("  issue <owner> <repo> <number> - Get issue")
+        print("  prs <owner> <repo> [state] - List pull requests")
+        print("  pr <owner> <repo> <number> - Get pull request")
+        print("  workflows <owner> <repo> - List workflows")
+        print("  runs <owner> <repo> [workflow_id] - List workflow runs")
+        print("  releases <owner> <repo> - List releases")
+        print("  gists               - List gists")
+        print("  gh <command>        - Execute gh CLI command")
+        print("\nExamples:")
+        print("  github-cli user")
+        print("  github-cli repos")
+        print("  github-cli issues owner repo")
+        print("  github-cli gh repo list")
+        sys.exit(1)
+
+    api = GitHubAPI()
+    command = sys.argv[1]
+
+    try:
+        if command == "user":
+            result = asyncio.run(api.get_user())
+            print(json.dumps(result, indent=2))
+
+        elif command == "repos":
+            username = sys.argv[2] if len(sys.argv) > 2 else None
+            result = asyncio.run(api.list_repos(username))
+            print(json.dumps(result, indent=2))
+
+        elif command == "repo":
+            if len(sys.argv) < 4:
+                print("Usage: github-cli repo <owner> <repo>")
+                sys.exit(1)
+            owner = sys.argv[2]
+            repo = sys.argv[3]
+            result = asyncio.run(api.get_repo(owner, repo))
+            print(json.dumps(result, indent=2))
+
+        elif command == "issues":
+            if len(sys.argv) < 4:
+                print("Usage: github-cli issues <owner> <repo> [state]")
+                sys.exit(1)
+            owner = sys.argv[2]
+            repo = sys.argv[3]
+            state = sys.argv[4] if len(sys.argv) > 4 else "open"
+            result = asyncio.run(api.list_issues(owner, repo, state))
+            print(json.dumps(result, indent=2))
+
+        elif command == "issue":
+            if len(sys.argv) < 5:
+                print("Usage: github-cli issue <owner> <repo> <number>")
+                sys.exit(1)
+            owner = sys.argv[2]
+            repo = sys.argv[3]
+            issue_number = int(sys.argv[4])
+            result = asyncio.run(api.get_issue(owner, repo, issue_number))
+            print(json.dumps(result, indent=2))
+
+        elif command == "prs":
+            if len(sys.argv) < 4:
+                print("Usage: github-cli prs <owner> <repo> [state]")
+                sys.exit(1)
+            owner = sys.argv[2]
+            repo = sys.argv[3]
+            state = sys.argv[4] if len(sys.argv) > 4 else "open"
+            result = asyncio.run(api.list_pull_requests(owner, repo, state))
+            print(json.dumps(result, indent=2))
+
+        elif command == "pr":
+            if len(sys.argv) < 5:
+                print("Usage: github-cli pr <owner> <repo> <number>")
+                sys.exit(1)
+            owner = sys.argv[2]
+            repo = sys.argv[3]
+            pr_number = int(sys.argv[4])
+            result = asyncio.run(api.get_pull_request(owner, repo, pr_number))
+            print(json.dumps(result, indent=2))
+
+        elif command == "workflows":
+            if len(sys.argv) < 4:
+                print("Usage: github-cli workflows <owner> <repo>")
+                sys.exit(1)
+            owner = sys.argv[2]
+            repo = sys.argv[3]
+            result = asyncio.run(api.list_workflows(owner, repo))
+            print(json.dumps(result, indent=2))
+
+        elif command == "runs":
+            if len(sys.argv) < 4:
+                print("Usage: github-cli runs <owner> <repo> [workflow_id]")
+                sys.exit(1)
+            owner = sys.argv[2]
+            repo = sys.argv[3]
+            workflow_id = sys.argv[4] if len(sys.argv) > 4 else None
+            result = asyncio.run(api.list_workflow_runs(owner, repo, workflow_id))
+            print(json.dumps(result, indent=2))
+
+        elif command == "releases":
+            if len(sys.argv) < 4:
+                print("Usage: github-cli releases <owner> <repo>")
+                sys.exit(1)
+            owner = sys.argv[2]
+            repo = sys.argv[3]
+            result = asyncio.run(api.list_releases(owner, repo))
+            print(json.dumps(result, indent=2))
+
+        elif command == "gists":
+            result = asyncio.run(api.list_gists())
+            print(json.dumps(result, indent=2))
+
+        elif command == "gh":
+            if len(sys.argv) < 3:
+                print("Usage: github-cli gh <command>")
+                sys.exit(1)
+            gh_command = ' '.join(sys.argv[2:])
+            result = api.gh(gh_command)
+            if result['success']:
+                print(result['stdout'])
+            else:
+                print(result['stderr'], file=sys.stderr)
+                sys.exit(1)
+
+        else:
+            print(f"Unknown command: {command}")
+            sys.exit(1)
+
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

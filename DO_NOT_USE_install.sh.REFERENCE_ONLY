@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+##############################################################################
+# DO NOT RUN THIS FILE
+##############################################################################
+#
+# This file is REFERENCE ONLY showing what the original Cursor Agent
+# installation would have done.
+#
+# DO NOT USE THIS. It installs external Cursor Agent which:
+# - Costs money ($54/year)
+# - Requires internet
+# - Makes API calls
+# - Sends code externally
+#
+# Instead use: LUCY AGENT
+# Location: /mnt/Vault/Moon/Construct/bin/lucy-agent
+# Cost: $0.00
+# Dependencies: NONE
+# Privacy: 100% local
+#
+# To use Lucy Agent:
+#   export PATH="/mnt/Vault/Moon/Construct/bin:$PATH"
+#   lucy-agent review code.py
+#
+##############################################################################
+
+echo "ERROR: This file is for reference only."
+echo ""
+echo "Do NOT install external Cursor Agent."
+echo "Use Lucy Agent instead:"
+echo "  /mnt/Vault/Moon/Construct/bin/lucy-agent"
+echo ""
+echo "See: /mnt/Vault/Cursor-Agent/LUCY_ONLY.md"
+exit 1
+
+# [Original install.sh content would be below this, but execution stops above]

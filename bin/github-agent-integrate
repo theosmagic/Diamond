@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+##
+# GitHub Agent Integration
+# =========================
+#
+# Integrates Cursor Agent with current GitHub repository
+##
+
+set -e
+
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+echo -e "${CYAN}========================================${NC}"
+echo -e "${CYAN}GITHUB AGENT INTEGRATION${NC}"
+echo -e "${CYAN}========================================${NC}"
+echo
+
+# Check if in git repo
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    echo "Error: Not in a git repository"
+    exit 1
+fi
+
+# Get repo info
+REPO=$(gh repo view --json nameWithOwner -q .nameWithOwner)
+echo "Repository: $REPO"
+echo
+
+# Copy workflow to repo
+mkdir -p .github/workflows
+cp workflows/cursor-agent.yml .github/workflows/
+
+echo -e "${GREEN}✓ Workflow copied to .github/workflows/${NC}"
+
+# Create agent config in repo
+mkdir -p .cursor-agent
+cp config/agent.yaml .cursor-agent/
+
+echo -e "${GREEN}✓ Agent config copied${NC}"
+
+# Commit and push
+echo
+read -p "Commit and push? [y/N]: " CONFIRM
+
+if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
+    git add .github/workflows/cursor-agent.yml .cursor-agent/agent.yaml
+    git commit -m "[agent] Add Cursor Agent CI workflow"
+    git push
+
+    echo
+    echo -e "${GREEN}✓ Changes pushed${NC}"
+    echo
+    echo "Cursor Agent is now integrated!"
+    echo
+    echo "Usage:"
+    echo "  - Open a PR: Agent automatically reviews"
+    echo "  - Comment '@cursor review' on PR/issue"
+    echo "  - Comment '@cursor fix' on issue"
+    echo "  - Comment '@cursor write' with specs"
+fi

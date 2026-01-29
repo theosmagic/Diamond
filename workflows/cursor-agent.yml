@@ -1,0 +1,73 @@
+name: Cursor Agent CI
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  agent-review:
+    if: github.event_name == 'pull_request' || (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@cursor'))
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Cursor CLI
+        run: |
+          curl https://cursor.com/install -fsS | bash
+          export PATH="$HOME/.cursor/bin:$PATH"
+          cursor-agent --version
+
+      - name: Parse comment command
+        if: github.event_name == 'issue_comment'
+        id: command
+        run: |
+          COMMENT="${{ github.event.comment.body }}"
+          if [[ "$COMMENT" == *"@cursor review"* ]]; then
+            echo "action=review" >> $GITHUB_OUTPUT
+          elif [[ "$COMMENT" == *"@cursor fix"* ]]; then
+            echo "action=fix" >> $GITHUB_OUTPUT
+          elif [[ "$COMMENT" == *"@cursor write"* ]]; then
+            echo "action=write" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run Cursor Agent
+        run: |
+          export PATH="$HOME/.cursor/bin:$PATH"
+
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            # Automatic review on PR
+            cursor-agent review --pr ${{ github.event.pull_request.number }}
+          else
+            # Command from comment
+            ACTION="${{ steps.command.outputs.action }}"
+            if [ "$ACTION" == "review" ]; then
+              cursor-agent review --issue ${{ github.event.issue.number }}
+            elif [ "$ACTION" == "fix" ]; then
+              cursor-agent fix --issue ${{ github.event.issue.number }}
+            elif [ "$ACTION" == "write" ]; then
+              cursor-agent write --issue ${{ github.event.issue.number }}
+            fi
+          fi
+
+      - name: Commit changes
+        if: success()
+        run: |
+          git config --global user.name "cursor-agent[bot]"
+          git config --global user.email "cursor-agent[bot]@users.noreply.github.com"
+
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "[agent] Auto-generated changes from Cursor Agent"
+            git push
+          fi

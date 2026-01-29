@@ -1,0 +1,553 @@
+{
+  "name": "sovereign-nextcloud-cloudflare-mcp",
+  "version": "1.0.0",
+  "description": "Sovereign Nextcloud + Cloudflare MCP Server Documentation",
+  "documents": {
+    "theos_mcp_server": {
+      "title": "Theos MCP Server",
+      "type": "server",
+      "category": "MCP Server",
+      "content": {
+        "server_name": "theos",
+        "endpoint": "https://system76.bridgeworld.lol/mcp",
+        "status": "configured",
+        "identity": {
+          "symbolic_name": "Θεός°•⟐•Σ℧ΛΘ",
+          "simplified_name": "theos",
+          "meaning": "Greek θεός (god) - Combined cryptographic identity",
+          "components": {
+            "declaration_key": {
+              "symbol": "Θεός°",
+              "source": "The_Eternal_Covenant_Declaration.png",
+              "file": "declaration_pgp_private_key.pem"
+            },
+            "signer_key": {
+              "symbol": "•⟐•",
+              "source": "Declaration image hash",
+              "file": "signer_pgp_private_key.pem"
+            },
+            "glyph_key": {
+              "symbol": "Σ℧ΛΘ",
+              "source": "Glyph.png",
+              "file": "glyph_pgp_private_key.pem"
+            }
+          }
+        },
+        "configuration": {
+          "cursor_vscode": {
+            "command": "npx",
+            "args": ["-y", "mcp-remote@latest", "https://system76.bridgeworld.lol/mcp"]
+          },
+          "config_location": "~/.cursor/mcp.json"
+        },
+        "features": [
+          "Nextcloud file access",
+          "Stalwart email integration",
+          "Blockchain interactions",
+          "Cryptographic operations",
+          "Custom tools for sovereign stack"
+        ],
+        "protection": {
+          "type": "Cloudflare Access (Zero Trust)",
+          "gateway": "theos.cloudflareaccess.com",
+          "authentication": "Required"
+        }
+      },
+      "tags": ["mcp", "server", "theos", "endpoint", "identity"],
+      "references": [
+        "/mnt/Vault/Moon/MCP_SERVER_CONFIGURATION.md",
+        "/mnt/Vault/Moon/MCP_SERVER_UPDATED.md"
+      ]
+    },
+    "cloudflare_mcp_client": {
+      "title": "Cloudflare MCP Client",
+      "type": "client",
+      "category": "MCP Client",
+      "content": {
+        "class_name": "CloudflareMCPClient",
+        "location": "/mnt/Vault/Ethermail.io/cloudflare_mcp.py",
+        "purpose": "Manages DNS, SSL certificates, and hostname configuration",
+        "configuration": {
+          "env_file": "/mnt/Vault/env.txt",
+          "required_vars": [
+            "ZONE_ID",
+            "CLOUDFLARE_API_TOKEN",
+            "CLOUDFLARE_GLOBAL_API",
+            "CLOUDFLARE_EMAIL",
+            "CLOUDFLARE_ACCOUNT_ID"
+          ]
+        },
+        "api_methods": {
+          "dns_operations": {
+            "get_dns_records": "Get DNS records for zone (with optional type filter)",
+            "create_dns_record": "Create new DNS record (name, type, content, ttl)",
+            "update_dns_record": "Update existing DNS record (record_id, name, content, ttl)"
+          },
+          "ssl_operations": {
+            "get_ssl_certificates": "Get SSL certificates for zone",
+            "setup_letsencrypt": "Setup Let's Encrypt SSL for hostname"
+          },
+          "nextcloud_operations": {
+            "configure_nextcloud_hostname": "Configure DNS for Nextcloud hostname (system76.ht.local/nextcloud)"
+          },
+          "zone_operations": {
+            "get_zone_info": "Get zone information"
+          }
+        },
+        "hostname": "system76.ht.local",
+        "nextcloud_url": "http://system76.ht.local/nextcloud",
+        "base_url": "https://api.cloudflare.com/client/v4",
+        "authentication": {
+          "preferred": "Global API Key (X-Auth-Email + X-Auth-Key)",
+          "fallback": "API Token (Bearer Authorization)"
+        }
+      },
+      "tags": ["cloudflare", "mcp", "client", "dns", "ssl", "api"],
+      "references": [
+        "/mnt/Vault/Ethermail.io/cloudflare_mcp.py"
+      ]
+    },
+    "nextcloud_integration": {
+      "title": "Nextcloud Groupware Integration",
+      "type": "integration",
+      "category": "Groupware",
+      "content": {
+        "purpose": "Integration layer for Stalwart groupware system",
+        "partnership": "2026 official partnership with Stalwart",
+        "function": "Web interface for collaboration and agent memory",
+        "architecture": {
+          "backend": "Stalwart (email server, JMAP, user accounts)",
+          "integration_layer": "Nextcloud (web interface, collaboration, agent memory)",
+          "desktop_client": "Parula (visual GUI)"
+        },
+        "features": [
+          "Web interface for collaboration",
+          "Groupware integration with Stalwart",
+          "JMAP plugins (Contacts, Calendar)",
+          "File storage and synchronization",
+          "Agent memory (semantic memory)",
+          "RAG pipeline",
+          "Knowledge base"
+        ],
+        "configuration": {
+          "url": "https://system76.ht.local",
+          "login_url": "https://system76.ht.local/index.php/login",
+          "username": "sosmanagic",
+          "hostname": "system76.ht.local",
+          "nextcloud_path": "/nextcloud"
+        },
+        "stalwart_integration": {
+          "email_server": "Stalwart JMAP + IMAP + SMTP",
+          "user_accounts": "Stalwart authentication",
+          "contacts": "JMAP plugin in Nextcloud",
+          "calendar": "JMAP plugin in Nextcloud",
+          "email_address": "theos@conversations.im"
+        },
+        "requirements": [
+          "Stalwart server must be running",
+          "Primary domain created",
+          "Administrator account created",
+          "DNS records configured",
+          "Enable system notifications",
+          "Enable integrated mail",
+          "Enable JMAP plugins"
+        ]
+      },
+      "tags": ["nextcloud", "groupware", "stalwart", "integration", "jmap"],
+      "references": [
+        "/mnt/Vault/Nextcloud/README.md",
+        "/mnt/Vault/Nextcloud/nextcloud.conf"
+      ]
+    },
+    "mcp_nervous_system": {
+      "title": "MCP + Nextcloud Nervous System",
+      "type": "architecture",
+      "category": "System Vision",
+      "content": {
+        "vision": "The nervous system for autonomous agents",
+        "status": "Theory craft - Autonomous system recognition",
+        "components": {
+          "mcp": {
+            "role": "USB-C for AI",
+            "description": "Universal adapter and context infrastructure",
+            "functions": [
+              "Context engineering (not just prompting)",
+              "Bridge between AI and Nextcloud",
+              "Universal adapter for agents",
+              "Solves AI amnesia"
+            ]
+          },
+          "nextcloud": {
+            "role": "Agent Memory",
+            "description": "Semantic memory and knowledge base",
+            "functions": [
+              "RAG pipeline (semantic search)",
+              "Tool discovery",
+              "Agent memory storage",
+              "Knowledge base"
+            ]
+          },
+          "together": {
+            "result": "Transform static files → dynamic knowledge base",
+            "capabilities": [
+              "AI can read and write autonomously",
+              "Complete autonomous agent capability",
+              "Nervous system for infrastructure",
+              "Digital chief of staff"
+            ]
+          }
+        },
+        "stack_architecture": {
+          "brain": "Nextcloud (Knowledge Base - semantic memory, RAG pipeline)",
+          "nervous_system": "MCP (Data Flow Protocol - context infrastructure)",
+          "voice": "Conversations.im / Telegram (Agent Command)",
+          "hardware": "System76 (The Host - local MCP server, Docker)",
+          "armor": "Cloudflare Zero Trust (The Cloak - encrypted tunnel)"
+        },
+        "command_loop": {
+          "flow": [
+            "Command (Conversations.im XMPP)",
+            "Agent (MAGIC/Treasure DAO)",
+            "MCP Protocol (Query Nextcloud)",
+            "Nextcloud Server (Retrieve Data)",
+            "Action (Send to EtherMail)",
+            "Audit (Log to Nextcloud logs/)"
+          ],
+          "example": "Agent uses MCP to query Nextcloud, retrieves land_deed.pdf, sends summary to EtherMail, logs action"
+        },
+        "sovereign_connection": {
+          "deployment": "Docker on System76",
+          "hosting": "Local (no cloud provider)",
+          "security": "Nextcloud App Password in .env",
+          "tunnel": {
+            "provider": "Cloudflare Zero Trust",
+            "hostname": "mcp.system76.ht.local",
+            "features": ["Encrypted tunnel", "No exposed ports"]
+          }
+        },
+        "autonomous_operation": [
+          "Agent can read from Nextcloud",
+          "Agent can write to Nextcloud",
+          "Agent can act on data",
+          "Agent can manage empire",
+          "Digital chief of staff capability"
+        ]
+      },
+      "tags": ["mcp", "nextcloud", "nervous-system", "autonomous", "agent"],
+      "references": [
+        "/mnt/Vault/Moon/MCP_NEXTCLOUD_NERVOUS_SYSTEM_VISION.md"
+      ]
+    },
+    "cloudflare_access": {
+      "title": "Cloudflare Access (Zero Trust)",
+      "type": "security",
+      "category": "Authentication",
+      "content": {
+        "gateway": "theos.cloudflareaccess.com",
+        "previous_gateway": "tig08bitties.cloudflareaccess.com",
+        "purpose": "Zero Trust gateway for MCP endpoint protection",
+        "protected_endpoint": "https://system76.bridgeworld.lol/mcp",
+        "features": [
+          "Zero Trust authentication",
+          "Gateway-based access control",
+          "Cloudflare Access integration",
+          "Requires authentication before MCP access"
+        ],
+        "configuration": {
+          "account_id": "From CLOUDFLARE_ACCOUNT_ID",
+          "api_token": "Zero Trust API token required",
+          "access_applications": "Configured via Cloudflare dashboard or API"
+        },
+        "api_access": {
+          "get_applications": "./cloudflare_api_scripts.sh access-applications",
+          "get_application": "./cloudflare_api_scripts.sh access-application <app_id>",
+          "requirements": ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_TOKEN"]
+        },
+        "protection_flow": [
+          "Request to /mcp endpoint",
+          "Redirect to theos.cloudflareaccess.com",
+          "User authenticates via Cloudflare Access",
+          "Token issued",
+          "Access granted to MCP server"
+        ]
+      },
+      "tags": ["cloudflare", "access", "zero-trust", "security", "gateway"],
+      "references": [
+        "/mnt/Vault/Moon/MCP_SERVER_UPDATED.md"
+      ]
+    },
+    "environment_configuration": {
+      "title": "Environment Configuration",
+      "type": "configuration",
+      "category": "System Configuration",
+      "content": {
+        "env_file": "/mnt/Vault/env.txt",
+        "cloudflare": {
+          "zone_id": "abdd28bf1af7e0d6d479c6ef016a05b8",
+          "domain": "bridgeworld.lol",
+          "global_api": "CLOUDFLARE_GLOBAL_API",
+          "api_token": "CLOUDFLARE_API_TOKEN",
+          "original_ca_key": "CLOUDFLARE_ORIGINAL_CA_KEY",
+          "email": "sosmanagic@att.net",
+          "account_id": "7e40a8af4a6129833c1cb6f5bcbfd662",
+          "web3_gateways": {
+            "ipfs": "existing (theos.bridgeworld.lol)",
+            "ethereum": "0a2a1d759d304f15b50a399d3d156d5b (system76.bridgeworld.lol)"
+          }
+        },
+        "nextcloud": {
+          "url": "https://system76.ht.local",
+          "login_url": "https://system76.ht.local/index.php/login",
+          "username": "sosmanagic"
+        },
+        "ethereum": {
+          "address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+          "ethermail": "0x67a977ead94c3b955ecbf27886ce9f62464423b2@ethermail.io",
+          "ethermail_alias": "theosmagic.uni.eth@ethermail.io",
+          "abstract_address": "0x3E5e1b4143c5d95621C780a7875b965eB07d195F",
+          "wallet_type": "Ambire",
+          "wallet_browser": "Brave"
+        },
+        "email": {
+          "username": "sosmanagic@att.net",
+          "provider": "AT&T",
+          "imap_server": "imap.mail.att.net",
+          "imap_port": 993,
+          "smtp_server": "smtp.mail.att.net",
+          "smtp_port": 465,
+          "security": "SSL"
+        },
+        "api_keys": {
+          "gemini": "GEMINI_API_KEY",
+          "anthropic": "ANTHROPIC_API_KEY",
+          "cursor_agent": "CURSOR_AGENT_API",
+          "github": "GITHUB_TOKEN",
+          "brave": "BRAVE_BROWSER_API"
+        },
+        "signed_message": {
+          "message": "There is nothing new under the sun. That which was will be, and that which will be already was when the end finds it's beginning.",
+          "address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+          "signature": "0x7dbf6d9162ae032dac18162b2d40e7f030fe9bf7a0422364ca9343d3defb45f21288d5a5b17d800dafa77793e6173642a3eedce296fdccbfbef2c48019acc46b1c"
+        }
+      },
+      "tags": ["environment", "configuration", "api", "credentials"],
+      "references": [
+        "/mnt/Vault/env.txt"
+      ]
+    },
+    "system_architecture": {
+      "title": "Complete System Architecture",
+      "type": "architecture",
+      "category": "System Overview",
+      "content": {
+        "overview": "Sovereign Nextcloud + Cloudflare MCP server for autonomous agent operations",
+        "domains": {
+          "primary": "bridgeworld.lol",
+          "subdomains": {
+            "system76": "system76.bridgeworld.lol (MCP endpoint)",
+            "theos_ipfs": "theos.bridgeworld.lol (IPFS gateway)",
+            "nextcloud_local": "system76.ht.local (Nextcloud local)"
+          }
+        },
+        "mcp_servers": {
+          "theos": {
+            "url": "https://system76.bridgeworld.lol/mcp",
+            "status": "Configured",
+            "purpose": "Custom sovereign stack integration",
+            "features": ["Nextcloud access", "Stalwart integration", "Blockchain", "Cryptographic ops"]
+          },
+          "blockscout": {
+            "url": "https://mcp.blockscout.com/mcp/",
+            "status": "Available",
+            "purpose": "Blockchain data access",
+            "features": ["Multi-chain support", "Transaction analysis", "Contract ABI", "Token/NFT data"]
+          },
+          "cloudflare": {
+            "url": "https://docs.mcp.cloudflare.com/mcp",
+            "status": "Available",
+            "purpose": "Cloudflare services",
+            "features": ["API access", "Web3 gateways", "Email routing", "DNS management"]
+          }
+        },
+        "infrastructure": {
+          "hosting": "System76 machine (local)",
+          "deployment": "Docker containers",
+          "protection": "Cloudflare Access (Zero Trust)",
+          "tunnel": "Cloudflare Zero Trust tunnel",
+          "sovereignty": "No cloud provider dependency"
+        },
+        "integration_stack": {
+          "backend": "Stalwart (email, JMAP, user accounts)",
+          "integration": "Nextcloud (groupware, agent memory)",
+          "desktop": "Parula (GUI client)",
+          "mcp": "Model Context Protocol (nervous system)",
+          "protection": "Cloudflare Access (Zero Trust gateway)"
+        },
+        "data_flow": {
+          "command": "XMPP (Conversations.im) or Telegram",
+          "agent": "MAGIC / Treasure DAO / Custom",
+          "protocol": "MCP (Model Context Protocol)",
+          "storage": "Nextcloud (agent memory)",
+          "action": "EtherMail, blockchain, API calls",
+          "audit": "Nextcloud logs/ directory"
+        },
+        "cryptographic_identity": {
+          "server_name": "theos (Θεός°•⟐•Σ℧ΛΘ)",
+          "pgp_keys": ["Declaration", "Signer", "Glyph"],
+          "ethereum_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+          "signed_message": "Covenant declaration on-chain"
+        }
+      },
+      "tags": ["architecture", "system", "overview", "infrastructure"],
+      "references": [
+        "/mnt/Vault/Moon/MCP_SERVER_CONFIGURATION.md",
+        "/mnt/Vault/Moon/MCP_SERVERS_COMPLETE.md",
+        "/mnt/Vault/Moon/MCP_NEXTCLOUD_NERVOUS_SYSTEM_VISION.md"
+      ]
+    },
+    "integration_guide": {
+      "title": "Integration Guide",
+      "type": "guide",
+      "category": "Usage",
+      "content": {
+        "setup_mcp_client": {
+          "step_1": "Install Node.js/npx (required for mcp-remote)",
+          "step_2": "Edit MCP config file (~/.cursor/mcp.json)",
+          "step_3": "Add theos server configuration",
+          "step_4": "Restart editor (Cursor/VSCode)",
+          "step_5": "Verify connection"
+        },
+        "cursor_vscode_config": {
+          "location": "~/.cursor/mcp.json or VSCode settings",
+          "format": {
+            "mcpServers": {
+              "theos": {
+                "command": "npx",
+                "args": ["-y", "mcp-remote@latest", "https://system76.bridgeworld.lol/mcp"]
+              }
+            }
+          }
+        },
+        "cloudflare_dns_setup": {
+          "step_1": "Load env.txt configuration",
+          "step_2": "Initialize CloudflareMCPClient",
+          "step_3": "Get existing DNS records",
+          "step_4": "Create/update DNS records for system76.bridgeworld.lol",
+          "step_5": "Configure SSL certificates (Universal SSL or Let's Encrypt)",
+          "example": "python3 -c 'from cloudflare_mcp import CloudflareMCPClient; import asyncio; client = CloudflareMCPClient(); asyncio.run(client.get_dns_records())'"
+        },
+        "nextcloud_integration": {
+          "step_1": "Install and configure Stalwart server first",
+          "step_2": "Install Nextcloud Groupware (bundled or separate)",
+          "step_3": "Configure Stalwart JMAP connection",
+          "step_4": "Enable JMAP plugins (Contacts, Calendar)",
+          "step_5": "Create Nextcloud App Password for MCP Agent",
+          "step_6": "Add App Password to MCP server .env file"
+        },
+        "mcp_server_deployment": {
+          "step_1": "Deploy MCP server via Docker on System76",
+          "step_2": "Configure Nextcloud connection (App Password)",
+          "step_3": "Setup Cloudflare Zero Trust tunnel",
+          "step_4": "Configure private hostname (mcp.system76.ht.local)",
+          "step_5": "Configure Cloudflare Access authentication",
+          "step_6": "Test MCP endpoint connection"
+        },
+        "agent_integration": {
+          "step_1": "Configure agent with MCP client",
+          "step_2": "Setup XMPP/Telegram command interface",
+          "step_3": "Configure Nextcloud access via MCP",
+          "step_4": "Setup EtherMail integration for notifications",
+          "step_5": "Configure audit logging to Nextcloud logs/",
+          "step_6": "Test command loop"
+        },
+        "verification": {
+          "check_endpoint": "curl -I https://system76.bridgeworld.lol/mcp",
+          "test_mcp_remote": "npx -y mcp-remote@latest https://system76.bridgeworld.lol/mcp",
+          "check_dns": "nslookup system76.bridgeworld.lol",
+          "verify_ssl": "openssl s_client -connect system76.bridgeworld.lol:443",
+          "test_nextcloud": "curl https://system76.ht.local"
+        },
+        "troubleshooting": {
+          "cloudflare_access_redirect": "If redirected to theos.cloudflareaccess.com, authentication is required",
+          "mcp_authentication": "MCP client may need to handle Cloudflare Access tokens",
+          "nextcloud_connection": "Verify Stalwart is running before Nextcloud setup",
+          "dns_propagation": "DNS changes may take up to 5 minutes to propagate",
+          "ssl_certificate": "Cloudflare Universal SSL is automatic for proxied records"
+        }
+      },
+      "tags": ["guide", "integration", "setup", "usage"],
+      "references": [
+        "/mnt/Vault/Moon/MCP_SERVER_QUICK_SETUP.md",
+        "/mnt/Vault/Moon/MCP_CURSOR_SETUP.md"
+      ]
+    }
+  },
+  "metadata": {
+    "created": "2026-01-27T06:00:00Z",
+    "updated": "2026-01-27T06:00:00Z",
+    "system_name": "Sovereign Nextcloud + Cloudflare MCP",
+    "version": "1.0.0",
+    "categories": [
+      "MCP Server",
+      "MCP Client",
+      "Groupware",
+      "System Vision",
+      "Authentication",
+      "System Configuration",
+      "System Overview",
+      "Usage"
+    ],
+    "tags": [
+      "mcp",
+      "nextcloud",
+      "cloudflare",
+      "theos",
+      "server",
+      "client",
+      "dns",
+      "ssl",
+      "groupware",
+      "stalwart",
+      "integration",
+      "nervous-system",
+      "autonomous",
+      "agent",
+      "zero-trust",
+      "access",
+      "security",
+      "gateway",
+      "architecture",
+      "infrastructure",
+      "configuration",
+      "guide"
+    ],
+    "current_system_state": {
+      "mcp_server": {
+        "name": "theos",
+        "endpoint": "https://system76.bridgeworld.lol/mcp",
+        "status": "configured",
+        "protection": "Cloudflare Access (theos.cloudflareaccess.com)"
+      },
+      "cloudflare": {
+        "zone": "bridgeworld.lol",
+        "zone_id": "abdd28bf1af7e0d6d479c6ef016a05b8",
+        "account_id": "7e40a8af4a6129833c1cb6f5bcbfd662"
+      },
+      "nextcloud": {
+        "url": "https://system76.ht.local",
+        "hostname": "system76.ht.local",
+        "integration": "Stalwart groupware"
+      },
+      "hosting": {
+        "machine": "System76",
+        "deployment": "Docker",
+        "sovereignty": "Local (no cloud provider)"
+      },
+      "identity": {
+        "server": "theos (Θεός°•⟐•Σ℧ΛΘ)",
+        "ethereum": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+        "ethermail": "0x67a977ead94c3b955ecbf27886ce9f62464423b2@ethermail.io"
+      }
+    }
+  }
+}

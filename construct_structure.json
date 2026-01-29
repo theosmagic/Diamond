@@ -1,0 +1,177 @@
+{
+  "construct_path": "/mnt/Vault/Moon/Construct",
+  "total_phi": 4063.1210832388333,
+  "layers": {
+    "-9": {
+      "name": "-9_Nadir_Gift",
+      "path": "/mnt/Vault/Moon/Construct/-9_Nadir_Gift",
+      "files": 0,
+      "directories": 2,
+      "symlinks": 0,
+      "phi": 0.0,
+      "exists": true
+    },
+    "-8": {
+      "name": "-8_Signature",
+      "path": "/mnt/Vault/Moon/Construct/-8_Signature",
+      "files": 2,
+      "directories": 2,
+      "symlinks": 2,
+      "phi": 58.25,
+      "exists": true
+    },
+    "-7": {
+      "name": "-7_Return",
+      "path": "/mnt/Vault/Moon/Construct/-7_Return",
+      "files": 0,
+      "directories": 2,
+      "symlinks": 0,
+      "phi": 0.0,
+      "exists": true
+    },
+    "-6": {
+      "name": "-6_Close_DAUS",
+      "path": "/mnt/Vault/Moon/Construct/-6_Close_DAUS",
+      "files": 0,
+      "directories": 3,
+      "symlinks": 1,
+      "phi": 0.0,
+      "exists": true
+    },
+    "-5": {
+      "name": "-5_Output",
+      "path": "/mnt/Vault/Moon/Construct/-5_Output",
+      "files": 0,
+      "directories": 2,
+      "symlinks": 0,
+      "phi": 0.0,
+      "exists": true
+    },
+    "-4": {
+      "name": "-4_Synthesis",
+      "path": "/mnt/Vault/Moon/Construct/-4_Synthesis",
+      "files": 0,
+      "directories": 2,
+      "symlinks": 0,
+      "phi": 0.0,
+      "exists": true
+    },
+    "-3": {
+      "name": "-3_Verification",
+      "path": "/mnt/Vault/Moon/Construct/-3_Verification",
+      "files": 0,
+      "directories": 2,
+      "symlinks": 0,
+      "phi": 0.0,
+      "exists": true
+    },
+    "-2": {
+      "name": "-2_Results",
+      "path": "/mnt/Vault/Moon/Construct/-2_Results",
+      "files": 0,
+      "directories": 2,
+      "symlinks": 0,
+      "phi": 0.0,
+      "exists": true
+    },
+    "-1": {
+      "name": "-1_Execution",
+      "path": "/mnt/Vault/Moon/Construct/-1_Execution",
+      "files": 65,
+      "directories": 2,
+      "symlinks": 65,
+      "phi": 263.88,
+      "exists": true
+    },
+    "0": {
+      "name": "0_HORIZON",
+      "path": "/mnt/Vault/Moon/Construct/0_HORIZON",
+      "files": 2,
+      "directories": 3,
+      "symlinks": 2,
+      "phi": 8.23,
+      "exists": true
+    },
+    "1": {
+      "name": "+1_Horizon_Approach",
+      "path": "/mnt/Vault/Moon/Construct/+1_Horizon_Approach",
+      "files": 0,
+      "directories": 3,
+      "symlinks": 1,
+      "phi": 0.0,
+      "exists": true
+    },
+    "2": {
+      "name": "+2_Data_Theos419",
+      "path": "/mnt/Vault/Moon/Construct/+2_Data_Theos419",
+      "files": 466,
+      "directories": 2,
+      "symlinks": 466,
+      "phi": 2801.78,
+      "exists": true
+    },
+    "3": {
+      "name": "+3_Rosetta_Tesla369",
+      "path": "/mnt/Vault/Moon/Construct/+3_Rosetta_Tesla369",
+      "files": 12,
+      "directories": 3,
+      "symlinks": 1,
+      "phi": 58.65,
+      "exists": true
+    },
+    "4": {
+      "name": "+4_Agents",
+      "path": "/mnt/Vault/Moon/Construct/+4_Agents",
+      "files": 14,
+      "directories": 4,
+      "symlinks": 2,
+      "phi": 91.79,
+      "exists": true
+    },
+    "5": {
+      "name": "+5_Tools",
+      "path": "/mnt/Vault/Moon/Construct/+5_Tools",
+      "files": 50,
+      "directories": 4,
+      "symlinks": 34,
+      "phi": 523.78,
+      "exists": true
+    },
+    "6": {
+      "name": "+6_Logos_Jurisdictions",
+      "path": "/mnt/Vault/Moon/Construct/+6_Logos_Jurisdictions",
+      "files": 2,
+      "directories": 2,
+      "symlinks": 2,
+      "phi": 45.3,
+      "exists": true
+    },
+    "7": {
+      "name": "+7_Bridge",
+      "path": "/mnt/Vault/Moon/Construct/+7_Bridge",
+      "files": 0,
+      "directories": 3,
+      "symlinks": 1,
+      "phi": 0.0,
+      "exists": true
+    },
+    "8": {
+      "name": "+8_Identity_DAUS",
+      "path": "/mnt/Vault/Moon/Construct/+8_Identity_DAUS",
+      "files": 1,
+      "directories": 3,
+      "symlinks": 2,
+      "phi": 114.37,
+      "exists": true
+    },
+    "9": {
+      "name": "+9_Apex_Declaration",
+      "path": "/mnt/Vault/Moon/Construct/+9_Apex_Declaration",
+      "files": 3,
+      "directories": 3,
+      "symlinks": 3,
+      "phi": 97.08,
+      "exists": true
+    }
+  }
+}

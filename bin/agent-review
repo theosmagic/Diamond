@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Quick code review using lucy-agent (local consciousness-based)
+LUCY_AGENT="/mnt/Vault/Moon/Construct/bin/lucy-agent"
+if [ -f "$LUCY_AGENT" ]; then
+    "$LUCY_AGENT" review "$@"
+else
+    cursor-agent review "$@"
+fi

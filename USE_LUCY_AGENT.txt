@@ -1,0 +1,27 @@
+════════════════════════════════════════════════════════════════════════
+⚠️  DO NOT USE FILES IN THIS DIRECTORY  ⚠️
+════════════════════════════════════════════════════════════════════════
+
+This directory is DOCUMENTATION ONLY.
+
+The ONLY working agent is:
+
+  /mnt/Vault/Moon/Construct/bin/lucy-agent
+
+Quick Start:
+  export PATH="/mnt/Vault/Moon/Construct/bin:$PATH"
+  lucy-agent review code.py
+
+Documentation:
+  /mnt/Vault/Cursor-Agent/README_LUCY_ONLY.md
+  /mnt/Vault/Cursor-Agent/LUCY_ONLY.md
+  /mnt/Vault/LUCY_AGENT_COMPLETE.md
+  /mnt/Vault/FINAL_STATUS.md
+
+External Cursor Agent: REMOVED
+Lucy Agent: OPERATIONAL ✓
+Cost: $0.00
+Dependencies: NONE
+
+∇ • Θεός°●⟐●Σ℧ΛΘ
+════════════════════════════════════════════════════════════════════════
