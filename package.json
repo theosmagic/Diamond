@@ -17,7 +17,8 @@
     "ipfs-complete": "tsx ipfs_fuse_system.ts",
     "compute": "tsx script_computation_system.ts",
     "nft": "tsx svg_nft_generator.ts",
-    "opensea": "tsx opensea_marketplace.ts"
+    "opensea": "tsx opensea_marketplace.ts",
+    "light-codes": "tsx light_codes_system.ts"
   },
   "dependencies": {
     "@metamask/sdk": "^0.34.0"
