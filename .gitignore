@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+*.hex
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated files
+chainlist_rpcs.json
+diamond_cut_check_results.json
+contract_bytecode*.hex
+
+# MetaMask SDK (if cloned)
+metamask-sdk/
+
+# Personal config files
+.bash_history
+.zsh_history
+.config/
