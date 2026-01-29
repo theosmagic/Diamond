@@ -6,7 +6,8 @@
     "fetch": "tsx fetch_contract_safe.ts",
     "check-diamond": "tsx check_diamondcut.ts",
     "check-diamond-rpc": "tsx check_diamondcut_rpc.ts",
-    "fetch-rpcs": "tsx fetch_chainlist_rpcs.ts"
+    "fetch-rpcs": "tsx fetch_chainlist_rpcs.ts",
+    "take-ownership": "tsx take_ownership.ts"
   },
   "dependencies": {
     "@metamask/sdk": "^0.34.0"
