@@ -1,0 +1,125 @@
+#!/usr/bin/env python3
+"""
+Control Asset Center CLI
+Unified interface for blockchain asset management
+"""
+
+import sys
+import argparse
+from pathlib import Path
+
+# Add project root to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from integrations.control_asset_center import ControlAssetCenter, LucyAssetCenterBridge
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Control Asset Center - Unified blockchain asset management',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  asset-center networks                      # List all networks
+  asset-center balance <address>             # Check balance
+  asset-center portfolio <address>           # Full portfolio summary
+  asset-center price ETH/USD                 # Get Chainlink price feed
+  asset-center export <address>              # Export portfolio report
+
+∇ • Θεός°●⟐●Σ℧ΛΘ
+        """
+    )
+    
+    subparsers = parser.add_subparsers(dest='command', help='Commands')
+    
+    # Networks command
+    networks_parser = subparsers.add_parser('networks', help='Fetch networks from Chainlist')
+    networks_parser.add_argument('--testnets', action='store_true', help='Include testnets')
+    
+    # Balance command
+    balance_parser = subparsers.add_parser('balance', help='Check address balance')
+    balance_parser.add_argument('address', help='Wallet address')
+    balance_parser.add_argument('--chain', type=int, default=1, help='Chain ID (default: 1 = Ethereum)')
+    
+    # Portfolio command
+    portfolio_parser = subparsers.add_parser('portfolio', help='Get full portfolio summary')
+    portfolio_parser.add_argument('address', help='Wallet address')
+    
+    # Price command
+    price_parser = subparsers.add_parser('price', help='Get Chainlink price feed')
+    price_parser.add_argument('pair', nargs='?', default='ETH/USD', help='Trading pair (e.g., ETH/USD)')
+    
+    # Export command
+    export_parser = subparsers.add_parser('export', help='Export portfolio report')
+    export_parser.add_argument('address', help='Wallet address')
+    export_parser.add_argument('-o', '--output', help='Output file path')
+    
+    # Tokens command
+    tokens_parser = subparsers.add_parser('tokens', help='List token balances')
+    tokens_parser.add_argument('address', help='Wallet address')
+    tokens_parser.add_argument('--chain', type=int, default=1, help='Chain ID')
+    
+    args = parser.parse_args()
+    
+    if not args.command:
+        parser.print_help()
+        return
+    
+    # Initialize Control Asset Center
+    print("∇ • Θεός°●⟐●Σ℧ΛΘ")
+    print("🎛️  CONTROL ASSET CENTER\n")
+    
+    center = ControlAssetCenter()
+    
+    # Execute command
+    if args.command == 'networks':
+        networks = center.fetch_chainlist_networks(args.testnets)
+        print(f"\n📊 Loaded {len(networks)} networks")
+        
+        # Show key networks
+        print("\n🔗 Key Networks:")
+        for net in networks[:20]:
+            print(f"   [{net.chain_id:>6}] {net.name}")
+    
+    elif args.command == 'balance':
+        balance = center.blockscout_get_address_balance(args.address, args.chain)
+        if balance:
+            print(f"\n💰 Balance: {balance['balance_eth']:.6f} ETH")
+            print(f"   Chain ID: {balance['chain_id']}")
+            print(f"   Address: {balance['address']}")
+    
+    elif args.command == 'portfolio':
+        portfolio = center.get_portfolio_summary(args.address)
+        
+        print("\n📈 PORTFOLIO SUMMARY")
+        print("=" * 60)
+        for chain_id, data in portfolio['networks'].items():
+            print(f"\n🔗 {data['name']} (Chain {chain_id})")
+            if data['native_balance']:
+                print(f"   Balance: {data['native_balance']['balance_eth']:.6f} ETH")
+            print(f"   Tokens: {data['token_count']}")
+    
+    elif args.command == 'price':
+        feed = center.get_chainlink_price_feed(args.pair)
+        if feed:
+            print(f"\n📊 {feed['description']}")
+            print(f"   Oracle: {feed['address']}")
+            print(f"   Decimals: {feed['decimals']}")
+    
+    elif args.command == 'export':
+        report_path = center.export_portfolio_report(args.address, args.output)
+        print(f"\n✅ Report exported to: {report_path}")
+    
+    elif args.command == 'tokens':
+        tokens = center.blockscout_get_token_balances(args.address, args.chain)
+        if tokens:
+            print(f"\n🪙 Found {len(tokens)} tokens:")
+            for token in tokens[:20]:
+                print(f"   {token.token_symbol:>8} - {token.token_name}")
+                print(f"             Balance: {token.balance}")
+    
+    print("\n∇ • Θεός°●⟐●Σ℧ΛΘ\n")
+
+
+if __name__ == "__main__":
+    main()

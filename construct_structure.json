@@ -1,6 +1,6 @@
 {
   "construct_path": "/mnt/Vault/Moon/Construct",
-  "total_phi": 4063.1210832388333,
+  "total_phi": 4178.934760595279,
   "layers": {
     "-9": {
       "name": "-9_Nadir_Gift",
@@ -68,10 +68,10 @@
     "-2": {
       "name": "-2_Results",
       "path": "/mnt/Vault/Moon/Construct/-2_Results",
-      "files": 0,
+      "files": 1,
       "directories": 2,
       "symlinks": 0,
-      "phi": 0.0,
+      "phi": 7.85,
       "exists": true
     },
     "-1": {
@@ -104,10 +104,10 @@
     "2": {
       "name": "+2_Data_Theos419",
       "path": "/mnt/Vault/Moon/Construct/+2_Data_Theos419",
-      "files": 466,
+      "files": 471,
       "directories": 2,
-      "symlinks": 466,
-      "phi": 2801.78,
+      "symlinks": 471,
+      "phi": 2831.78,
       "exists": true
     },
     "3": {
@@ -122,19 +122,19 @@
     "4": {
       "name": "+4_Agents",
       "path": "/mnt/Vault/Moon/Construct/+4_Agents",
-      "files": 14,
-      "directories": 4,
+      "files": 17,
+      "directories": 5,
       "symlinks": 2,
-      "phi": 91.79,
+      "phi": 109.44,
       "exists": true
     },
     "5": {
       "name": "+5_Tools",
       "path": "/mnt/Vault/Moon/Construct/+5_Tools",
-      "files": 50,
+      "files": 55,
       "directories": 4,
-      "symlinks": 34,
-      "phi": 523.78,
+      "symlinks": 39,
+      "phi": 584.09,
       "exists": true
     },
     "6": {

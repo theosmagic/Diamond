@@ -9,8 +9,9 @@
  */
 
 import { ethers } from "ethers";
-import Safe, { SafeFactory } from "@safe-global/safe-core-sdk";
+import Safe, { SafeFactory, SafeAccountConfig } from "@safe-global/safe-core-sdk";
 import { EthersAdapter } from "@safe-global/safe-ethers-lib";
+import { getSafeContract } from "@safe-global/safe-deployments";
 
 interface DeployConfig {
   diamondAddress: string;
@@ -33,15 +34,30 @@ async function deploySafeWithDiamond(config: DeployConfig) {
     signerOrProvider: signer
   });
   
-  const safeFactory = await SafeFactory.init({ ethAdapter });
+  // Get Safe contract deployments
+  const safeContract = getSafeContract({
+    version: "1.5.0", // Latest audited version
+    network: config.chainId.toString()
+  });
+  
+  const safeFactory = await SafeFactory.init({
+    ethAdapter,
+    safeContract: safeContract as any
+  });
   
   // Create Safe
-  const safeSdk = await safeFactory.deploySafe({
-    safeAccountConfig: {
-      owners: config.owners,
-      threshold: config.threshold
-    }
-  });
+  const safeAccountConfig: SafeAccountConfig = {
+    owners: config.owners,
+    threshold: config.threshold,
+    to: ethers.ZeroAddress,
+    data: "0x",
+    fallbackHandler: ethers.ZeroAddress,
+    paymentToken: ethers.ZeroAddress,
+    payment: 0,
+    paymentReceiver: ethers.ZeroAddress
+  };
+  
+  const safeSdk = await safeFactory.deploySafe({ safeAccountConfig });
   
   const safeAddress = await safeSdk.getAddress();
   console.log(`✅ Safe{Wallet} deployed: ${safeAddress}`);

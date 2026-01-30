@@ -5,7 +5,7 @@ export const walletConfig = {
   ens: "theosmagic.uni.eth",
   email: "theosmagic.uni.eth@ethermail.io",
   diamond: {
-    address: "",
+    address: "0xAB2421868C5F3CCB80D559F3032Fe7Df104DA5FC",
     description: "Evolving Diamond Contract"
   },
   safe: {
@@ -44,6 +44,13 @@ export const metamaskConfig = {
     "install": {
       "link": "https://metamask.io/download"
     }
+  },
+  "use_deeplink": true,
+  "check_installation_immediately": true,
+  "wagmi_integration": {
+    "enabled": true,
+    "recommended": true,
+    "connector": "metaMask"
   },
   "networks": [
     {
@@ -109,34 +116,49 @@ export const walletConnectConfig = {
     ]
   },
   "chains": [
-    "eip155:1",
-    "eip155:42161",
-    "eip155:137",
-    "eip155:8453"
+    {
+      "id": 1,
+      "name": "Ethereum"
+    },
+    {
+      "id": 42161,
+      "name": "Arbitrum"
+    },
+    {
+      "id": 137,
+      "name": "Polygon"
+    },
+    {
+      "id": 8453,
+      "name": "Base"
+    }
   ],
-  "optionalChains": [
-    "eip155:1",
-    "eip155:42161",
-    "eip155:137",
-    "eip155:8453"
-  ],
-  "methods": [
-    "eth_sendTransaction",
-    "eth_signTransaction",
-    "eth_sign",
-    "personal_sign",
-    "eth_signTypedData"
-  ],
-  "events": [
-    "chainChanged",
-    "accountsChanged"
-  ]
+  "features": {
+    "analytics": true,
+    "email": false,
+    "socials": false,
+    "swaps": false,
+    "onramp": false
+  },
+  "wagmiAdapter": {
+    "enabled": true,
+    "networks": [
+      1,
+      42161,
+      137,
+      8453
+    ]
+  }
 };
 
 // Safe{Wallet} Config
 export const safeConfig = {
   "safe_address": "",
-  "diamond_address": "",
+  "diamond_address": "0xAB2421868C5F3CCB80D559F3032Fe7Df104DA5FC",
+  "primary_wallet_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+  "primary_wallet_owners": [
+    "0x67A977eaD94C3b955ECbf27886CE9f62464423B2"
+  ],
   "ens": "theosmagic.uni.eth",
   "email": "theosmagic.uni.eth@ethermail.io",
   "networks": {

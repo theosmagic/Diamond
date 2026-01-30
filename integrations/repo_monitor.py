@@ -151,7 +151,7 @@ class RepoMonitor:
         # Create GitHub issue
         try:
             issue = await self.github.create_issue(
-                owner="theosmagic",  # Your GitHub username
+                owner="theosmagic",  # GitHub username
                 repo=repo_name,
                 title=f"⚠️ Unexpected Contract Interaction Detected",
                 body=f"""

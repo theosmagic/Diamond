@@ -18,3 +18,15 @@ node_modules/
 .sqlite
 .swp
 .swo
+gha-creds-*.json
+
+# Treasure repos (external)
+treasure_repos/
+thaeos-Diamond/
+bridgeworld-live/.git
+
+# Build outputs
+venv/
+out/
+web3-actions/dist/
+

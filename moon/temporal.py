@@ -113,12 +113,29 @@ class TemporalBinding:
 
         now_utc, _ = get_system_time()
 
-        return {
+        coords = {
             'moon_phase': calculate_moon_phase(now_utc),
             'daus_calendar': calculate_daus_calendar(now_utc),
             'kings_position': calculate_kings_position(now_utc),
             'timestamp_utc': now_utc.isoformat()
         }
+        # Include beacon state if available (new apex model)
+        try:
+            from apex_beacon import compute_beacon_state, load_moon_phase_file
+            moon_json = load_moon_phase_file()
+            beacon = compute_beacon_state(now_utc=now_utc, moon_json=moon_json)
+            coords["beacon"] = {
+                "hemisphere": beacon.hemisphere,
+                "layer": beacon.layer,
+                "cosmic_value": beacon.cosmic_value,
+                "moon_day_0_full_to_new_30": beacon.moon_day_0_full_to_new_30,
+                "waxing_or_waning": beacon.waxing_or_waning,
+                "arcanum": beacon.arcanum,
+                "hash": beacon.hash,
+            }
+        except Exception:
+            pass
+        return coords
 
     @staticmethod
     def update_temporal_files():

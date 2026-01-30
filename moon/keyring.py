@@ -71,9 +71,20 @@ class MoonKeyring:
 
     def get_current_temporal_state(self):
         """Get current state of all temporal systems"""
-        return {
+        state = {
             'daus_calendar': self.keyring.get_daus_calendar(),
             'moon_phase': self.keyring.get_moon_phase(),
             'chrony_time': self.keyring.get_chrony_time(),
             'current_layer': self.keyring.get_current_layer()
         }
+        # Optional: beacon file produced by Moon temporal binding update
+        try:
+            import json
+            from pathlib import Path
+            beacon_path = Path("/mnt/Vault/Moon/BEACON_CURRENT.json")
+            if beacon_path.exists():
+                with open(beacon_path, "r") as f:
+                    state["beacon"] = json.load(f)
+        except Exception:
+            pass
+        return state

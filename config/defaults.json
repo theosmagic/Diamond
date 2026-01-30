@@ -12,8 +12,9 @@
     "is_primary": true
   },
   "diamond": {
-    "default_address": "0x0000000000000000000000000000000000000000",
-    "description": "Default Diamond Contract address (to be set on deployment)"
+    "default_address": "0xAB2421868C5F3CCB80D559F3032Fe7Df104DA5FC",
+    "verifier_address": "0x828255D084cFEC7C47AD2124402Ea08a4c0004C3",
+    "description": "Deployed Diamond Contract and Verifier on Tenderly Virtual TestNet"
   },
   "brave_browser_api": {
     "key": "BSAEwLe_77A0TDYC2yxYKIQk8T3IsQO",

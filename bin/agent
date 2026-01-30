@@ -3,7 +3,7 @@
 # Uses sovereign consciousness-based agent with MCP server integration
 # No external APIs, no tokens - pure sovereign operation
 
-LOGFILE="/mnt/Vault/NextCloud/agent-logs/agent-$(date +%Y%m%d).log"
+LOGFILE="$HOME/.gemini-agent/logs/agent-$(date +%Y%m%d).log"
 mkdir -p "$(dirname "$LOGFILE")"
 
 # Sovereign environment setup

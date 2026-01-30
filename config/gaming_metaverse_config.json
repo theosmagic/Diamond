@@ -1,0 +1,181 @@
+{
+  "master_key": {
+    "image_path": "/mnt/Vault/Cursor-Agent/Master_Key.png",
+    "ipfs_cid": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqSnPMck",
+    "sha256": "c4aa73faa55c35e2096a63c6db96cb0bc4af672759f4e980072dfd7ce13b9bbf",
+    "recipient": "0x9b1d38e00898625bbeece55d39109a907a3fcffa",
+    "ens_name": "θεός°•.eth"
+  },
+  "networks": {
+    "ethereum": {
+      "chain_id": 1,
+      "name": "Ethereum Mainnet",
+      "rpc": "https://eth.llamarpc.com",
+      "explorer": "https://etherscan.io",
+      "native_token": {
+        "symbol": "ETH",
+        "decimals": 18
+      },
+      "priority": 1,
+      "enabled": true
+    },
+    "arbitrum": {
+      "chain_id": 42161,
+      "name": "Arbitrum One",
+      "rpc": "https://arb1.arbitrum.io/rpc",
+      "explorer": "https://arbiscan.io",
+      "native_token": {
+        "symbol": "ETH",
+        "decimals": 18
+      },
+      "priority": 2,
+      "enabled": true,
+      "is_primary": true
+    },
+    "polygon": {
+      "chain_id": 137,
+      "name": "Polygon",
+      "rpc": "https://polygon-rpc.com",
+      "explorer": "https://polygonscan.com",
+      "native_token": {
+        "symbol": "MATIC",
+        "decimals": 18
+      },
+      "priority": 3,
+      "enabled": true
+    },
+    "base": {
+      "chain_id": 8453,
+      "name": "Base (Coinbase L2)",
+      "rpc": "https://mainnet.base.org",
+      "explorer": "https://basescan.org",
+      "native_token": {
+        "symbol": "ETH",
+        "decimals": 18
+      },
+      "priority": 4,
+      "enabled": true
+    }
+  },
+  "tokens": {
+    "MAGIC": {
+      "symbol": "MAGIC",
+      "name": "MAGIC Token",
+      "address": "0x539bdE0d7Dbd336b79148AA742883198BBF60342",
+      "chain_id": 42161,
+      "network": "Arbitrum",
+      "decimals": 18,
+      "type": "ERC-20",
+      "priority": 1,
+      "description": "Core TreasureDAO ecosystem token",
+      "coingecko_id": "magic",
+      "enabled": true
+    },
+    "MANA": {
+      "symbol": "MANA",
+      "name": "Decentraland MANA",
+      "address": "0x0F5D2fB29fb7d3CFeE444a200298f468908cC942",
+      "chain_id": 1,
+      "network": "Ethereum",
+      "decimals": 18,
+      "type": "ERC-20",
+      "priority": 2,
+      "description": "Decentraland metaverse token",
+      "coingecko_id": "decentraland",
+      "enabled": true
+    },
+    "SAND": {
+      "symbol": "SAND",
+      "name": "The Sandbox SAND",
+      "address": "0x3845badAde8e6dFF049820680d1F14bD3903a5d0",
+      "chain_id": 1,
+      "network": "Ethereum",
+      "decimals": 18,
+      "type": "ERC-20",
+      "priority": 3,
+      "description": "The Sandbox metaverse token",
+      "coingecko_id": "the-sandbox",
+      "enabled": true
+    },
+    "THO": {
+      "symbol": "THO",
+      "name": "THO Coin",
+      "address": "0x233f3956d82bfea9E78B2BdB0a9D245193881870",
+      "chain_id": 8453,
+      "network": "Base",
+      "decimals": 18,
+      "type": "ERC-20",
+      "priority": 4,
+      "description": "Custom token on Base (X402)",
+      "pool_address": "0xc0B518AD8f598D1F830c357f31295E0fEC3dcb58",
+      "enabled": true
+    }
+  },
+  "marketplaces": {
+    "opensea": {
+      "name": "OpenSea",
+      "url": "https://opensea.io",
+      "api": "https://api.opensea.io/api/v2",
+      "supported_chains": [1, 42161, 137, 8453, 10],
+      "enabled": true,
+      "features": ["nft_trading", "collections", "offers"]
+    },
+    "magic_eden": {
+      "name": "Magic Eden",
+      "url": "https://magiceden.io",
+      "api": "https://api-mainnet.magiceden.dev/v2",
+      "supported_chains": [1, 137],
+      "enabled": true,
+      "features": ["nft_trading", "launchpad"]
+    },
+    "treasure_marketplace": {
+      "name": "Treasure Marketplace",
+      "url": "https://treasure.lol",
+      "contract": "0x09986B4e255B3c548041a30A2Ee312Fe176731c2",
+      "chain_id": 42161,
+      "network": "Arbitrum",
+      "type": "Diamond",
+      "enabled": true,
+      "is_primary": true
+    }
+  },
+  "gaming_platforms": {
+    "immutable_passport": {
+      "name": "Immutable Passport",
+      "url": "https://passport.immutable.com",
+      "sdk": "@immutable/passport",
+      "chain_id": 13371,
+      "network": "Immutable zkEVM",
+      "enabled": true,
+      "features": ["web3_auth", "wallet", "identity"]
+    },
+    "ready_player_one": {
+      "name": "Ready Player One Ecosystem",
+      "description": "Metaverse gaming integration",
+      "enabled": true,
+      "integration_type": "custom"
+    },
+    "godot": {
+      "name": "Godot Engine Export",
+      "description": "Game engine export integration",
+      "version": "4.x",
+      "enabled": true,
+      "export_formats": ["web", "native"],
+      "web3_integration": true
+    }
+  },
+  "treasure_dao": {
+    "ens": "θεός°•.eth",
+    "cloudflare_domain": "bridgeworld.lol",
+    "primary_network": "Arbitrum One",
+    "chain_id": 42161,
+    "total_contracts": 22,
+    "contracts_source": "/mnt/Vault/Cursor-Agent/treasure_dao_contracts.json"
+  },
+  "api_keys": {
+    "brave_browser": "BSAEwLe_77A0TDYC2yxYKIQk8T3IsQO",
+    "opensea": "",
+    "magic_eden": "",
+    "immutable": ""
+  }
+}

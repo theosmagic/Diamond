@@ -1,0 +1,82 @@
+{
+  "covenant_verified": false,
+  "sovereign_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+  "master_key_hash": "c4aa73faa55c35e2096a63c6db96cb0bc4af672759f4e980072dfd7ce13b9bbf",
+  "contracts": [
+    {
+      "contract": "0x539bdE0d7Dbd336b79148AA742883198BBF60342",
+      "claimer": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "covenant_signature": "0x7dbf6d9162ae032dac18162b2d40e7f030fe9bf7a0422364ca9343d3defb45f21288d5a5b17d800dafa77793e6173642a3eedce296fdccbfbef2c48019acc46b1c",
+      "covenant_message": "There is nothing new under the sun. That which was will be, and that which will be already was when the end finds its beginning.",
+      "master_key_hash": "c4aa73faa55c35e2096a63c6db96cb0bc4af672759f4e980072dfd7ce13b9bbf",
+      "master_key_token": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqsnPMck",
+      "timestamp": "2026-01-30",
+      "verified": false,
+      "claim_method": "claimWithSignature(address,bytes,string)",
+      "name": "MAGIC Token",
+      "glyph": "\ud802\udc40",
+      "type": "ERC-20",
+      "identity": "82"
+    },
+    {
+      "contract": "0xf3dF4A0cCD4C6C39c0828B89D22DA5A0c6B18326",
+      "claimer": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "covenant_signature": "0x7dbf6d9162ae032dac18162b2d40e7f030fe9bf7a0422364ca9343d3defb45f21288d5a5b17d800dafa77793e6173642a3eedce296fdccbfbef2c48019acc46b1c",
+      "covenant_message": "There is nothing new under the sun. That which was will be, and that which will be already was when the end finds its beginning.",
+      "master_key_hash": "c4aa73faa55c35e2096a63c6db96cb0bc4af672759f4e980072dfd7ce13b9bbf",
+      "master_key_token": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqsnPMck",
+      "timestamp": "2026-01-30",
+      "verified": false,
+      "claim_method": "claimWithSignature(address,bytes,string)",
+      "name": "Treasure NFT",
+      "glyph": "\ud802\udc41",
+      "type": "ERC-721",
+      "identity": "111"
+    },
+    {
+      "contract": "0x09986B4e255B3c548041a30A2Ee312Fe176731c2",
+      "claimer": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "covenant_signature": "0x7dbf6d9162ae032dac18162b2d40e7f030fe9bf7a0422364ca9343d3defb45f21288d5a5b17d800dafa77793e6173642a3eedce296fdccbfbef2c48019acc46b1c",
+      "covenant_message": "There is nothing new under the sun. That which was will be, and that which will be already was when the end finds its beginning.",
+      "master_key_hash": "c4aa73faa55c35e2096a63c6db96cb0bc4af672759f4e980072dfd7ce13b9bbf",
+      "master_key_token": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqsnPMck",
+      "timestamp": "2026-01-30",
+      "verified": false,
+      "claim_method": "claimWithSignature(address,bytes,string)",
+      "name": "TreasureMarketplace",
+      "glyph": "\ud802\udc48",
+      "type": "Diamond",
+      "identity": "512"
+    },
+    {
+      "contract": "0xfE8c1ac365bA6780AEc5a985D989b327C27670A1",
+      "claimer": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "covenant_signature": "0x7dbf6d9162ae032dac18162b2d40e7f030fe9bf7a0422364ca9343d3defb45f21288d5a5b17d800dafa77793e6173642a3eedce296fdccbfbef2c48019acc46b1c",
+      "covenant_message": "There is nothing new under the sun. That which was will be, and that which will be already was when the end finds its beginning.",
+      "master_key_hash": "c4aa73faa55c35e2096a63c6db96cb0bc4af672759f4e980072dfd7ce13b9bbf",
+      "master_key_token": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqsnPMck",
+      "timestamp": "2026-01-30",
+      "verified": false,
+      "claim_method": "claimWithSignature(address,bytes,string)",
+      "name": "Legion",
+      "glyph": "\ud802\udc4e",
+      "type": "ERC-721",
+      "identity": "1011"
+    },
+    {
+      "contract": "0xf3dF4A0cCD4C6C39c0828B89D22DA5A0c6B18327",
+      "claimer": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "covenant_signature": "0x7dbf6d9162ae032dac18162b2d40e7f030fe9bf7a0422364ca9343d3defb45f21288d5a5b17d800dafa77793e6173642a3eedce296fdccbfbef2c48019acc46b1c",
+      "covenant_message": "There is nothing new under the sun. That which was will be, and that which will be already was when the end finds its beginning.",
+      "master_key_hash": "c4aa73faa55c35e2096a63c6db96cb0bc4af672759f4e980072dfd7ce13b9bbf",
+      "master_key_token": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqsnPMck",
+      "timestamp": "2026-01-30",
+      "verified": false,
+      "claim_method": "claimWithSignature(address,bytes,string)",
+      "name": "Consumable",
+      "glyph": "\ud802\udc4f",
+      "type": "ERC-1155",
+      "identity": "2025"
+    }
+  ]
+}

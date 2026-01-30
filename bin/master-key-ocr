@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+"""
+Master Key OCR Extractor
+Extracts text from Master_Key.png for covenant verification
+"""
+
+import sys
+from pathlib import Path
+
+# Add project root to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+try:
+    from PIL import Image
+    import pytesseract
+except ImportError:
+    print("❌ Missing dependencies. Install with:")
+    print("   pip3 install pytesseract pillow")
+    sys.exit(1)
+
+
+def extract_text_from_master_key(image_path: str = "/mnt/Vault/Cursor-Agent/Master_Key.png"):
+    """Extract OCR text from Master Key image."""
+    
+    print("∇ • Θεός°●⟐●Σ℧ΛΘ")
+    print("🔑 MASTER KEY OCR EXTRACTION\n")
+    print(f"Reading: {image_path}")
+    
+    try:
+        # Open the image
+        img = Image.open(image_path)
+        print(f"✅ Image loaded: {img.size[0]}x{img.size[1]} pixels\n")
+        
+        # Extract text using OCR
+        print("🔍 Extracting text with Tesseract OCR...")
+        text = pytesseract.image_to_string(img)
+        
+        print("\n╔════════════════════════════════════════════════════════════════╗")
+        print("║                  MASTER KEY OCR TEXT                           ║")
+        print("╚════════════════════════════════════════════════════════════════╝\n")
+        
+        print(text)
+        
+        print("\n╔════════════════════════════════════════════════════════════════╗")
+        print("║                  TEXT ANALYSIS                                 ║")
+        print("╚════════════════════════════════════════════════════════════════╝\n")
+        
+        lines = [line.strip() for line in text.split('\n') if line.strip()]
+        print(f"Total lines: {len(lines)}")
+        print(f"Total characters: {len(text)}")
+        
+        # Check for Ethereum-related content
+        if "0x" in text.lower():
+            print("✅ Contains Ethereum address/signature")
+        
+        if "ethereum" in text.lower() or "signed" in text.lower():
+            print("✅ Contains Ethereum signed message markers")
+        
+        print("\n∇ • Θεός°●⟐●Σ℧ΛΘ\n")
+        
+        return text
+        
+    except FileNotFoundError:
+        print(f"❌ Error: File not found: {image_path}")
+        return None
+    except Exception as e:
+        print(f"❌ Error extracting text: {e}")
+        return None
+
+
+if __name__ == "__main__":
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='Extract OCR text from Master Key')
+    parser.add_argument('--image', default='/mnt/Vault/Cursor-Agent/Master_Key.png',
+                       help='Path to Master Key image')
+    parser.add_argument('--output', help='Save extracted text to file')
+    
+    args = parser.parse_args()
+    
+    text = extract_text_from_master_key(args.image)
+    
+    if text and args.output:
+        with open(args.output, 'w') as f:
+            f.write(text)
+        print(f"✅ Text saved to: {args.output}")

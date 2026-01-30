@@ -39,16 +39,16 @@ def run_ocr(input_path, output_dir, model_name='deepseek-ai/DeepSeek-OCR-2', dev
     print(f"Loading tokenizer: {model_name}")
     tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
     
-        print(f"Loading model: {model_name}")
-        # Use 'eager' for CPU, flash_attention_2 for CUDA if supported
-        attn_implementation = 'flash_attention_2' if device == 'cuda' else 'eager'
-        
-        model = AutoModel.from_pretrained(
-            model_name, 
-            attn_implementation=attn_implementation, 
-            trust_remote_code=True, 
-            # use_safetensors=True
-        )    
+    print(f"Loading model: {model_name}")
+    # Use 'eager' for CPU, flash_attention_2 for CUDA if supported
+    attn_implementation = 'flash_attention_2' if device == 'cuda' else 'eager'
+    
+    model = AutoModel.from_pretrained(
+        model_name, 
+        attn_implementation=attn_implementation, 
+        trust_remote_code=True, 
+        # use_safetensors=True
+    )
     if device == 'cuda':
         model = model.eval().cuda().to(torch.bfloat16)
     else:

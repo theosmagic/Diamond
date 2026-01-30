@@ -14,7 +14,7 @@
  */
 
 import { ActionFn, Context, Event, TransactionEvent } from "@tenderly/actions";
-import { ethers } from "ethers";
+import { ethers, Interface, LogDescription } from "ethers";
 
 // Diamond Contract ABI (simplified)
 const DIAMOND_ABI = [
@@ -47,8 +47,8 @@ export const onboarding: ActionFn = async (context: Context, event: Event) => {
   console.log("Event:", JSON.stringify(event, null, 2));
   
   // Handle transaction events
-  if (event instanceof TransactionEvent) {
-    await handleTransactionEvent(context, event);
+  if ("hash" in event) {
+    await handleTransactionEvent(context, event as TransactionEvent);
   }
   
   // Handle other event types
@@ -84,7 +84,7 @@ async function handleTransactionEvent(context: Context, event: TransactionEvent)
     for (const log of event.logs) {
       try {
         // Try Diamond Contract ABI
-        const diamondIface = new ethers.Interface(DIAMOND_ABI);
+        const diamondIface = new Interface(DIAMOND_ABI);
         const diamondParsed = diamondIface.parseLog(log);
         
         if (diamondParsed && diamondParsed.name === "DiamondCut") {
@@ -94,7 +94,7 @@ async function handleTransactionEvent(context: Context, event: TransactionEvent)
         }
         
         // Try Safe{Wallet} ABI
-        const safeIface = new ethers.Interface(SAFE_ABI);
+        const safeIface = new Interface(SAFE_ABI);
         const safeParsed = safeIface.parseLog(log);
         
         if (safeParsed && (safeParsed.name === "ExecutionSuccess" || safeParsed.name === "ExecutionFailure")) {
@@ -115,7 +115,7 @@ async function handleTransactionEvent(context: Context, event: TransactionEvent)
 async function handleDiamondCut(
   context: Context, 
   event: TransactionEvent,
-  parsed: ethers.LogDescription
+  parsed: LogDescription
 ) {
   console.log("🔷 Diamond Cut Event Detected!");
   console.log("Diamond Cut Event Details:");
@@ -142,7 +142,7 @@ async function handleDiamondCut(
 async function handleSafeExecution(
   context: Context,
   event: TransactionEvent,
-  parsed: ethers.LogDescription
+  parsed: LogDescription
 ) {
   console.log("🛡️  Safe{Wallet} Execution Detected!");
   console.log("  Success:", parsed.name === "ExecutionSuccess");

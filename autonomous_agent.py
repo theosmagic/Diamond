@@ -201,12 +201,13 @@ class AutonomousAgent:
         
         return result
     
-    def deploy_diamond_contract(self, contract_name: str = "Diamond") -> Dict[str, Any]:
+    def deploy_diamond_contract(self, contract_name: str = "Diamond", private_key: Optional[str] = None) -> Dict[str, Any]:
         """
         Deploy Diamond Contract to Tenderly autonomously
         
         Args:
             contract_name: Name of contract to deploy
+            private_key: Private key for deployment
         
         Returns:
             Deployment result
@@ -240,6 +241,14 @@ class AutonomousAgent:
             "--verifier-url", verifier_url,
             "--broadcast"
         ]
+        
+        # Add private key if available
+        pk = private_key or os.environ.get("PRIVATE_KEY")
+        if pk:
+            deploy_cmd.extend(["--private-key", pk])
+        else:
+            # Fallback to interactive/unlocked if needed, or fail
+            pass
         
         result = self.execute_command(deploy_cmd)
         

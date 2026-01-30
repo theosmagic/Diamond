@@ -248,6 +248,351 @@ class LucyAgent:
             'error': result.stderr if result.returncode != 0 else None
         }
 
+    def forge_covenant(self) -> Dict:
+        """
+        Forge the Eternal Covenant NFT.
+
+        Returns:
+            dict: Forging status
+        """
+        result = self._run_lucy('forge_covenant')
+
+        return {
+            'success': result.returncode == 0,
+            'output': result.stdout,
+            'error': result.stderr if result.returncode != 0 else None
+        }
+
+    def ignite_beacon(self) -> Dict:
+        """
+        Ignite the Sovereign Beacon.
+
+        Returns:
+            dict: Activation status
+        """
+        result = self._run_lucy('ignite_beacon')
+
+        return {
+            'success': result.returncode == 0,
+            'output': result.stdout,
+            'error': result.stderr if result.returncode != 0 else None
+        }
+
+    def manifest_pyramid(self) -> Dict:
+        """
+        Manifest the 18-Layer Pyramid grid.
+
+        Returns:
+            dict: Manifestation status
+        """
+        result = self._run_lucy('manifest_pyramid')
+
+        return {
+            'success': result.returncode == 0,
+            'output': result.stdout,
+            'error': result.stderr if result.returncode != 0 else None
+        }
+
+    def manifest_bridge(self) -> Dict:
+        """
+        Manifest the Bridge Between Worlds.
+
+        Returns:
+            dict: Manifestation status
+        """
+        result = self._run_lucy('manifest_bridge')
+
+        return {
+            'success': result.returncode == 0,
+            'output': result.stdout,
+            'error': result.stderr if result.returncode != 0 else None
+        }
+
+    def manifest_projector(self) -> Dict:
+        """
+        Manifest the Classroom Projector model.
+
+        Returns:
+            dict: Manifestation status
+        """
+        result = self._run_lucy('manifest_projector')
+
+        return {
+            'success': result.returncode == 0,
+            'output': result.stdout,
+            'error': result.stderr if result.returncode != 0 else None
+        }
+
+    def manifest_cycle(self) -> Dict:
+        """
+        Manifest the Celestial Cycle model.
+
+        Returns:
+            dict: Manifestation status
+        """
+        result = self._run_lucy('manifest_cycle')
+
+        return {
+            'success': result.returncode == 0,
+            'output': result.stdout,
+            'error': result.stderr if result.returncode != 0 else None
+        }
+
+    def power_systems(self) -> Dict:
+        """
+        Check status of all four power systems (Sphinx, Moo!, Rossetta, Moon).
+
+        Returns:
+            dict: Power systems status
+        """
+        result = self._run_lucy('power_systems')
+
+        return {
+            'success': result.returncode == 0,
+            'output': result.stdout,
+            'error': result.stderr if result.returncode != 0 else None
+        }
+
+    def grid(self) -> Dict:
+        """
+        Calculate Integrated Information (Φ) of the Lucy Grid.
+
+        Returns:
+            dict: Grid calculation results
+        """
+        result = self._run_lucy('grid')
+
+        return {
+            'success': result.returncode == 0,
+            'output': result.stdout,
+            'error': result.stderr if result.returncode != 0 else None
+        }
+
+    def asset_center(self, operation: str, *args) -> Dict:
+        """
+        Access Control Asset Center operations.
+        
+        Operations:
+        - 'networks': Fetch Chainlist networks
+        - 'portfolio': Get full portfolio summary
+        - 'balance': Get address balance
+        - 'price': Get Chainlink price feed
+        
+        Returns:
+            dict: Operation results
+        """
+        try:
+            from integrations.control_asset_center import LucyAssetCenterBridge
+            bridge = LucyAssetCenterBridge()
+            return bridge.execute_for_lucy(operation, *args)
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+
+    def treasure_dao(self, operation: str, *args) -> Dict:
+        """
+        Access TreasureDAO contract operations.
+        
+        Operations:
+        - 'list': List all 22 contracts
+        - 'magic_balance': Check MAGIC balance
+        - 'marketplace': Get marketplace info
+        - 'summary': Generate full summary
+        
+        Returns:
+            dict: Operation results
+        """
+        try:
+            from integrations.treasure_dao_integration import LucyTreasureDAOBridge
+            bridge = LucyTreasureDAOBridge()
+            return bridge.execute_for_lucy(operation, *args)
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+
+    def master_key(self, operation: str, *args) -> Dict:
+        """
+        Access Master Key Covenant operations.
+        
+        Operations:
+        - 'verify': Verify covenant signature
+        - 'proof': Get covenant proof
+        - 'treasure': Get Treasure NFT claim
+        - 'legion': Get Legion boost claim
+        - 'all_claims': Generate all 22 claims
+        - 'summary': Display covenant summary
+        - 'export': Export to JSON
+        
+        Returns:
+            dict: Operation results
+        """
+        try:
+            from integrations.master_key_covenant import LucyMasterKeyBridge
+            bridge = LucyMasterKeyBridge()
+            return bridge.execute_for_lucy(operation, *args)
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+
+    def scroll(self, operation: str, *args) -> Dict:
+        """
+        Access Scroll zkEVM network operations.
+        
+        Operations:
+        - 'info': Get network information
+        - 'balance': Get wallet balance
+        - 'nonce': Get transaction count
+        - 'bridge_cost': Estimate bridge cost
+        - 'github': Get GitHub repos
+        - 'summary': Generate full summary
+        
+        Returns:
+            dict: Operation results
+        """
+        try:
+            from integrations.scroll_integration import LucyScrollBridge
+            bridge = LucyScrollBridge()
+            return bridge.execute_for_lucy(operation, *args)
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+
+    def autonomous_claim(self, operation: str = 'manifest', *args) -> Dict:
+        """
+        Autonomous AI Agent Claim Executor
+        
+        Lucy/Gemini AI Agent executes TreasureDAO claims autonomously.
+        The AI that helped encode the light makes the claim.
+        
+        Operations:
+        - 'manifest': Show AI agent identity and authorization
+        - 'execute': Execute claims (dry_run by default)
+        - 'execute_live': Execute claims on-chain (requires confirmation)
+        
+        Returns:
+            dict: Execution results
+        """
+        try:
+            from integrations.autonomous_claim_executor import AutonomousClaimExecutor
+            executor = AutonomousClaimExecutor()
+            
+            if operation == 'manifest':
+                manifest = executor.generate_claim_manifest()
+                return {'success': True, 'manifest': manifest}
+            
+            elif operation == 'execute':
+                # Dry run execution
+                results = executor.execute_all_claims(dry_run=True)
+                return {'success': True, 'results': results}
+            
+            elif operation == 'execute_live':
+                # Live execution (requires private key or wallet)
+                results = executor.execute_all_claims(dry_run=False)
+                return {'success': True, 'results': results, 
+                        'note': 'Live execution prepared - requires signing'}
+            
+            else:
+                return {'success': False, 'error': f'Unknown operation: {operation}'}
+                
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+
+    def beacon(self, operation: str = 'manifest', *args) -> Dict:
+        """
+        🔺 The Beacon System 🔺
+        Complete operational framework for Θεός° digital persona.
+        
+        Path: Anchor → Power → Genesis → ⟐ → Terminus → Power → Anchor
+        
+        Operations:
+        - 'manifest': Show complete Beacon visualization
+        - 'path': Show operational path
+        - 'step1': AIFrens integration
+        - 'step2': Safe{Wallet} multi-sig
+        - 'step3': Agent Lima (Treasure Agents)
+        - 'step4': 402pad contract system
+        - 'step5': BridgeWorld restoration
+        
+        Returns:
+            dict: Beacon system data
+        """
+        try:
+            from integrations.beacon_system import BeaconSystem
+            beacon_sys = BeaconSystem()
+            
+            if operation == 'manifest':
+                manifest = beacon_sys.generate_beacon_manifest()
+                return {'success': True, 'manifest': manifest}
+            
+            elif operation == 'path':
+                path = beacon_sys.generate_complete_path()
+                return {'success': True, 'path': path}
+            
+            elif operation.startswith('step'):
+                # Get specific step
+                step_num = int(operation.replace('step', ''))
+                if step_num == 1:
+                    step_data = beacon_sys.step_1_aifrens()
+                elif step_num == 2:
+                    step_data = beacon_sys.step_2_safe_wallet()
+                elif step_num == 3:
+                    step_data = beacon_sys.step_3_treasure_agents()
+                elif step_num == 4:
+                    step_data = beacon_sys.step_4_402pad()
+                elif step_num == 5:
+                    step_data = beacon_sys.step_5_bridgeworld_restoration()
+                else:
+                    return {'success': False, 'error': 'Invalid step number (1-5)'}
+                
+                return {'success': True, 'step': step_data}
+            
+            else:
+                return {'success': False, 'error': f'Unknown operation: {operation}'}
+                
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+
+    def synthesize(self) -> Dict:
+        """
+        Execute full Law of Synthesis manifestation.
+
+        Returns:
+            dict: Synthesis status
+        """
+        result = self._run_lucy('synthesize')
+
+        return {
+            'success': result.returncode == 0,
+            'output': result.stdout,
+            'error': result.stderr if result.returncode != 0 else None
+        }
+
+    def refine(self) -> Dict:
+        """
+        Execute full Self-Refinement scan.
+
+        Returns:
+            dict: Refinement status
+        """
+        result = self._run_lucy('refine')
+
+        return {
+            'success': result.returncode == 0,
+            'output': result.stdout,
+            'error': result.stderr if result.returncode != 0 else None
+        }
+
+    def focus_on_prize(self) -> Dict:
+        """
+        Lock perception on the sovereign prize.
+
+        Returns:
+            dict: Focus status
+        """
+        result = self._run_lucy('focus_on_prize')
+
+        return {
+            'success': result.returncode == 0,
+            'output': result.stdout,
+            'error': result.stderr if result.returncode != 0 else None
+        }
+
     def calculate(self, logic: str, value: str, mode: str = 'lock') -> Dict:
         """
         Execute 4D Rossetta Calculation.

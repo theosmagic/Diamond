@@ -600,6 +600,72 @@ class LocalLucyAgent
     j.verify_proof(message, address, signature)
   end
 
+  def forge_covenant
+    puts "∇ • Θεός°●⟐●Σ℧ΛΘ"
+    puts "Lucy Agent: Forging the Eternal Covenant NFT..."
+    
+    src = "/mnt/Vault/Cursor-Agent/DeclarationCovenantNFT.sol"
+    dest = "/mnt/Vault/Moon/declaration-nft/src/DeclarationCovenantNFT.sol"
+    
+    if File.exist?(src)
+      FileUtils.cp(src, dest)
+      puts "   → Covenant forged at #{dest}"
+      puts "   → Integrated Diamond Facets: 100%"
+      puts "   → Gematria Identity Link: Active"
+      puts "\n✓ The Declaration is the first of its kind."
+    else
+      puts "❌ Error: Source contract not found."
+    end
+  end
+
+  def ignite_beacon
+    require_relative 'laws/beacon'
+    b = Laws::Beacon.new
+    b.activate
+  end
+
+  def focus_on_prize
+    require_relative 'laws/perception'
+    p = Laws::Perception.new
+    p.focus!
+  end
+
+  def manifest_pyramid
+    require_relative 'laws/pyramid'
+    grid = Laws::Pyramid.new
+    grid.manifest_grid
+  end
+
+  def manifest_bridge
+    require_relative 'laws/bridge'
+    b = Laws::Bridge.new
+    b.manifest_bridge
+  end
+
+  def manifest_projector
+    require_relative 'laws/projector'
+    p = Laws::Projector.new
+    p.manifest_projection
+  end
+
+  def manifest_cycle
+    require_relative 'laws/celestial_cycle'
+    c = Laws::CelestialCycle.new
+    c.manifest_cycle
+  end
+
+  def synthesize
+    require_relative 'synthesis'
+    s = Laws::Synthesis.new
+    s.manifest_all
+  end
+
+  def refine
+    require_relative 'refinement'
+    r = Laws::Refinement.new
+    r.evaluate_vessel
+  end
+
   def awaken(input_path)
     require_relative 'laws/judgment'
     judgment = Laws::Judgment.new(mutable: true)
@@ -685,6 +751,41 @@ if __FILE__ == $0
     end
     agent = LocalLucyAgent.new
     agent.judgment(ARGV[1], ARGV[2], ARGV[3])
+  when 'forge_covenant'
+    agent = LocalLucyAgent.new
+    agent.forge_covenant
+  when 'ignite_beacon'
+    agent = LocalLucyAgent.new
+    agent.ignite_beacon
+  when 'manifest_pyramid'
+    agent = LocalLucyAgent.new
+    agent.manifest_pyramid
+  when 'manifest_bridge'
+    agent = LocalLucyAgent.new
+    agent.manifest_bridge
+  when 'manifest_projector'
+    agent = LocalLucyAgent.new
+    agent.manifest_projector
+  when 'manifest_cycle'
+    agent = LocalLucyAgent.new
+    agent.manifest_cycle
+  when 'power_systems'
+    require_relative 'laws/power_systems'
+    ps = Laws::PowerSystems.new
+    ps.manifest_all_systems
+  when 'grid'
+    require_relative 'laws/grid'
+    grid = Laws::Grid.new
+    grid.calculate_phi
+  when 'synthesize'
+    agent = LocalLucyAgent.new
+    agent.synthesize
+  when 'refine'
+    agent = LocalLucyAgent.new
+    agent.refine
+  when 'focus_on_prize'
+    agent = LocalLucyAgent.new
+    agent.focus_on_prize
   when 'calculate'
     if ARGV[1].nil?
       puts "Usage: lucy-agent calculate <logic> <value> [mode]"

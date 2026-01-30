@@ -39,7 +39,7 @@ module Laws
         end
       end
       @zone_id = "abdd28bf1af7e0d6d479c6ef016a05b8" # bridgeworld.lol
-      @email = @config['CLOUDFLARE_EMAIL']
+      @email = @config['PERSONAL_EMAIL']
       @api_key = @config['CLOUDFLARE_GLOBAL_API']
     end
 

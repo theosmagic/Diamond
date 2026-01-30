@@ -1,4 +1,6 @@
-account_id: ""
+account_id: "ce89fcd4-5aba-4325-81e7-bc35ae5dc04b"
+project_slug: "testnet"
+username: "Ua_0357"
 actions:
   Ua_0357/testnet:
     runtime: v2
@@ -15,7 +17,7 @@ actions:
                 contract:
                   invocation: any
                 name: DiamondCut
-              network: 73571  # Tenderly Virtual TestNet
+              network: 73571
             - eventEmitted:
                 contract:
                   invocation: any
@@ -28,5 +30,4 @@ actions:
               network: 73571
             status:
             - mined
-        execution_type: ""
-project_slug: "Ua_0357/testnet"
+        execution_type: "parallel"

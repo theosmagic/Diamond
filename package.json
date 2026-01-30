@@ -22,10 +22,19 @@
     "registry": "tsx script_registry_system.ts"
   },
   "dependencies": {
-    "@metamask/sdk": "^0.34.0"
+    "@metamask/sdk": "^0.34.0",
+    "@metamask/sdk-react": "^0.33.1",
+    "@reown/appkit": "^1.8.17",
+    "@reown/appkit-adapter-wagmi": "^1.8.17",
+    "@safe-global/safe-core-sdk": "^3.3.5",
+    "@safe-global/safe-ethers-lib": "^1.9.4",
+    "@tanstack/react-query": "^5.90.20",
+    "ethers": "^5.8.0",
+    "viem": "^2.45.1",
+    "wagmi": "^3.4.1"
   },
   "devDependencies": {
-    "tsx": "^4.7.0",
-    "@types/node": "^20.0.0"
+    "@types/node": "^20.0.0",
+    "tsx": "^4.7.0"
   }
 }

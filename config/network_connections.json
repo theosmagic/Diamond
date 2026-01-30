@@ -1,0 +1,135 @@
+{
+  "primary_identity": {
+    "ens": "theosmagic.uni.eth",
+    "email": "theosmagic.uni.eth@ethermail.io",
+    "wallet_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+    "master_key_hash": "c4aa73faa55c35e2096a63c6db96cb0bc4af672759f4e980072dfd7ce13b9bbf",
+    "master_key_image": "/mnt/Vault/Cursor-Agent/Master_Key.png"
+  },
+  "main_networks": {
+    "ethereum": {
+      "chain_id": 1,
+      "name": "Ethereum Mainnet",
+      "rpc": "https://eth.llamarpc.com",
+      "explorer": "https://etherscan.io",
+      "native_token": "ETH",
+      "priority": 1
+    },
+    "arbitrum": {
+      "chain_id": 42161,
+      "name": "Arbitrum One",
+      "rpc": "https://arb1.arbitrum.io/rpc",
+      "explorer": "https://arbiscan.io",
+      "native_token": "ETH",
+      "priority": 2
+    },
+    "polygon": {
+      "chain_id": 137,
+      "name": "Polygon",
+      "rpc": "https://polygon-rpc.com",
+      "explorer": "https://polygonscan.com",
+      "native_token": "MATIC",
+      "priority": 3
+    },
+    "base": {
+      "chain_id": 8453,
+      "name": "Base (Coinbase)",
+      "rpc": "https://mainnet.base.org",
+      "explorer": "https://basescan.org",
+      "native_token": "ETH",
+      "priority": 4
+    },
+    "scroll": {
+      "chain_id": 534352,
+      "name": "Scroll (zkEVM L2)",
+      "rpc": "https://rpc.scroll.io",
+      "explorer": "https://scrollscan.com",
+      "native_token": "ETH",
+      "priority": 5,
+      "type": "zk_rollup",
+      "github": "https://github.com/scroll-tech",
+      "docs": "https://guide.scroll.io/developers/"
+    }
+  },
+  "key_tokens": {
+    "MAGIC": {
+      "address": "0x539bdE0d7Dbd336b79148AA742883198BBF60342",
+      "chain": "arbitrum",
+      "chain_id": 42161,
+      "decimals": 18,
+      "symbol": "MAGIC",
+      "name": "MAGIC",
+      "description": "TreasureDAO ecosystem token"
+    },
+    "MANA": {
+      "address": "0x0F5D2fB29fb7d3CFeE444a200298f468908cC942",
+      "chain": "ethereum",
+      "chain_id": 1,
+      "decimals": 18,
+      "symbol": "MANA",
+      "name": "Decentraland MANA",
+      "description": "Decentraland metaverse token"
+    },
+    "SAND": {
+      "address": "0x3845badAde8e6dFF049820680d1F14bD3903a5d0",
+      "chain": "ethereum",
+      "chain_id": 1,
+      "decimals": 18,
+      "symbol": "SAND",
+      "name": "The Sandbox SAND",
+      "description": "The Sandbox metaverse token"
+    }
+  },
+  "nft_platforms": {
+    "opensea": {
+      "name": "OpenSea",
+      "url": "https://opensea.io",
+      "api": "https://api.opensea.io/api/v2",
+      "supported_chains": [1, 42161, 137, 8453, 10],
+      "profile_url": "https://opensea.io/0x67A977eaD94C3b955ECbf27886CE9f62464423B2"
+    },
+    "magic_eden": {
+      "name": "Magic Eden",
+      "url": "https://magiceden.io",
+      "supported_chains": [1, 137],
+      "profile_url": "https://magiceden.io/u/0x67A977eaD94C3b955ECbf27886CE9f62464423B2"
+    }
+  },
+  "gaming_platforms": {
+    "immutable_passport": {
+      "name": "Immutable Passport",
+      "url": "https://passport.immutable.com",
+      "chain": "immutable_zkevm",
+      "chain_id": 13371,
+      "description": "Web3 gaming identity"
+    },
+    "ready_player_one": {
+      "name": "Ready Player One / OASIS",
+      "type": "metaverse_platform",
+      "description": "Metaverse gaming platform integration"
+    },
+    "godot_export": {
+      "name": "Godot Engine Export",
+      "type": "game_engine",
+      "description": "Godot game engine Web3 integration",
+      "export_targets": ["HTML5", "Native", "Web3"]
+    }
+  },
+  "treasure_dao": {
+    "network": "arbitrum",
+    "chain_id": 42161,
+    "ecosystem_url": "https://treasure.lol",
+    "bridgeworld_url": "https://bridgeworld.gg",
+    "marketplace_url": "https://trove.treasure.lol",
+    "contracts_file": "/mnt/Vault/Cursor-Agent/treasure_dao_contracts.json",
+    "total_contracts": 22,
+    "contract_integration": "active"
+  },
+  "brave_api": {
+    "key": "BSAEwLe_77A0TDYC2yxYKIQk8T3IsQO",
+    "service": "Brave Search API",
+    "enabled": true
+  },
+  "updated": "2026-01-30",
+  "version": "1.0"
+}

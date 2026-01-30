@@ -1,0 +1,95 @@
+{
+  "services": {
+    "chainlist": {
+      "enabled": true,
+      "api_url": "https://chainid.network/chains.json",
+      "cache_ttl_hours": 24,
+      "description": "Network RPC directory"
+    },
+    "chainlink": {
+      "enabled": true,
+      "description": "Oracle price feeds",
+      "networks": {
+        "ethereum": {
+          "chain_id": 1,
+          "feeds": {
+            "ETH/USD": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419",
+            "BTC/USD": "0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c",
+            "LINK/USD": "0x2c1d072e956AFFC0D435Cb7AC38EF18d24d9127c"
+          }
+        },
+        "arbitrum": {
+          "chain_id": 42161,
+          "feeds": {
+            "ETH/USD": "0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612",
+            "BTC/USD": "0x6ce185860a4963106506C203335A2910413708e9"
+          }
+        }
+      }
+    },
+    "blockscout": {
+      "enabled": true,
+      "description": "Blockchain explorer",
+      "endpoints": {
+        "1": "https://eth.blockscout.com/api",
+        "100": "https://gnosis.blockscout.com/api",
+        "137": "https://polygon.blockscout.com/api",
+        "42161": "https://arbitrum.blockscout.com/api",
+        "8453": "https://base.blockscout.com/api"
+      }
+    },
+    "dex_aggregator": {
+      "enabled": true,
+      "provider": "1inch",
+      "description": "DEX swap aggregator",
+      "api_url": "https://api.1inch.dev/swap/v5.2",
+      "requires_api_key": true,
+      "api_key": ""
+    },
+    "metamask_portfolio": {
+      "enabled": true,
+      "description": "MetaMask Portfolio tracking",
+      "tracked_networks": [1, 42161, 137, 8453, 10],
+      "update_interval_minutes": 5
+    }
+  },
+  "default_networks": [
+    {
+      "chain_id": 1,
+      "name": "Ethereum Mainnet",
+      "symbol": "ETH",
+      "priority": 1
+    },
+    {
+      "chain_id": 42161,
+      "name": "Arbitrum One",
+      "symbol": "ETH",
+      "priority": 2
+    },
+    {
+      "chain_id": 137,
+      "name": "Polygon",
+      "symbol": "MATIC",
+      "priority": 3
+    },
+    {
+      "chain_id": 8453,
+      "name": "Base",
+      "symbol": "ETH",
+      "priority": 4
+    },
+    {
+      "chain_id": 10,
+      "name": "Optimism",
+      "symbol": "ETH",
+      "priority": 5
+    }
+  ],
+  "portfolio_settings": {
+    "primary_wallet": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+    "track_tokens": true,
+    "track_nfts": false,
+    "cache_duration_minutes": 5,
+    "export_format": "json"
+  }
+}

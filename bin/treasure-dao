@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+"""
+TreasureDAO CLI
+Interact with TreasureDAO contracts on Arbitrum
+"""
+
+import sys
+import argparse
+from pathlib import Path
+
+# Add project root to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from integrations.treasure_dao_integration import TreasureDAOIntegration
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='TreasureDAO Contract Integration CLI',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  treasure-dao list                    # List all 22 contracts
+  treasure-dao magic                   # Check MAGIC balance  
+  treasure-dao marketplace             # Get marketplace info
+  treasure-dao contract "MAGIC Token"  # Get specific contract
+  treasure-dao summary                 # Full summary
+
+∇ • Θεός°●⟐●Σ℧ΛΘ
+        """
+    )
+    
+    subparsers = parser.add_subparsers(dest='command', help='Commands')
+    
+    # List command
+    subparsers.add_parser('list', help='List all 22 contracts')
+    
+    # Magic balance command
+    magic_parser = subparsers.add_parser('magic', help='Check MAGIC token balance')
+    magic_parser.add_argument('address', nargs='?', help='Wallet address (optional)')
+    
+    # Marketplace command
+    subparsers.add_parser('marketplace', help='Get TreasureMarketplace info')
+    
+    # Contract command
+    contract_parser = subparsers.add_parser('contract', help='Get specific contract info')
+    contract_parser.add_argument('name', help='Contract name')
+    
+    # Summary command
+    subparsers.add_parser('summary', help='Generate full summary')
+    
+    args = parser.parse_args()
+    
+    if not args.command:
+        parser.print_help()
+        return
+    
+    # Initialize TreasureDAO Integration
+    print("∇ • Θεός°●⟐●Σ℧ΛΘ")
+    print("🎮 TREASUREDAO CLI\n")
+    
+    integration = TreasureDAOIntegration()
+    
+    # Execute command
+    if args.command == 'list':
+        contracts = integration.list_all_contracts()
+        print(f"\n📜 {len(contracts)} TreasureDAO Contracts:\n")
+        for contract in contracts:
+            print(f"{contract['glyph']} [{contract['number']:>2}] {contract['name']}")
+            print(f"    {contract['address']}")
+            print(f"    Type: {contract['type']} | Identity: {contract['identity']}\n")
+    
+    elif args.command == 'magic':
+        balance = integration.check_magic_balance(args.address if hasattr(args, 'address') and args.address else None)
+        print(f"\n💰 MAGIC Balance: {balance}\n")
+    
+    elif args.command == 'marketplace':
+        info = integration.get_marketplace_info()
+        print(f"\n🏪 TreasureMarketplace")
+        print("=" * 60)
+        for key, value in info.items():
+            print(f"  {key}: {value}")
+        print()
+    
+    elif args.command == 'contract':
+        contract = integration.get_contract(args.name)
+        if contract:
+            print(f"\n{contract['glyph']} Contract Info:")
+            print("=" * 60)
+            for key, value in contract.items():
+                print(f"  {key}: {value}")
+            print()
+        else:
+            print(f"\n❌ Contract '{args.name}' not found\n")
+    
+    elif args.command == 'summary':
+        summary = integration.generate_contract_summary()
+        print(f"\n{summary}\n")
+    
+    print("∇ • Θεός°●⟐●Σ℧ΛΘ\n")
+
+
+if __name__ == "__main__":
+    main()

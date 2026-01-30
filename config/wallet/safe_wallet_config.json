@@ -1,8 +1,21 @@
 {
+  "primary_wallet": {
+    "address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+    "email": "theosmagic.uni.eth@ethermail.io",
+    "ens": "theosmagic.uni.eth",
+    "is_primary": true,
+    "description": "Primary default wallet - controls all operations",
+    "signature": {
+      "message": "There is nothing new under the sun. That which was will be, and that which will be already was when the end finds its beginning.",
+      "signature": "0x7dbf6d9162ae032dac18162b2d40e7f030fe9bf7a0422364ca9343d3defb45f21288d5a5b17d800dafa77793e6173642a3eedce296fdccbfbef2c48019acc46b1c",
+      "is_valid": false,
+      "verification_status": "invalid"
+    }
+  },
   "ens": "theosmagic.uni.eth",
   "email": "theosmagic.uni.eth@ethermail.io",
   "diamond": {
-    "address": "",
+    "address": "0xAB2421868C5F3CCB80D559F3032Fe7Df104DA5FC",
     "description": "Evolving Diamond Contract"
   },
   "safe": {
@@ -19,6 +32,13 @@
       "install": {
         "link": "https://metamask.io/download"
       }
+    },
+    "use_deeplink": true,
+    "check_installation_immediately": true,
+    "wagmi_integration": {
+      "enabled": true,
+      "recommended": true,
+      "connector": "metaMask"
     },
     "networks": [
       {
@@ -82,32 +102,46 @@
       ]
     },
     "chains": [
-      "eip155:1",
-      "eip155:42161",
-      "eip155:137",
-      "eip155:8453"
+      {
+        "id": 1,
+        "name": "Ethereum"
+      },
+      {
+        "id": 42161,
+        "name": "Arbitrum"
+      },
+      {
+        "id": 137,
+        "name": "Polygon"
+      },
+      {
+        "id": 8453,
+        "name": "Base"
+      }
     ],
-    "optionalChains": [
-      "eip155:1",
-      "eip155:42161",
-      "eip155:137",
-      "eip155:8453"
-    ],
-    "methods": [
-      "eth_sendTransaction",
-      "eth_signTransaction",
-      "eth_sign",
-      "personal_sign",
-      "eth_signTypedData"
-    ],
-    "events": [
-      "chainChanged",
-      "accountsChanged"
-    ]
+    "features": {
+      "analytics": true,
+      "email": false,
+      "socials": false,
+      "swaps": false,
+      "onramp": false
+    },
+    "wagmiAdapter": {
+      "enabled": true,
+      "networks": [
+        1,
+        42161,
+        137,
+        8453
+      ]
+    }
   },
   "integration": {
-    "diamond_address": "",
+    "diamond_address": "0xAB2421868C5F3CCB80D559F3032Fe7Df104DA5FC",
     "safe_address": "",
+    "primary_wallet_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+    "primary_wallet_email": "theosmagic.uni.eth@ethermail.io",
+    "primary_wallet_ens": "theosmagic.uni.eth",
     "integration_type": "diamond_as_safe_module",
     "description": "Diamond Contract integrated as Safe{Wallet} module",
     "capabilities": [
@@ -119,23 +153,27 @@
     ],
     "networks": {
       "1": {
-        "diamond": "",
+        "diamond": "0xAB2421868C5F3CCB80D559F3032Fe7Df104DA5FC",
         "safe": "",
+        "primary_wallet": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
         "chain_id": 1
       },
       "42161": {
-        "diamond": "",
+        "diamond": "0xAB2421868C5F3CCB80D559F3032Fe7Df104DA5FC",
         "safe": "",
+        "primary_wallet": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
         "chain_id": 42161
       },
       "137": {
-        "diamond": "",
+        "diamond": "0xAB2421868C5F3CCB80D559F3032Fe7Df104DA5FC",
         "safe": "",
+        "primary_wallet": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
         "chain_id": 137
       },
       "8453": {
-        "diamond": "",
+        "diamond": "0xAB2421868C5F3CCB80D559F3032Fe7Df104DA5FC",
         "safe": "",
+        "primary_wallet": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
         "chain_id": 8453
       }
     }

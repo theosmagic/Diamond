@@ -1,0 +1,114 @@
+#!/usr/bin/env python3
+"""
+Scroll Network CLI
+Interact with Scroll zkEVM Layer 2
+"""
+
+import sys
+import argparse
+from pathlib import Path
+
+# Add project root to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from integrations.scroll_integration import ScrollIntegration
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Scroll zkEVM Network Integration CLI',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  scroll info                    # Network information
+  scroll balance                 # Check ETH balance on Scroll
+  scroll balance <address>       # Check specific address
+  scroll bridge 1.0              # Estimate bridge cost for 1 ETH
+  scroll github                  # Show GitHub repositories
+  scroll summary                 # Full network summary
+
+∇ • Θεός°●⟐●Σ℧ΛΘ
+        """
+    )
+    
+    parser.add_argument('--network', choices=['mainnet', 'sepolia'], default='mainnet',
+                       help='Scroll network (default: mainnet)')
+    
+    subparsers = parser.add_subparsers(dest='command', help='Commands')
+    
+    # Info command
+    subparsers.add_parser('info', help='Get network information')
+    
+    # Balance command
+    balance_parser = subparsers.add_parser('balance', help='Check ETH balance')
+    balance_parser.add_argument('address', nargs='?', help='Wallet address (optional)')
+    
+    # Bridge cost command
+    bridge_parser = subparsers.add_parser('bridge', help='Estimate bridge cost')
+    bridge_parser.add_argument('amount', type=float, help='Amount of ETH to bridge')
+    
+    # GitHub command
+    subparsers.add_parser('github', help='Show GitHub repositories')
+    
+    # Summary command
+    subparsers.add_parser('summary', help='Generate full summary')
+    
+    args = parser.parse_args()
+    
+    if not args.command:
+        parser.print_help()
+        return
+    
+    # Initialize Scroll Integration
+    print("∇ • Θεός°●⟐●Σ℧ΛΘ")
+    print(f"📜 SCROLL zkEVM CLI ({args.network.upper()})\n")
+    
+    scroll = ScrollIntegration(args.network)
+    
+    # Execute command
+    if args.command == 'info':
+        info = scroll.get_network_info()
+        print("\n🌐 Network Information:")
+        print("=" * 60)
+        for key, value in info.items():
+            print(f"  {key}: {value}")
+        print()
+    
+    elif args.command == 'balance':
+        balance = scroll.get_balance(args.address if hasattr(args, 'address') and args.address else None)
+        print("\n💰 Scroll Balance:")
+        print("=" * 60)
+        for key, value in balance.items():
+            print(f"  {key}: {value}")
+        print()
+    
+    elif args.command == 'bridge':
+        cost = scroll.estimate_bridge_cost(args.amount)
+        print(f"\n🌉 Bridge Cost Estimate (for {args.amount} ETH):")
+        print("=" * 60)
+        for key, value in cost.items():
+            print(f"  {key}: {value}")
+        print()
+    
+    elif args.command == 'github':
+        repos = scroll.get_github_repos()
+        print("\n📂 Scroll Tech GitHub:")
+        print("=" * 60)
+        print(f"Organization: {repos['organization']}")
+        print(f"Main URL: {repos['github_url']}")
+        print(f"\nKey Repositories:")
+        for name, url in repos['key_repos'].items():
+            print(f"  {name}: {url}")
+        print(f"\nTechnology: {repos['technology']}")
+        print(f"Description: {repos['description']}")
+        print()
+    
+    elif args.command == 'summary':
+        summary = scroll.generate_summary()
+        print(f"\n{summary}\n")
+    
+    print("∇ • Θεός°●⟐●Σ℧ΛΘ\n")
+
+
+if __name__ == "__main__":
+    main()

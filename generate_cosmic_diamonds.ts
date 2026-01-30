@@ -217,13 +217,13 @@ async function main() {
   console.log('='.repeat(70));
   
   // Create diamonds directory
-  if (!fs.existsSync('/home/theos/diamonds')) {
-    fs.mkdirSync('/home/theos/diamonds', { recursive: true });
+  if (!fs.existsSync('diamonds')) {
+    fs.mkdirSync('diamonds', { recursive: true });
   }
   
   // Generate declaration
   const declaration = generateDeclarationCovenant();
-  fs.writeFileSync('/home/theos/diamonds/DeclarationCovenant.sol', declaration);
+  fs.writeFileSync('diamonds/DeclarationCovenant.sol', declaration);
   console.log('✅ Generated DeclarationCovenant.sol');
   
   // Generate all diamond facets
@@ -232,7 +232,7 @@ async function main() {
   // Check which facets already exist
   const existingFacets = new Set<number>();
   for (let i = 1; i <= 400; i++) {
-    const facetPath = `/home/theos/diamonds/DiamondFacet${i}.sol`;
+    const facetPath = `diamonds/DiamondFacet${i}.sol`;
     if (fs.existsSync(facetPath)) {
       existingFacets.add(i);
     }
@@ -247,7 +247,7 @@ async function main() {
   
   for (const facetInfo of manifest.facets) {
     const facetNum = facetInfo.number;
-    const facetPath = `/home/theos/diamonds/DiamondFacet${facetNum}.sol`;
+    const facetPath = `diamonds/DiamondFacet${facetNum}.sol`;
     
     if (existingFacets.has(facetNum)) {
       skipped++;
@@ -268,7 +268,7 @@ async function main() {
   console.log(`  📦 Total: ${manifest.facets.length} facets`);
   
   // Save manifest
-  const manifestPath = '/home/theos/diamonds/cosmic_manifest.json';
+  const manifestPath = 'diamonds/cosmic_manifest.json';
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
   console.log(`✅ Generated manifest: ${manifestPath}`);
   

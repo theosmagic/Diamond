@@ -1,34 +1,10 @@
-# Foundry Configuration for Tenderly Virtual TestNet
-# Based on: https://docs.tenderly.co/virtual-testnets/smart-contract-frameworks/foundry
-
 [profile.default]
-src = "src"
+src = "diamond-contract/contracts"
 out = "out"
 libs = ["lib"]
 solc_version = "0.8.20"
 optimizer = true
 optimizer_runs = 200
 
-# Tenderly Virtual TestNet Configuration
-# Chain ID: 73571 (Tenderly Virtual TestNet)
-# Verifier URL: ${TENDERLY_VIRTUAL_TESTNET_RPC}/verify/etherscan
-
 [etherscan]
-# Tenderly Access Key: LZAQjWhTiJJUskQJQXUzAw2ZE0EJpNni
-# Chain ID: 73571 (Tenderly Virtual TestNet)
-# Verifier URL format: ${TENDERLY_VIRTUAL_TESTNET_RPC}/verify/etherscan
-unknown_chain = { 
-    key = "${TENDERLY_ACCESS_KEY}", 
-    chain = 73571, 
-    url = "${TENDERLY_VIRTUAL_TESTNET_RPC_URL}/verify/etherscan" 
-}
-
-# RPC URLs
-# Tenderly Virtual TestNet RPC URLs are configured via environment variables:
-# - TENDERLY_VIRTUAL_TESTNET_RPC_URL (HTTP)
-# - TENDERLY_VIRTUAL_TESTNET_RPC_WS_URL (WebSocket)
-
-# Example usage:
-# export TENDERLY_ACCESS_KEY=LZAQjWhTiJJUskQJQXUzAw2ZE0EJpNni
-# export TENDERLY_VIRTUAL_TESTNET_RPC_URL=https://virtual.mainnet.us-east.rpc.tenderly.co/ba0e32f8-b5f3-4ca6-a2cc-3ab4fa250000
-# forge create Counter --rpc-url $TENDERLY_VIRTUAL_TESTNET_RPC_URL --verify --verifier-url $TENDERLY_VIRTUAL_TESTNET_RPC_URL/verify/etherscan
+unknown_chain = { key = "${TENDERLY_ACCESS_KEY}", chain = 73571, url = "${TENDERLY_VIRTUAL_TESTNET_RPC_URL}/verify/etherscan" }
