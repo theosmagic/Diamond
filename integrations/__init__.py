@@ -26,6 +26,15 @@ except ImportError:
     get_tenderly_http_endpoint = None
     get_tenderly_websocket_endpoint = None
 
+# Foundry + Tenderly integration
+try:
+    from .foundry_tenderly import FoundryTenderlyIntegration, get_foundry_tenderly
+    FOUNDRY_TENDERLY_AVAILABLE = True
+except ImportError:
+    FOUNDRY_TENDERLY_AVAILABLE = False
+    FoundryTenderlyIntegration = None
+    get_foundry_tenderly = None
+
 # Safe{Wallet} integration
 try:
     from .safe_wallet import SafeWalletIntegration, UnifiedWalletInterface, get_unified_wallet_config
@@ -127,6 +136,9 @@ __all__ = [
     'get_tenderly_http_endpoint',
     'get_tenderly_websocket_endpoint',
     'TENDERLY_AVAILABLE',
+    'FoundryTenderlyIntegration',
+    'get_foundry_tenderly',
+    'FOUNDRY_TENDERLY_AVAILABLE',
     'SafeWalletIntegration',
     'UnifiedWalletInterface',
     'get_unified_wallet_config',

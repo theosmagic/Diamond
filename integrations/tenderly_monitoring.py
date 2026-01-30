@@ -60,6 +60,12 @@ class TenderlyIntegration:
                     "Tenderly CLI not found. Install it with:\n"
                     "curl https://raw.githubusercontent.com/Tenderly/tenderly-cli/master/scripts/install-linux.sh | sh"
                 )
+        
+        # Store API key
+        self.api_key = api_key or get_tenderly_api_key()
+        if self.api_key:
+            os.environ["TENDERLY_API"] = self.api_key
+            os.environ["TENDERLY_ACCESS_KEY"] = self.api_key
     
     def _run_command(self, args: List[str], cwd: Optional[str] = None) -> Dict[str, Any]:
         """
