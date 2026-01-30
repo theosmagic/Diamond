@@ -217,6 +217,27 @@ class TenderlyIntegration:
             "--network",
             network_id
         ])
+    
+    def get_project_info(self) -> Dict[str, Any]:
+        """
+        Get Tenderly project information
+        
+        Returns:
+            Project information dictionary
+        """
+        from integrations.config import get_defaults
+        
+        defaults = get_defaults()
+        tenderly_config = defaults.get("tenderly_api", {})
+        project_info = tenderly_config.get("project", {})
+        
+        return {
+            "username": project_info.get("username", ""),
+            "project_name": project_info.get("project_name", ""),
+            "project_id": project_info.get("project_id", ""),
+            "project_slug": f"{project_info.get('username', '')}/{project_info.get('project_name', '')}",
+            "dashboard_url": project_info.get("dashboard_url", "")
+        }
 
 
 # Global instance
