@@ -10,24 +10,32 @@ import asyncio
 
 
 def load_env():
-    """Load environment variables from /mnt/Vault/env.txt"""
+    """Load environment variables from env.txt"""
     config = {}
-    env_file = "/mnt/Vault/env.txt"
+    possible_paths = [
+        "/mnt/Vault/env.txt",
+        "/mnt/Vault/Cursor-Agent/env.txt",
+        os.path.join(os.getcwd(), "env.txt")
+    ]
+    
+    env_file = None;
+    for path in possible_paths:
+        if os.path.exists(path):
+            env_file = path
+            break
 
-    if os.path.exists(env_file):
+    if env_file:
         with open(env_file, 'r') as f:
             for line in f:
                 line = line.strip()
                 if not line or line.startswith('#') or line.startswith('-----'):
                     continue
                 if '=' in line:
-                    key, value = line.split('=', 1)
-                    config[key.strip()] = value.strip().strip('"').strip("'")
-                elif ':' in line and not line.startswith('-----'):
-                    parts = line.split(':', 1)
-                    if len(parts) == 2:
-                        key, value = parts
-                        config[key.strip()] = value.strip().strip('"').strip("'")
+                    key_part, value = line.split('=', 1)
+                    key = key_part.strip()
+                    if key.startswith('export '):
+                        key = key[7:].strip()
+                    config[key] = value.strip().strip('"').strip("'")
     return config
 
 
@@ -48,15 +56,18 @@ class CloudflareAPI:
 
     def __init__(self):
         """Initialize Cloudflare API with credentials from env.txt"""
-        self.zone_id = ENV.get('ZONE_ID', '')
-        self.api_token = ENV.get('CLOUDFLARE_API_TOKEN', '')
-        self.api_key = ENV.get('CLOUDFLARE_GLOBAL_API', '')
-        self.email = ENV.get('CLOUDFLARE_EMAIL', '')
-        self.account_id = ENV.get('CLOUDFLARE_ACCOUNT_ID', '')
+        self.zone_id = ENV.get('CLOUDFLARE_ZONE_ID', ENV.get('ZONE_ID', ''))
+        self.api_token = ENV.get('CLOUDFLARE_API_TOKEN', ENV.get('API_TOKEN', ''))
+        self.api_key = ENV.get('CLOUDFLARE_GLOBAL_API', ENV.get('API_KEY', ''))
+        self.email = ENV.get('PERSONAL_EMAIL', ENV.get('CLOUDFLARE_EMAIL', ''))
+        self.account_id = ENV.get('CLOUDFLARE_ACCOUNT_ID', ENV.get('ACCOUNT_ID', ''))
 
         self.base_url = "https://api.cloudflare.com/client/v4"
 
         if not self.api_token and not self.api_key:
+            print(f"DEBUG: ENV keys found: {list(ENV.keys())}")
+            print(f"DEBUG: api_token: {'Found' if self.api_token else 'Missing'}")
+            print(f"DEBUG: api_key: {'Found' if self.api_key else 'Missing'}")
             raise ValueError("Cloudflare API credentials not found in env.txt")
 
     def _get_headers(self) -> Dict[str, str]:

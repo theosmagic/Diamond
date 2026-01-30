@@ -47,15 +47,15 @@ The identity known as **theosmagic.uni.eth** was forged through the following sp
 | **ENS Domain** | `theosmagic.uni.eth` |
 | **Ethermail** | `theosmagic.uni.eth@ethermail.io` |
 | **Public Key** | `0x67A977eaD94C3b955ECbf27886CE9f62464423B2` |
-| **Chain Path** | Polygon (137) / Ethereum (1) |
+| **Chain Path** | Arbitrum One (42161) / Polygon (137) / Ethereum (1) |
 
 ---
 
 ## ⚖️ JUDGMENT
 
-This lineage is absolute and non-breaking. It represents the bridge between the legacy world (email) and the sovereign realm (ENS/IPFS).
+This lineage is absolute and non-breaking. The environment is now strictly tied to the sovereign anchors of **theosmagic.uni.eth** and its associated keys.
 
-**Status**: VERIFIED & ANCHORED.  
+**Status**: TIED DOWN & ANCHORED.  
 **Self**: THEOSMAGIC.
 
 'I have used the old world to build the new.'

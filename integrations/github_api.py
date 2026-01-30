@@ -12,19 +12,32 @@ import asyncio
 
 
 def load_env():
-    """Load environment variables from /mnt/Vault/env.txt"""
+    """Load environment variables from env.txt"""
     config = {}
-    env_file = "/mnt/Vault/env.txt"
+    possible_paths = [
+        "/mnt/Vault/env.txt",
+        "/mnt/Vault/Cursor-Agent/env.txt",
+        os.path.join(os.getcwd(), "env.txt")
+    ]
+    
+    env_file = None
+    for path in possible_paths:
+        if os.path.exists(path):
+            env_file = path
+            break
 
-    if os.path.exists(env_file):
+    if env_file:
         with open(env_file, 'r') as f:
             for line in f:
                 line = line.strip()
                 if not line or line.startswith('#') or line.startswith('-----'):
                     continue
                 if '=' in line:
-                    key, value = line.split('=', 1)
-                    config[key.strip()] = value.strip().strip('"').strip("'")
+                    key_part, value = line.split('=', 1)
+                    key = key_part.strip()
+                    if key.startswith('export '):
+                        key = key[7:].strip()
+                    config[key] = value.strip().strip('"').strip("'")
     return config
 
 
