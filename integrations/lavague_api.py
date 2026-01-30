@@ -5,12 +5,22 @@ LaVague Web Agent Integration
 Integration with LaVague framework for AI-powered web automation.
 LaVague is a Large Action Model framework for developing AI Web Agents.
 
+Official Repository: https://github.com/lavague-ai/LaVague
+Documentation: https://docs.lavague.ai/
+
 Features:
 - Web automation with LLM-powered actions
 - Support for Selenium and Playwright drivers
 - Customizable World Model and Action Engine
 - Interactive Gradio interface
 - Token usage tracking
+- Chrome Extension driver support
+
+Based on official LaVague patterns:
+- Uses lavague.core.WorldModel and ActionEngine
+- Uses lavague.core.agents.WebAgent
+- Supports SeleniumDriver, PlaywrightDriver
+- Follows official API patterns from LaVague documentation
 """
 
 import os
@@ -88,10 +98,15 @@ class LaVagueAgent:
                 "LaVague is not installed. Install it with: pip install lavague"
             )
 
-        # Setup API key from environment
+        # Setup API key from environment (LaVague uses OPENAI_API_KEY by default)
         api_key = ENV.get('OPENAI_API_KEY') or os.getenv('OPENAI_API_KEY')
         if api_key:
             os.environ['OPENAI_API_KEY'] = api_key
+        else:
+            # Check for telemetry setting
+            telemetry = ENV.get('LAVAGUE_TELEMETRY', os.getenv('LAVAGUE_TELEMETRY', ''))
+            if telemetry.upper() == 'NONE':
+                os.environ['LAVAGUE_TELEMETRY'] = 'NONE'
 
         # Initialize driver
         if driver_type == "selenium":
@@ -109,7 +124,7 @@ class LaVagueAgent:
         else:
             self.world_model = WorldModel()
 
-        # Initialize Action Engine
+        # Initialize Action Engine (official pattern: ActionEngine(driver))
         if action_engine_config:
             self.action_engine = ActionEngine(self.driver, **action_engine_config)
         else:
@@ -184,12 +199,30 @@ class LaVagueAgent:
         self.agent.demo(objective)
 
     def get_current_url(self) -> str:
-        """Get current page URL"""
-        return self.agent.driver.get_url()
+        """
+        Get current page URL
+        
+        Returns:
+            Current page URL
+        """
+        try:
+            return self.agent.driver.get_url()
+        except AttributeError:
+            # Fallback for different driver implementations
+            return self.driver.get_url() if hasattr(self.driver, 'get_url') else ""
 
     def get_page_title(self) -> str:
-        """Get current page title"""
-        return self.agent.driver.get_title()
+        """
+        Get current page title
+        
+        Returns:
+            Current page title
+        """
+        try:
+            return self.agent.driver.get_title()
+        except AttributeError:
+            # Fallback for different driver implementations
+            return self.driver.get_title() if hasattr(self.driver, 'get_title') else ""
 
     def take_screenshot(self, path: Optional[str] = None) -> str:
         """
