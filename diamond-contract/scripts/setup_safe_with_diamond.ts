@@ -11,6 +11,7 @@ import { ethers } from "ethers";
 import Safe, { SafeFactory, SafeAccountConfig } from "@safe-global/safe-core-sdk";
 import { EthersAdapter } from "@safe-global/safe-ethers-lib";
 import { getSafeContract, getProxyFactoryContract, getModuleProxyFactoryContract } from "@safe-global/safe-deployments";
+import { SignatureVerifier__factory, SafeDiamondModule__factory } from "../typechain-types";
 
 interface SetupConfig {
   owners: string[];
@@ -24,6 +25,27 @@ interface SetupConfig {
 /**
  * Setup Safe{Wallet} with Diamond Contract module
  */
+/**
+ * Deploy SignatureVerifier contract
+ */
+export async function deploySignatureVerifier(signer: ethers.Signer): Promise<ethers.Contract> {
+  console.log("Deploying SignatureVerifier contract...");
+  
+  const SignatureVerifierFactory = new SignatureVerifier__factory(signer);
+  const signatureVerifier = await SignatureVerifierFactory.deploy();
+  await signatureVerifier.waitForDeployment();
+  
+  const address = await signatureVerifier.getAddress();
+  console.log(`✅ SignatureVerifier deployed at: ${address}`);
+  
+  // Verify primary signature
+  const [isValid, recoveredAddress] = await signatureVerifier.verifyPrimarySignature();
+  console.log(`Primary signature verification: ${isValid ? "✅ Valid" : "❌ Invalid"}`);
+  console.log(`Recovered address: ${recoveredAddress}`);
+  
+  return signatureVerifier;
+}
+
 export async function setupSafeWithDiamond(config: SetupConfig) {
   console.log(`\nSetting up Safe{Wallet} with Diamond on chain ${config.chainId}...`);
   

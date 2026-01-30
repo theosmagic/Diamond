@@ -3,6 +3,7 @@ pragma solidity ^0.8.20;
 
 import "@safe-global/safe-contracts/contracts/base/ModuleManager.sol";
 import "@safe-global/safe-contracts/contracts/interfaces/ISafe.sol";
+import "./SignatureVerifier.sol";
 
 /**
  * @title SafeDiamondModule

@@ -6,3 +6,8 @@ python-multipart==0.0.6
 sqlalchemy==2.0.25
 pydantic==2.5.3
 pydantic-settings==2.1.0
+lavague>=1.0.0
+selenium>=4.0.0
+playwright>=1.40.0
+requests>=2.31.0
+httpx>=0.25.0

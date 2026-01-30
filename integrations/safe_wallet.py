@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Dict, Any, Optional, List
 import json
 from integrations.wallet_manager import get_primary_wallet_manager
+from integrations.signature_verification import get_signature_verifier, verify_primary_wallet_signature
 
 
 def load_env():
@@ -296,7 +297,13 @@ class UnifiedWalletInterface:
                 "email": self.safe.email,
                 "ens": self.safe.ens,
                 "is_primary": True,
-                "description": "Primary default wallet - controls all operations"
+                "description": "Primary default wallet - controls all operations",
+                "signature": {
+                    "message": self.signature_data["message"],
+                    "signature": self.signature_data["signature"],
+                    "is_valid": self.signature_data["is_valid"],
+                    "verification_status": self.signature_data["verification_status"]
+                }
             },
             "ens": self.safe.ens,
             "email": self.safe.email,
@@ -313,6 +320,52 @@ class UnifiedWalletInterface:
             "integration": self.diamond_safe_config,
             "networks": self.safe.networks
         }
+    
+    def verify_signature(self, message: str = None, signature: str = None) -> Dict[str, Any]:
+        """
+        Verify Ethereum signature
+        
+        Args:
+            message: Optional message to verify (defaults to primary wallet message)
+            signature: Optional signature to verify (defaults to primary wallet signature)
+        
+        Returns:
+            Verification result
+        """
+        if message is None and signature is None:
+            # Verify primary wallet signature
+            is_valid, recovered_address = verify_primary_wallet_signature()
+        else:
+            # Verify custom signature
+            is_valid, recovered_address = self.signature_verifier.verify_signature(
+                message or self.signature_verifier.PRIMARY_WALLET_MESSAGE,
+                signature or self.signature_verifier.PRIMARY_WALLET_SIGNATURE,
+                self.safe.primary_wallet_address
+            )
+        
+        return {
+            "is_valid": is_valid,
+            "recovered_address": recovered_address,
+            "expected_address": self.safe.primary_wallet_address,
+            "matches_primary": recovered_address and recovered_address.lower() == self.safe.primary_wallet_address.lower()
+        }
+    
+    def sign_message(self, message: str, private_key: str = None) -> str:
+        """
+        Sign a message (requires private key)
+        
+        Args:
+            message: The message to sign
+            private_key: The private key (if None, will use environment variable)
+        
+        Returns:
+            The signature hex string
+        """
+        if private_key is None:
+            # In production, get from secure storage
+            raise ValueError("Private key required for signing")
+        
+        return self.signature_verifier.sign_message(message, private_key)
     
     def generate_react_config(self) -> str:
         """

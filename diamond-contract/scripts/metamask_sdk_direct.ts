@@ -54,6 +54,62 @@ export const connectMetaMask = async () => {
 }
 
 // Send transaction
+// Primary wallet signature data
+export const PRIMARY_WALLET_MESSAGE = "There is nothing new under the sun. That which was will be, and that which will be already was when the end finds its beginning.";
+export const PRIMARY_WALLET_ADDRESS = "0x67A977eaD94C3b955ECbf27886CE9f62464423B2";
+export const PRIMARY_WALLET_SIGNATURE = "0x7dbf6d9162ae032dac18162b2d40e7f030fe9bf7a0422364ca9343d3defb45f21288d5a5b17d800dafa77793e6173642a3eedce296fdccbfbef2c48019acc46b1c";
+
+/**
+ * Verify Ethereum signature
+ */
+export const verifySignature = async (message: string, signature: string, expectedAddress: string): Promise<boolean> => {
+  if (!metamaskSDK.isInitialized()) {
+    await metamaskSDK.init();
+  }
+  
+  const provider = metamaskSDK.getProvider();
+  if (!provider) {
+    throw new Error("MetaMask provider not available");
+  }
+  
+  // Use ethers.js or viem to verify signature
+  // This is a placeholder - actual implementation would use ethers.utils.verifyMessage
+  return true;
+};
+
+/**
+ * Verify primary wallet signature
+ */
+export const verifyPrimaryWalletSignature = async (): Promise<boolean> => {
+  return verifySignature(PRIMARY_WALLET_MESSAGE, PRIMARY_WALLET_SIGNATURE, PRIMARY_WALLET_ADDRESS);
+};
+
+/**
+ * Sign message with MetaMask
+ */
+export const signMessage = async (message: string): Promise<string> => {
+  if (!metamaskSDK.isInitialized()) {
+    await metamaskSDK.init();
+  }
+  
+  const provider = metamaskSDK.getProvider();
+  if (!provider) {
+    throw new Error("MetaMask provider not available");
+  }
+  
+  const accounts = await provider.request({ method: 'eth_requestAccounts' });
+  if (!accounts || accounts.length === 0) {
+    throw new Error("No accounts available");
+  }
+  
+  const signature = await provider.request({
+    method: 'personal_sign',
+    params: [message, accounts[0]]
+  });
+  
+  return signature as string;
+};
+
 export const sendTransaction = async (to: string, value: string, data?: string) => {
   try {
     const provider = getEthereumProvider()

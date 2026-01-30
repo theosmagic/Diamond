@@ -16,6 +16,7 @@ import json
 from pathlib import Path
 from typing import Dict, Any, Optional
 from integrations.config import get_primary_wallet, get_default_wallet_address
+from integrations.signature_verification import get_signature_verifier
 from typing import List
 
 
@@ -48,6 +49,10 @@ class PrimaryWalletManager:
         Returns:
             Primary wallet configuration
         """
+        # Get signature verification data
+        verifier = get_signature_verifier()
+        signature_data = verifier.get_signature_data()
+        
         return {
             "address": self.address,
             "email": self.email,
@@ -61,7 +66,14 @@ class PrimaryWalletManager:
                 "metamask_sdk",
                 "walletconnect_appkit"
             ],
-            "description": "Primary default wallet - controls all operations"
+            "description": "Primary default wallet - controls all operations",
+            "signature": {
+                "message": signature_data["message"],
+                "signature": signature_data["signature"],
+                "is_valid": signature_data["is_valid"],
+                "verification_status": signature_data["verification_status"],
+                "recovered_address": signature_data["recovered_address"]
+            }
         }
     
     def is_primary_wallet(self, address: str) -> bool:
