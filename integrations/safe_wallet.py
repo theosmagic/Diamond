@@ -106,6 +106,8 @@ class SafeWalletIntegration:
         """
         Get MetaMask SDK configuration
         
+        Note: Recommended approach is to use Wagmi with MetaMask SDK connector
+        
         Returns:
             Configuration for MetaMask SDK
         """
@@ -119,6 +121,13 @@ class SafeWalletIntegration:
                 "install": {
                     "link": "https://metamask.io/download"
                 }
+            },
+            "use_deeplink": True,
+            "check_installation_immediately": True,
+            "wagmi_integration": {
+                "enabled": True,
+                "recommended": True,
+                "connector": "metaMask"
             },
             "networks": [
                 {
@@ -166,10 +175,12 @@ class SafeWalletIntegration:
     
     def get_walletconnect_config(self) -> Dict[str, Any]:
         """
-        Get WalletConnect kit configuration
+        Get WalletConnect AppKit configuration
+        
+        Note: WalletConnect has migrated from @walletconnect/modal to AppKit (@reown/appkit)
         
         Returns:
-            Configuration for WalletConnect
+            Configuration for WalletConnect AppKit
         """
         project_id = ENV.get('WALLETCONNECT_PROJECT_ID', '')
         
@@ -182,28 +193,22 @@ class SafeWalletIntegration:
                 "icons": [f"https://{self.ens}/icon.png"]
             },
             "chains": [
-                "eip155:1",      # Ethereum
-                "eip155:42161",   # Arbitrum
-                "eip155:137",     # Polygon
-                "eip155:8453",    # Base
+                {"id": 1, "name": "Ethereum"},
+                {"id": 42161, "name": "Arbitrum"},
+                {"id": 137, "name": "Polygon"},
+                {"id": 8453, "name": "Base"}
             ],
-            "optionalChains": [
-                "eip155:1",
-                "eip155:42161",
-                "eip155:137",
-                "eip155:8453",
-            ],
-            "methods": [
-                "eth_sendTransaction",
-                "eth_signTransaction",
-                "eth_sign",
-                "personal_sign",
-                "eth_signTypedData",
-            ],
-            "events": [
-                "chainChanged",
-                "accountsChanged",
-            ]
+            "features": {
+                "analytics": True,
+                "email": False,
+                "socials": False,
+                "swaps": False,
+                "onramp": False
+            },
+            "wagmiAdapter": {
+                "enabled": True,
+                "networks": [1, 42161, 137, 8453]
+            }
         }
     
     def get_diamond_safe_integration(self) -> Dict[str, Any]:
