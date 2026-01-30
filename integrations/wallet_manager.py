@@ -16,6 +16,7 @@ import json
 from pathlib import Path
 from typing import Dict, Any, Optional
 from integrations.config import get_primary_wallet, get_default_wallet_address
+from typing import List
 
 
 class PrimaryWalletManager:
