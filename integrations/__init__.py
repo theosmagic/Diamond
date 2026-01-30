@@ -7,6 +7,7 @@ from .cloudflare_api import CloudflareAPI
 from .github_api import GitHubAPI
 from .lavague_api import LaVagueAgent, LaVagueTaskRunner, run_objective, create_agent
 from .blockscout_api import BlockscoutAPI
+from .chainlist_api import ChainlistAPI
 from .chainlink_api import ChainlinkIntegration, ChainlinkPriceFeeds, ChainlinkAutomation, ChainlinkCCIP, ChainlinkFunctions
 from .config import get_default_ens, get_default_email, get_defaults
 
