@@ -4,6 +4,13 @@
     "email": "theosmagic.uni.eth@ethermail.io",
     "description": "Default ENS domain and email"
   },
+  "primary_wallet": {
+    "address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+    "email": "theosmagic.uni.eth@ethermail.io",
+    "ens": "theosmagic.uni.eth",
+    "description": "Primary default wallet - controls all operations",
+    "is_primary": true
+  },
   "diamond": {
     "default_address": "0x0000000000000000000000000000000000000000",
     "description": "Default Diamond Contract address (to be set on deployment)"

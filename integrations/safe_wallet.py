@@ -16,6 +16,7 @@ import sys
 from pathlib import Path
 from typing import Dict, Any, Optional, List
 import json
+from integrations.wallet_manager import get_primary_wallet_manager
 
 
 def load_env():
@@ -66,12 +67,22 @@ class SafeWalletIntegration:
         Args:
             diamond_address: Diamond Contract address
         """
+        # Import config to get primary wallet
+        from integrations.config import get_primary_wallet, get_default_wallet_address
+        
         self.diamond_address = diamond_address or ENV.get('DIAMOND_ADDRESS', '')
         self.safe_address = ENV.get('SAFE_WALLET_ADDRESS', '')
         
-        # Default ENS
-        self.ens = ENV.get('ENS_NAME', 'theosmagic.uni.eth')
-        self.email = ENV.get('DIGITAL_PERSONA_EMAIL', 'theosmagic.uni.eth@ethermail.io')
+        # Get primary wallet manager
+        wallet_manager = get_primary_wallet_manager()
+        self.primary_wallet_address = wallet_manager.address
+        self.ens = wallet_manager.ens
+        self.email = wallet_manager.email
+        
+        # Override with environment variables if present
+        self.primary_wallet_address = ENV.get('PUBLIC_ADDRESS', self.primary_wallet_address)
+        self.ens = ENV.get('ENS_NAME', self.ens)
+        self.email = ENV.get('DIGITAL_PERSONA_EMAIL', ENV.get('EMAIL', self.email))
         
         # Network configuration
         self.networks = {
@@ -88,9 +99,13 @@ class SafeWalletIntegration:
         Returns:
             Configuration for Safe SDK
         """
+        wallet_manager = get_primary_wallet_manager()
+        
         return {
             "safe_address": self.safe_address,
             "diamond_address": self.diamond_address,
+            "primary_wallet_address": self.primary_wallet_address,
+            "primary_wallet_owners": wallet_manager.get_safe_owners(),
             "ens": self.ens,
             "email": self.email,
             "networks": self.networks,
@@ -221,6 +236,9 @@ class SafeWalletIntegration:
         return {
             "diamond_address": self.diamond_address,
             "safe_address": self.safe_address,
+            "primary_wallet_address": self.primary_wallet_address,
+            "primary_wallet_email": self.email,
+            "primary_wallet_ens": self.ens,
             "integration_type": "diamond_as_safe_module",
             "description": "Diamond Contract integrated as Safe{Wallet} module",
             "capabilities": [
@@ -234,6 +252,7 @@ class SafeWalletIntegration:
                 chain_id: {
                     "diamond": self.diamond_address,
                     "safe": self.safe_address,
+                    "primary_wallet": self.primary_wallet_address,
                     "chain_id": chain_id
                 }
                 for chain_id in [1, 42161, 137, 8453]
@@ -272,6 +291,13 @@ class UnifiedWalletInterface:
             Complete configuration
         """
         return {
+            "primary_wallet": {
+                "address": self.safe.primary_wallet_address,
+                "email": self.safe.email,
+                "ens": self.safe.ens,
+                "is_primary": True,
+                "description": "Primary default wallet - controls all operations"
+            },
             "ens": self.safe.ens,
             "email": self.safe.email,
             "diamond": {

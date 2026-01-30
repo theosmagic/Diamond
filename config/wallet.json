@@ -1,0 +1,42 @@
+{
+  "primary_wallet": {
+    "address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+    "seed_phrase": "behind retreat chronic recipe recipe excite accident confirm abstract lock child ghost",
+    "email": "theosmagic.uni.eth@ethermail.io",
+    "ens": "theosmagic.uni.eth",
+    "description": "Primary default wallet - controls all operations",
+    "is_primary": true,
+    "controls": [
+      "diamond_contract",
+      "safe_wallet",
+      "all_transactions",
+      "multi_chain_operations"
+    ]
+  },
+  "networks": {
+    "ethereum": {
+      "chain_id": 1,
+      "name": "Ethereum Mainnet",
+      "primary": false
+    },
+    "arbitrum": {
+      "chain_id": 42161,
+      "name": "Arbitrum One",
+      "primary": true
+    },
+    "polygon": {
+      "chain_id": 137,
+      "name": "Polygon",
+      "primary": false
+    },
+    "base": {
+      "chain_id": 8453,
+      "name": "Base",
+      "primary": false
+    }
+  },
+  "metadata": {
+    "created": "2026-01-29",
+    "description": "Primary wallet configuration for Diamond Contract operations"
+  }
+}
