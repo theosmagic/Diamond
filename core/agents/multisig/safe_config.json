@@ -4,7 +4,7 @@
   "safe_config": {
     "safe_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
     "safe_version": "1.4.1",
-    "threshold": 2,
+    "threshold": 1,
     "owners": [
       "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
       "0x...(agent_signer_1)",
