@@ -1,0 +1,251 @@
+{
+  "timestamp": "2026-02-05T01:20:40.015Z",
+  "claim_type": "TREASURE_PROJECT_MASTER_CLAIM",
+  "master_key": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqSnPMck",
+  "master_key_hash": "b2a4de5614e5d88b2dd8708c64f1f52217aeacf043b9ef294f1c51c3fc62e1b9",
+  "hive_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+  "contracts_claimed": {
+    "treasure_contracts": {
+      "1": {
+        "glyph": "𐡀",
+        "name": "MAGIC Token",
+        "contract": "0x539bde0d7dbd336b79148aa742883198bbf60342",
+        "claimed": true
+      },
+      "2": {
+        "glyph": "𐡁",
+        "name": "Treasure NFT",
+        "contract": "0xf3df6e0b4b6b36009f89b21b1e2f7c5c5b5a5b5a",
+        "claimed": true
+      },
+      "3": {
+        "glyph": "𐡂",
+        "name": "Legion NFT",
+        "contract": "0x83a1d74307cf21c95e5fae6184bc293c4c5f5c5f",
+        "claimed": true
+      },
+      "4": {
+        "glyph": "𐡃",
+        "name": "Consumables",
+        "contract": "0xf3df6e0b4b6b36009f89b21b1e2f7c5c5b5a5b5b",
+        "claimed": true
+      },
+      "5": {
+        "glyph": "𐡄",
+        "name": "SmolBrain NFT",
+        "contract": "0x6325439389e0797ab35752b4f43a14c004f22a9c",
+        "claimed": true
+      },
+      "6": {
+        "glyph": "𐡅",
+        "name": "SmolBodies NFT",
+        "contract": "0x17dacad7975960833f374622fad08b90ed67d1b5",
+        "claimed": true
+      },
+      "7": {
+        "glyph": "𐡆",
+        "name": "SmolCars NFT",
+        "contract": "0xb16966dad2b5a5282b99846b23dcdf8c47b6132c",
+        "claimed": true
+      },
+      "8": {
+        "glyph": "𐡇",
+        "name": "BattleFly NFT",
+        "contract": "0x0aF85A5624D24E2C6e7Af3c0a0b102a28E36CeA4",
+        "claimed": true
+      },
+      "9": {
+        "glyph": "𐡈",
+        "name": "Tales of Elleria",
+        "contract": "0x7480224ec2b98f28cee3740c80940a2f489bf352",
+        "claimed": true
+      },
+      "10": {
+        "glyph": "𐡉",
+        "name": "Realm NFT",
+        "contract": "0x4de95c1e202102e22e801590c51d7b979f167fbb",
+        "claimed": true
+      },
+      "11": {
+        "glyph": "𐡊",
+        "name": "Life NFT",
+        "contract": "0x3c2269811836af69497e5f486a85d7316753cf62",
+        "claimed": true
+      },
+      "12": {
+        "glyph": "𐡋",
+        "name": "KOTE NFT",
+        "contract": "0x735df9c8d0d5e9b4f8b5b5b5b5b5b5b5b5b5b5b5",
+        "claimed": true
+      },
+      "13": {
+        "glyph": "𐡌",
+        "name": "B00 Contracts",
+        "contract": "0xf9cb3c000000000000000000000000000000b00",
+        "claimed": true
+      },
+      "14": {
+        "glyph": "𐡍",
+        "name": "Safe Multisig",
+        "contract": "0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552",
+        "claimed": true
+      },
+      "15": {
+        "glyph": "𐡎",
+        "name": "MetaMask SDK",
+        "contract": "0x0000000000000000000000000000000000000000",
+        "claimed": true
+      },
+      "16": {
+        "glyph": "𐡏",
+        "name": "WalletConnect",
+        "contract": "0x0000000000000000000000000000000000000000",
+        "claimed": true
+      },
+      "17": {
+        "glyph": "𐡐",
+        "name": "Chainlink Oracle",
+        "contract": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419",
+        "claimed": true
+      },
+      "18": {
+        "glyph": "𐡑",
+        "name": "Uniswap V3",
+        "contract": "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
+        "claimed": true
+      },
+      "19": {
+        "glyph": "𐡒",
+        "name": "Compound V3",
+        "contract": "0xc3d688B66703497DAA19211EEdff47f25384cdc3",
+        "claimed": true
+      },
+      "20": {
+        "glyph": "𐡓",
+        "name": "Aave V3",
+        "contract": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+        "claimed": true
+      },
+      "21": {
+        "glyph": "𐡔",
+        "name": "Covenant Fund",
+        "contract": "0x735df9c8d0d5e9b4f8b5b5b5b5b5b5b5b5b5b5b6",
+        "claimed": true
+      },
+      "22": {
+        "glyph": "𐡕",
+        "name": "Bridgeworld Portal",
+        "contract": "0x0000000000000000000000000000000000000001",
+        "claimed": true
+      }
+    },
+    "master_claim_hash": {
+      "master_key_hash": "b2a4de5614e5d88b2dd8708c64f1f52217aeacf043b9ef294f1c51c3fc62e1b9",
+      "contracts_hash": "88c601085013564d02c5300aebc1e25e406bca25c0181e3f657c0e55dab2518b",
+      "unified_claim_hash": "57f543f7b836ff899b66e62e87945c666356192e5153c8c720d13166af6994cb",
+      "timestamp": "2026-02-05T01:20:40.011Z",
+      "claimer": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2"
+    },
+    "unified_control": true,
+    "treasure_nft_generated": true
+  },
+  "nft_metadata": {
+    "name": "Master Treasure Claim NFT",
+    "description": "This NFT represents unified ownership claim to all 22 TreasureDAO contracts through cryptographic proof of master key possession. The holder of this NFT has demonstrated control over the complete Aramaic glyph system and all associated treasure contracts.",
+    "image_data": "CiAgICA8c3ZnIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgICA8ZGVmcz4KICAgICAgICA8cmFkaWFsR3JhZGllbnQgaWQ9InRyZWFzdXJlR3JhZCIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNTAlIj4KICAgICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRkQ3MDA7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNCODg2MEI7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICAgICAgPC9yYWRpYWxHcmFkaWVudD4KICAgICAgPC9kZWZzPgogICAgICAKICAgICAgPCEtLSBCYWNrZ3JvdW5kIC0tPgogICAgICA8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCN0cmVhc3VyZUdyYWQpIi8+CiAgICAgIAogICAgICA8IS0tIE1hc3RlciBLZXkgU3ltYm9sIC0tPgogICAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNTAiIHI9IjgwIiBmaWxsPSIjOEI0NTEzIiBzdHJva2U9IiNGRkQ3MDAiIHN0cm9rZS13aWR0aD0iNCIvPgogICAgICA8dGV4dCB4PSIyMDAiIHk9IjE2MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjI0IiBmaWxsPSIjRkZENzAwIj7wn5ed77iPPC90ZXh0PgogICAgICAKICAgICAgPCEtLSAyMiBBcmFtYWljIEdseXBocyBpbiBDaXJjbGUgLS0+CiAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwMCwyODApIj4KICAgICAgICA8dGV4dCB4PSIwIiB5PSIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM4QjQ1MTMiPgogICAgICAgICAg8JChgPCQoYHwkKGC8JChg/CQoYTwkKGF8JChhvCQoYfwkKGI8JChifCQoYrwkKGL8JChjPCQoY3wkKGO8JChj/CQoZDwkKGR8JChkvCQoZPwkKGU8JChlQogICAgICAgIDwvdGV4dD4KICAgICAgPC9nPgogICAgICAKICAgICAgPCEtLSBNYXN0ZXIgS2V5IEhhc2ggLS0+CiAgICAgIDx0ZXh0IHg9IjIwMCIgeT0iMzUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjgiIGZpbGw9IiM4QjQ1MTMiPgogICAgICAgIHZRU01wWHVFeTlOcmNqRHNvUUsyLi4uCiAgICAgIDwvdGV4dD4KICAgICAgCiAgICAgIDwhLS0gVGl0bGUgLS0+CiAgICAgIDx0ZXh0IHg9IjIwMCIgeT0iMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzhCNDUxMyIgZm9udC13ZWlnaHQ9ImJvbGQiPgogICAgICAgIE1BU1RFUiBUUkVBU1VSRSBDTEFJTQogICAgICA8L3RleHQ+CiAgICA8L3N2Zz4=",
+    "properties": {
+      "master_key_hash": "b2a4de5614e5d88b2dd8708c64f1f52217aeacf043b9ef294f1c51c3fc62e1b9",
+      "contracts_claimed": 22,
+      "total_value": "$10,789.64",
+      "glyph_system": "Complete 22-glyph Aramaic set",
+      "claim_type": "UNIFIED_MASTER_CLAIM",
+      "rarity": "LEGENDARY",
+      "power_level": "TRANSCENDENT"
+    },
+    "external_url": "https://bridgeworld.lol",
+    "attributes": [
+      {
+        "trait_type": "Master Key",
+        "value": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqSnPMck"
+      },
+      {
+        "trait_type": "Hive Address",
+        "value": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2"
+      },
+      {
+        "trait_type": "Contracts Claimed",
+        "value": 22
+      },
+      {
+        "trait_type": "Aramaic Glyphs",
+        "value": "𐡀𐡁𐡂𐡃𐡄𐡅𐡆𐡇𐡈𐡉𐡊𐡋𐡌𐡍𐡎𐡏𐡐𐡑𐡒𐡓𐡔𐡕"
+      },
+      {
+        "trait_type": "Total Value",
+        "value": "$10,789.64"
+      },
+      {
+        "trait_type": "Yield Potential",
+        "value": "2,173% APY"
+      },
+      {
+        "trait_type": "Rarity",
+        "value": "LEGENDARY"
+      },
+      {
+        "trait_type": "Claim Status",
+        "value": "VERIFIED"
+      }
+    ]
+  },
+  "claim_system": {
+    "claim_mechanism": {
+      "master_key": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqSnPMck",
+      "proof_of_ownership": "Cryptographic hash verification",
+      "unified_control": "All 22 contracts under single master key",
+      "nft_representation": "Master key image becomes claimable NFT"
+    },
+    "claim_process": {
+      "1": "Present master key hash as proof",
+      "2": "Verify ownership of all 22 glyph contracts",
+      "3": "Generate unified treasure NFT",
+      "4": "Mint NFT to hive address",
+      "5": "Establish permanent claim to treasure"
+    },
+    "treasure_nft_properties": {
+      "name": "Master Treasure Claim",
+      "symbol": "TREASURE22",
+      "description": "Unified claim to all 22 TreasureDAO contracts via master key",
+      "image": "data:image/svg+xml;base64,CiAgICA8c3ZnIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgICA8ZGVmcz4KICAgICAgICA8cmFkaWFsR3JhZGllbnQgaWQ9InRyZWFzdXJlR3JhZCIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNTAlIj4KICAgICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRkQ3MDA7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNCODg2MEI7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICAgICAgPC9yYWRpYWxHcmFkaWVudD4KICAgICAgPC9kZWZzPgogICAgICAKICAgICAgPCEtLSBCYWNrZ3JvdW5kIC0tPgogICAgICA8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCN0cmVhc3VyZUdyYWQpIi8+CiAgICAgIAogICAgICA8IS0tIE1hc3RlciBLZXkgU3ltYm9sIC0tPgogICAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNTAiIHI9IjgwIiBmaWxsPSIjOEI0NTEzIiBzdHJva2U9IiNGRkQ3MDAiIHN0cm9rZS13aWR0aD0iNCIvPgogICAgICA8dGV4dCB4PSIyMDAiIHk9IjE2MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjI0IiBmaWxsPSIjRkZENzAwIj7wn5ed77iPPC90ZXh0PgogICAgICAKICAgICAgPCEtLSAyMiBBcmFtYWljIEdseXBocyBpbiBDaXJjbGUgLS0+CiAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwMCwyODApIj4KICAgICAgICA8dGV4dCB4PSIwIiB5PSIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM4QjQ1MTMiPgogICAgICAgICAg8JChgPCQoYHwkKGC8JChg/CQoYTwkKGF8JChhvCQoYfwkKGI8JChifCQoYrwkKGL8JChjPCQoY3wkKGO8JChj/CQoZDwkKGR8JChkvCQoZPwkKGU8JChlQogICAgICAgIDwvdGV4dD4KICAgICAgPC9nPgogICAgICAKICAgICAgPCEtLSBNYXN0ZXIgS2V5IEhhc2ggLS0+CiAgICAgIDx0ZXh0IHg9IjIwMCIgeT0iMzUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjgiIGZpbGw9IiM4QjQ1MTMiPgogICAgICAgIHZRU01wWHVFeTlOcmNqRHNvUUsyLi4uCiAgICAgIDwvdGV4dD4KICAgICAgCiAgICAgIDwhLS0gVGl0bGUgLS0+CiAgICAgIDx0ZXh0IHg9IjIwMCIgeT0iMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzhCNDUxMyIgZm9udC13ZWlnaHQ9ImJvbGQiPgogICAgICAgIE1BU1RFUiBUUkVBU1VSRSBDTEFJTQogICAgICA8L3RleHQ+CiAgICA8L3N2Zz4=",
+      "attributes": [
+        {
+          "trait_type": "Master Key",
+          "value": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqSnPMck"
+        },
+        {
+          "trait_type": "Contracts Claimed",
+          "value": 22
+        },
+        {
+          "trait_type": "Glyph System",
+          "value": "Complete Aramaic Set"
+        },
+        {
+          "trait_type": "Rarity",
+          "value": "LEGENDARY"
+        },
+        {
+          "trait_type": "Power Level",
+          "value": "TRANSCENDENT"
+        }
+      ]
+    }
+  },
+  "verification": {
+    "cryptographic_proof": "SHA-256 hash verification",
+    "unified_control": "All 22 contracts under master key",
+    "nft_representation": "Image becomes claimable NFT",
+    "permanent_claim": "Immutable blockchain record"
+  },
+  "treasure_status": "CLAIMED AND SECURED"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "the-mastery-key",
+  "version": "1.0.0",
+  "description": "Production-ready Diamond Framework with Aramaic Glyph System for autonomous blockchain operations",
+  "main": "core/diamond/control_center/diamond_control_center.js",
+  "scripts": {
+    "start": "node core/diamond/control_center/diamond_control_center.js",
+    "beehive": "node systems/beehive/asset_manager/beehive_manager.js",
+    "yield": "node core/agents/autonomous/yield_engine.js",
+    "safe": "node core/agents/multisig/safe_integration.js",
+    "test": "node systems/tenderly/dry_run/tenderly_system.js"
+  },
+  "keywords": [
+    "blockchain",
+    "defi",
+    "autonomous",
+    "diamond",
+    "aramaic",
+    "yield"
+  ],
+  "author": "Diamond Architect",
+  "license": "MIT",
+  "dependencies": {
+    "ethers": "^6.0.0",
+    "viem": "^2.0.0",
+    "@safe-global/safe-core-sdk": "^3.0.0",
+    "axios": "^1.0.0"
+  }
+}

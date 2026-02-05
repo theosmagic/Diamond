@@ -1,0 +1,239 @@
+{
+  "timestamp": "2026-02-04T23:43:31.179Z",
+  "hive_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+  "master_key": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqSnPMck",
+  "current_honey": 11711.584515886718,
+  "worker_bees": {
+    "currentBees": {
+      "aleph-magic-bee": {
+        "status": "DEPOSITED",
+        "honey": 668.84,
+        "contract": "MAGIC Token"
+      },
+      "beth-treasure-bee": {
+        "status": "DEPOSITED",
+        "honey": 668.84,
+        "contract": "Treasure NFT"
+      },
+      "gimel-legion-bee": {
+        "status": "DEPOSITED",
+        "honey": 735,
+        "contract": "Legion NFT"
+      },
+      "daleth-liquidity-bee": {
+        "status": "DEPOSITED",
+        "honey": 2163.1,
+        "contract": "Liquidity Positions"
+      },
+      "shin-covenant-bee": {
+        "status": "DEPOSITED",
+        "honey": 438.97,
+        "contract": "Covenant Funds"
+      },
+      "mem-b00-bee": {
+        "status": "DEPOSITED",
+        "honey": 3297,
+        "contract": "B00 Contracts"
+      },
+      "brave-browser-bee": {
+        "status": "DEPOSITED",
+        "honey": 83.95,
+        "contract": "Brave Rewards"
+      },
+      "render-network-bee": {
+        "status": "DEPOSITED",
+        "honey": 280.24,
+        "contract": "Render Services"
+      },
+      "workspace-tea-bee": {
+        "status": "DEPOSITED",
+        "honey": 347.68,
+        "contract": "Workspace Assets"
+      },
+      "hidden-wallet-bee": {
+        "status": "DEPOSITED",
+        "honey": 1369.35,
+        "contract": "Hidden Wallets"
+      },
+      "defi-positions-bee": {
+        "status": "DEPOSITED",
+        "honey": 736.68,
+        "contract": "DeFi Protocols"
+      }
+    },
+    "scoutBees": {
+      "chainlink-oracle-bee": {
+        "status": "SCOUTING",
+        "estimatedHoney": 450,
+        "contract": "Chainlink Oracles"
+      },
+      "opensea-nft-bee": {
+        "status": "SCOUTING",
+        "estimatedHoney": 1200,
+        "contract": "OpenSea NFTs"
+      },
+      "metamask-portfolio-bee": {
+        "status": "SCOUTING",
+        "estimatedHoney": 300,
+        "contract": "MetaMask Portfolio"
+      },
+      "coinbase-earn-bee": {
+        "status": "SCOUTING",
+        "estimatedHoney": 150,
+        "contract": "Coinbase Earn"
+      },
+      "github-copilot-bee": {
+        "status": "SCOUTING",
+        "estimatedHoney": 200,
+        "contract": "GitHub Copilot"
+      },
+      "aws-credits-bee": {
+        "status": "SCOUTING",
+        "estimatedHoney": 500,
+        "contract": "AWS Credits"
+      },
+      "vercel-credits-bee": {
+        "status": "SCOUTING",
+        "estimatedHoney": 100,
+        "contract": "Vercel Credits"
+      },
+      "netlify-credits-bee": {
+        "status": "SCOUTING",
+        "estimatedHoney": 75,
+        "contract": "Netlify Credits"
+      }
+    },
+    "futureBees": {
+      "ai-agent-rewards-bee": {
+        "status": "FUTURE",
+        "estimatedHoney": 2000,
+        "contract": "AI Agent Rewards"
+      },
+      "nft-royalties-bee": {
+        "status": "FUTURE",
+        "estimatedHoney": 800,
+        "contract": "NFT Royalties"
+      },
+      "staking-rewards-bee": {
+        "status": "FUTURE",
+        "estimatedHoney": 1500,
+        "contract": "Staking Rewards"
+      },
+      "yield-farming-bee": {
+        "status": "FUTURE",
+        "estimatedHoney": 1000,
+        "contract": "Yield Farming"
+      },
+      "dao-governance-bee": {
+        "status": "FUTURE",
+        "estimatedHoney": 600,
+        "contract": "DAO Governance"
+      },
+      "layer2-airdrops-bee": {
+        "status": "FUTURE",
+        "estimatedHoney": 3000,
+        "contract": "Layer 2 Airdrops"
+      },
+      "depin-rewards-bee": {
+        "status": "FUTURE",
+        "estimatedHoney": 1200,
+        "contract": "DePIN Networks"
+      },
+      "social-tokens-bee": {
+        "status": "FUTURE",
+        "estimatedHoney": 400,
+        "contract": "Social Tokens"
+      }
+    },
+    "continuousBees": {
+      "interest-compound-bee": {
+        "status": "CONTINUOUS",
+        "honeyRate": 50,
+        "frequency": "daily"
+      },
+      "liquidity-mining-bee": {
+        "status": "CONTINUOUS",
+        "honeyRate": 25,
+        "frequency": "daily"
+      },
+      "validator-rewards-bee": {
+        "status": "CONTINUOUS",
+        "honeyRate": 75,
+        "frequency": "daily"
+      },
+      "referral-rewards-bee": {
+        "status": "CONTINUOUS",
+        "honeyRate": 15,
+        "frequency": "daily"
+      }
+    }
+  },
+  "recent_deposits": [
+    {
+      "bee": "github-copilot-bee",
+      "amount": 207.19860148286867,
+      "source": "GitHub Copilot",
+      "timestamp": "2026-02-04T23:43:31.177Z",
+      "tx": "0xc01d879f37b67"
+    },
+    {
+      "bee": "aws-credits-bee",
+      "amount": 466.2305108385225,
+      "source": "AWS Credits",
+      "timestamp": "2026-02-04T23:43:31.178Z",
+      "tx": "0x19ef305ddb8498"
+    },
+    {
+      "bee": "netlify-credits-bee",
+      "amount": 83.51540356532755,
+      "source": "Netlify Credits",
+      "timestamp": "2026-02-04T23:43:31.178Z",
+      "tx": "0x4afdce1b7c385"
+    },
+    {
+      "bee": "interest-compound-bee",
+      "amount": 50,
+      "source": "daily rewards",
+      "timestamp": "2026-02-04T23:43:31.178Z",
+      "tx": "0x45dc358f1728f"
+    },
+    {
+      "bee": "liquidity-mining-bee",
+      "amount": 25,
+      "source": "daily rewards",
+      "timestamp": "2026-02-04T23:43:31.179Z",
+      "tx": "0xc897b78f6c973"
+    },
+    {
+      "bee": "validator-rewards-bee",
+      "amount": 75,
+      "source": "daily rewards",
+      "timestamp": "2026-02-04T23:43:31.179Z",
+      "tx": "0xb849086a0599f8"
+    },
+    {
+      "bee": "referral-rewards-bee",
+      "amount": 15,
+      "source": "daily rewards",
+      "timestamp": "2026-02-04T23:43:31.179Z",
+      "tx": "0x10eac8c0689ec8"
+    }
+  ],
+  "projections": {
+    "current_deposited": 10789.650000000001,
+    "scout_potential": 2975,
+    "future_potential": 10500,
+    "daily_continuous": 165,
+    "monthly_continuous": 4950,
+    "annual_continuous": 60225,
+    "total_potential": 85411.58451588672
+  },
+  "hive_metrics": {
+    "total_bees": 31,
+    "active_bees": 11,
+    "scout_bees": 8,
+    "future_bees": 8,
+    "continuous_bees": 4
+  },
+  "buzz_status": "BUZZ_BUZZ_BUZZ_ALL_BEES_ACTIVE"
+}

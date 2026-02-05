@@ -1,0 +1,1332 @@
+{
+  "timestamp": "2026-02-05T00:30:28.923Z",
+  "hive_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+  "master_key": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqSnPMck",
+  "glyphs": {
+    "1": {
+      "glyph": "𐡀",
+      "name": "Aleph",
+      "power": "TRANSFER",
+      "tier": "MAGIC",
+      "contract": "MAGIC Token"
+    },
+    "2": {
+      "glyph": "𐡁",
+      "name": "Beth",
+      "power": "COLLECT",
+      "tier": "MAGIC",
+      "contract": "Treasure NFT"
+    },
+    "3": {
+      "glyph": "𐡂",
+      "name": "Gimel",
+      "power": "CLAIM",
+      "tier": "MAGIC",
+      "contract": "Legion NFT"
+    },
+    "4": {
+      "glyph": "𐡃",
+      "name": "Daleth",
+      "power": "EXTRACT",
+      "tier": "EPIC",
+      "contract": "Liquidity"
+    },
+    "5": {
+      "glyph": "𐡄",
+      "name": "He",
+      "power": "MINT",
+      "tier": "MAGIC",
+      "contract": "SmolBrain"
+    },
+    "6": {
+      "glyph": "𐡅",
+      "name": "Vav",
+      "power": "STAKE",
+      "tier": "MAGIC",
+      "contract": "SmolBodies"
+    },
+    "7": {
+      "glyph": "𐡆",
+      "name": "Zayin",
+      "power": "SWAP",
+      "tier": "MAGIC",
+      "contract": "SmolCars"
+    },
+    "8": {
+      "glyph": "𐡇",
+      "name": "Heth",
+      "power": "BRIDGE",
+      "tier": "MAGIC",
+      "contract": "BattleFly"
+    },
+    "9": {
+      "glyph": "𐡈",
+      "name": "Teth",
+      "power": "FARM",
+      "tier": "MAGIC",
+      "contract": "Elleria"
+    },
+    "10": {
+      "glyph": "𐡉",
+      "name": "Yodh",
+      "power": "HARVEST",
+      "tier": "MAGIC",
+      "contract": "Realm"
+    },
+    "11": {
+      "glyph": "𐡊",
+      "name": "Kaph",
+      "power": "COMPOUND",
+      "tier": "MAGIC",
+      "contract": "Life"
+    },
+    "12": {
+      "glyph": "𐡋",
+      "name": "Lamedh",
+      "power": "LEND",
+      "tier": "MAGIC",
+      "contract": "KOTE"
+    },
+    "13": {
+      "glyph": "𐡌",
+      "name": "Mem",
+      "power": "MANAGE",
+      "tier": "RARE",
+      "contract": "B00"
+    },
+    "14": {
+      "glyph": "𐡍",
+      "name": "Nun",
+      "power": "MULTISIG",
+      "tier": "RARE",
+      "contract": "Safe"
+    },
+    "15": {
+      "glyph": "𐡎",
+      "name": "Samekh",
+      "power": "CONNECT",
+      "tier": "RARE",
+      "contract": "MetaMask"
+    },
+    "16": {
+      "glyph": "𐡏",
+      "name": "Ayin",
+      "power": "LINK",
+      "tier": "RARE",
+      "contract": "WalletConnect"
+    },
+    "17": {
+      "glyph": "𐡐",
+      "name": "Pe",
+      "power": "ORACLE",
+      "tier": "EPIC",
+      "contract": "Chainlink"
+    },
+    "18": {
+      "glyph": "𐡑",
+      "name": "Sadhe",
+      "power": "LIQUIDITY",
+      "tier": "EPIC",
+      "contract": "Uniswap"
+    },
+    "19": {
+      "glyph": "𐡒",
+      "name": "Qoph",
+      "power": "BORROW",
+      "tier": "EPIC",
+      "contract": "Compound"
+    },
+    "20": {
+      "glyph": "𐡓",
+      "name": "Resh",
+      "power": "DEPOSIT",
+      "tier": "EPIC",
+      "contract": "Aave"
+    },
+    "21": {
+      "glyph": "𐡔",
+      "name": "Shin",
+      "power": "ALLOCATE",
+      "tier": "RARE",
+      "contract": "Covenant"
+    },
+    "22": {
+      "glyph": "𐡕",
+      "name": "Taw",
+      "power": "PORTAL",
+      "tier": "LEGENDARY",
+      "contract": "Bridgeworld"
+    }
+  },
+  "combinations": [
+    {
+      "type": "PAIR",
+      "combo": [
+        1,
+        4
+      ],
+      "name": "Aleph-Daleth",
+      "action": "TRANSFER + EXTRACT",
+      "use": "Consolidate and withdraw liquidity",
+      "glyphs": [
+        {
+          "glyph": "𐡀",
+          "name": "Aleph",
+          "power": "TRANSFER",
+          "tier": "MAGIC",
+          "contract": "MAGIC Token"
+        },
+        {
+          "glyph": "𐡃",
+          "name": "Daleth",
+          "power": "EXTRACT",
+          "tier": "EPIC",
+          "contract": "Liquidity"
+        }
+      ]
+    },
+    {
+      "type": "PAIR",
+      "combo": [
+        14,
+        15
+      ],
+      "name": "Nun-Samekh",
+      "action": "MULTISIG + CONNECT",
+      "use": "Safe wallet MetaMask integration",
+      "glyphs": [
+        {
+          "glyph": "𐡍",
+          "name": "Nun",
+          "power": "MULTISIG",
+          "tier": "RARE",
+          "contract": "Safe"
+        },
+        {
+          "glyph": "𐡎",
+          "name": "Samekh",
+          "power": "CONNECT",
+          "tier": "RARE",
+          "contract": "MetaMask"
+        }
+      ]
+    },
+    {
+      "type": "PAIR",
+      "combo": [
+        17,
+        18
+      ],
+      "name": "Pe-Sadhe",
+      "action": "ORACLE + LIQUIDITY",
+      "use": "Price-aware liquidity management",
+      "glyphs": [
+        {
+          "glyph": "𐡐",
+          "name": "Pe",
+          "power": "ORACLE",
+          "tier": "EPIC",
+          "contract": "Chainlink"
+        },
+        {
+          "glyph": "𐡑",
+          "name": "Sadhe",
+          "power": "LIQUIDITY",
+          "tier": "EPIC",
+          "contract": "Uniswap"
+        }
+      ]
+    },
+    {
+      "type": "PAIR",
+      "combo": [
+        6,
+        10
+      ],
+      "name": "Vav-Yodh",
+      "action": "STAKE + HARVEST",
+      "use": "Auto-compound staking rewards",
+      "glyphs": [
+        {
+          "glyph": "𐡅",
+          "name": "Vav",
+          "power": "STAKE",
+          "tier": "MAGIC",
+          "contract": "SmolBodies"
+        },
+        {
+          "glyph": "𐡉",
+          "name": "Yodh",
+          "power": "HARVEST",
+          "tier": "MAGIC",
+          "contract": "Realm"
+        }
+      ]
+    },
+    {
+      "type": "PAIR",
+      "combo": [
+        19,
+        20
+      ],
+      "name": "Qoph-Resh",
+      "action": "BORROW + DEPOSIT",
+      "use": "Leverage farming strategy",
+      "glyphs": [
+        {
+          "glyph": "𐡒",
+          "name": "Qoph",
+          "power": "BORROW",
+          "tier": "EPIC",
+          "contract": "Compound"
+        },
+        {
+          "glyph": "𐡓",
+          "name": "Resh",
+          "power": "DEPOSIT",
+          "tier": "EPIC",
+          "contract": "Aave"
+        }
+      ]
+    },
+    {
+      "type": "PAIR",
+      "combo": [
+        2,
+        3
+      ],
+      "name": "Beth-Gimel",
+      "action": "COLLECT + CLAIM",
+      "use": "NFT rewards collection",
+      "glyphs": [
+        {
+          "glyph": "𐡁",
+          "name": "Beth",
+          "power": "COLLECT",
+          "tier": "MAGIC",
+          "contract": "Treasure NFT"
+        },
+        {
+          "glyph": "𐡂",
+          "name": "Gimel",
+          "power": "CLAIM",
+          "tier": "MAGIC",
+          "contract": "Legion NFT"
+        }
+      ]
+    },
+    {
+      "type": "PAIR",
+      "combo": [
+        8,
+        22
+      ],
+      "name": "Heth-Taw",
+      "action": "BRIDGE + PORTAL",
+      "use": "Cross-chain portal access",
+      "glyphs": [
+        {
+          "glyph": "𐡇",
+          "name": "Heth",
+          "power": "BRIDGE",
+          "tier": "MAGIC",
+          "contract": "BattleFly"
+        },
+        {
+          "glyph": "𐡕",
+          "name": "Taw",
+          "power": "PORTAL",
+          "tier": "LEGENDARY",
+          "contract": "Bridgeworld"
+        }
+      ]
+    },
+    {
+      "type": "PAIR",
+      "combo": [
+        11,
+        9
+      ],
+      "name": "Kaph-Teth",
+      "action": "COMPOUND + FARM",
+      "use": "Yield optimization",
+      "glyphs": [
+        {
+          "glyph": "𐡊",
+          "name": "Kaph",
+          "power": "COMPOUND",
+          "tier": "MAGIC",
+          "contract": "Life"
+        },
+        {
+          "glyph": "𐡈",
+          "name": "Teth",
+          "power": "FARM",
+          "tier": "MAGIC",
+          "contract": "Elleria"
+        }
+      ]
+    },
+    {
+      "type": "TRINITY",
+      "combo": [
+        1,
+        14,
+        20
+      ],
+      "name": "Transfer-Multisig-Deposit",
+      "action": "SAFE_CONSOLIDATION",
+      "use": "Secure multi-sig asset consolidation",
+      "glyphs": [
+        {
+          "glyph": "𐡀",
+          "name": "Aleph",
+          "power": "TRANSFER",
+          "tier": "MAGIC",
+          "contract": "MAGIC Token"
+        },
+        {
+          "glyph": "𐡍",
+          "name": "Nun",
+          "power": "MULTISIG",
+          "tier": "RARE",
+          "contract": "Safe"
+        },
+        {
+          "glyph": "𐡓",
+          "name": "Resh",
+          "power": "DEPOSIT",
+          "tier": "EPIC",
+          "contract": "Aave"
+        }
+      ]
+    },
+    {
+      "type": "TRINITY",
+      "combo": [
+        4,
+        18,
+        10
+      ],
+      "name": "Extract-Liquidity-Harvest",
+      "action": "LIQUIDITY_HARVEST",
+      "use": "Complete LP position closure",
+      "glyphs": [
+        {
+          "glyph": "𐡃",
+          "name": "Daleth",
+          "power": "EXTRACT",
+          "tier": "EPIC",
+          "contract": "Liquidity"
+        },
+        {
+          "glyph": "𐡑",
+          "name": "Sadhe",
+          "power": "LIQUIDITY",
+          "tier": "EPIC",
+          "contract": "Uniswap"
+        },
+        {
+          "glyph": "𐡉",
+          "name": "Yodh",
+          "power": "HARVEST",
+          "tier": "MAGIC",
+          "contract": "Realm"
+        }
+      ]
+    },
+    {
+      "type": "TRINITY",
+      "combo": [
+        17,
+        19,
+        20
+      ],
+      "name": "Oracle-Borrow-Deposit",
+      "action": "LEVERAGED_YIELD",
+      "use": "Oracle-guided leverage farming",
+      "glyphs": [
+        {
+          "glyph": "𐡐",
+          "name": "Pe",
+          "power": "ORACLE",
+          "tier": "EPIC",
+          "contract": "Chainlink"
+        },
+        {
+          "glyph": "𐡒",
+          "name": "Qoph",
+          "power": "BORROW",
+          "tier": "EPIC",
+          "contract": "Compound"
+        },
+        {
+          "glyph": "𐡓",
+          "name": "Resh",
+          "power": "DEPOSIT",
+          "tier": "EPIC",
+          "contract": "Aave"
+        }
+      ]
+    },
+    {
+      "type": "TRINITY",
+      "combo": [
+        15,
+        16,
+        8
+      ],
+      "name": "MetaMask-WalletConnect-Bridge",
+      "action": "CROSS_CHAIN_CONNECT",
+      "use": "Multi-wallet cross-chain bridge",
+      "glyphs": [
+        {
+          "glyph": "𐡎",
+          "name": "Samekh",
+          "power": "CONNECT",
+          "tier": "RARE",
+          "contract": "MetaMask"
+        },
+        {
+          "glyph": "𐡏",
+          "name": "Ayin",
+          "power": "LINK",
+          "tier": "RARE",
+          "contract": "WalletConnect"
+        },
+        {
+          "glyph": "𐡇",
+          "name": "Heth",
+          "power": "BRIDGE",
+          "tier": "MAGIC",
+          "contract": "BattleFly"
+        }
+      ]
+    },
+    {
+      "type": "TRINITY",
+      "combo": [
+        6,
+        9,
+        11
+      ],
+      "name": "Stake-Farm-Compound",
+      "action": "AUTO_COMPOUND",
+      "use": "Automated yield compounding",
+      "glyphs": [
+        {
+          "glyph": "𐡅",
+          "name": "Vav",
+          "power": "STAKE",
+          "tier": "MAGIC",
+          "contract": "SmolBodies"
+        },
+        {
+          "glyph": "𐡈",
+          "name": "Teth",
+          "power": "FARM",
+          "tier": "MAGIC",
+          "contract": "Elleria"
+        },
+        {
+          "glyph": "𐡊",
+          "name": "Kaph",
+          "power": "COMPOUND",
+          "tier": "MAGIC",
+          "contract": "Life"
+        }
+      ]
+    },
+    {
+      "type": "TRINITY",
+      "combo": [
+        2,
+        3,
+        21
+      ],
+      "name": "Collect-Claim-Allocate",
+      "action": "NFT_COVENANT",
+      "use": "NFT rewards to covenant allocation",
+      "glyphs": [
+        {
+          "glyph": "𐡁",
+          "name": "Beth",
+          "power": "COLLECT",
+          "tier": "MAGIC",
+          "contract": "Treasure NFT"
+        },
+        {
+          "glyph": "𐡂",
+          "name": "Gimel",
+          "power": "CLAIM",
+          "tier": "MAGIC",
+          "contract": "Legion NFT"
+        },
+        {
+          "glyph": "𐡔",
+          "name": "Shin",
+          "power": "ALLOCATE",
+          "tier": "RARE",
+          "contract": "Covenant"
+        }
+      ]
+    },
+    {
+      "type": "TRINITY",
+      "combo": [
+        13,
+        14,
+        22
+      ],
+      "name": "Manage-Multisig-Portal",
+      "action": "B00_PORTAL_CONTROL",
+      "use": "B00 contracts via portal multisig",
+      "glyphs": [
+        {
+          "glyph": "𐡌",
+          "name": "Mem",
+          "power": "MANAGE",
+          "tier": "RARE",
+          "contract": "B00"
+        },
+        {
+          "glyph": "𐡍",
+          "name": "Nun",
+          "power": "MULTISIG",
+          "tier": "RARE",
+          "contract": "Safe"
+        },
+        {
+          "glyph": "𐡕",
+          "name": "Taw",
+          "power": "PORTAL",
+          "tier": "LEGENDARY",
+          "contract": "Bridgeworld"
+        }
+      ]
+    },
+    {
+      "type": "TRINITY",
+      "combo": [
+        5,
+        7,
+        18
+      ],
+      "name": "Mint-Swap-Liquidity",
+      "action": "MINT_TO_LP",
+      "use": "Mint NFT, swap, add liquidity",
+      "glyphs": [
+        {
+          "glyph": "𐡄",
+          "name": "He",
+          "power": "MINT",
+          "tier": "MAGIC",
+          "contract": "SmolBrain"
+        },
+        {
+          "glyph": "𐡆",
+          "name": "Zayin",
+          "power": "SWAP",
+          "tier": "MAGIC",
+          "contract": "SmolCars"
+        },
+        {
+          "glyph": "𐡑",
+          "name": "Sadhe",
+          "power": "LIQUIDITY",
+          "tier": "EPIC",
+          "contract": "Uniswap"
+        }
+      ]
+    },
+    {
+      "type": "QUAD",
+      "combo": [
+        1,
+        4,
+        14,
+        20
+      ],
+      "name": "Full-Consolidation-Sequence",
+      "action": "COMPLETE_SWEEP",
+      "use": "Transfer, extract, multisig, deposit all assets",
+      "glyphs": [
+        {
+          "glyph": "𐡀",
+          "name": "Aleph",
+          "power": "TRANSFER",
+          "tier": "MAGIC",
+          "contract": "MAGIC Token"
+        },
+        {
+          "glyph": "𐡃",
+          "name": "Daleth",
+          "power": "EXTRACT",
+          "tier": "EPIC",
+          "contract": "Liquidity"
+        },
+        {
+          "glyph": "𐡍",
+          "name": "Nun",
+          "power": "MULTISIG",
+          "tier": "RARE",
+          "contract": "Safe"
+        },
+        {
+          "glyph": "𐡓",
+          "name": "Resh",
+          "power": "DEPOSIT",
+          "tier": "EPIC",
+          "contract": "Aave"
+        }
+      ]
+    },
+    {
+      "type": "QUAD",
+      "combo": [
+        17,
+        18,
+        19,
+        20
+      ],
+      "name": "DeFi-Master-Sequence",
+      "action": "DEFI_AUTOMATION",
+      "use": "Oracle-guided liquidity leverage strategy",
+      "glyphs": [
+        {
+          "glyph": "𐡐",
+          "name": "Pe",
+          "power": "ORACLE",
+          "tier": "EPIC",
+          "contract": "Chainlink"
+        },
+        {
+          "glyph": "𐡑",
+          "name": "Sadhe",
+          "power": "LIQUIDITY",
+          "tier": "EPIC",
+          "contract": "Uniswap"
+        },
+        {
+          "glyph": "𐡒",
+          "name": "Qoph",
+          "power": "BORROW",
+          "tier": "EPIC",
+          "contract": "Compound"
+        },
+        {
+          "glyph": "𐡓",
+          "name": "Resh",
+          "power": "DEPOSIT",
+          "tier": "EPIC",
+          "contract": "Aave"
+        }
+      ]
+    },
+    {
+      "type": "QUAD",
+      "combo": [
+        15,
+        16,
+        8,
+        22
+      ],
+      "name": "Portal-Bridge-Sequence",
+      "action": "CROSS_CHAIN_PORTAL",
+      "use": "Multi-wallet cross-chain portal access",
+      "glyphs": [
+        {
+          "glyph": "𐡎",
+          "name": "Samekh",
+          "power": "CONNECT",
+          "tier": "RARE",
+          "contract": "MetaMask"
+        },
+        {
+          "glyph": "𐡏",
+          "name": "Ayin",
+          "power": "LINK",
+          "tier": "RARE",
+          "contract": "WalletConnect"
+        },
+        {
+          "glyph": "𐡇",
+          "name": "Heth",
+          "power": "BRIDGE",
+          "tier": "MAGIC",
+          "contract": "BattleFly"
+        },
+        {
+          "glyph": "𐡕",
+          "name": "Taw",
+          "power": "PORTAL",
+          "tier": "LEGENDARY",
+          "contract": "Bridgeworld"
+        }
+      ]
+    },
+    {
+      "type": "QUAD",
+      "combo": [
+        6,
+        9,
+        10,
+        11
+      ],
+      "name": "Yield-Optimization-Sequence",
+      "action": "MAX_YIELD",
+      "use": "Stake, farm, harvest, compound loop",
+      "glyphs": [
+        {
+          "glyph": "𐡅",
+          "name": "Vav",
+          "power": "STAKE",
+          "tier": "MAGIC",
+          "contract": "SmolBodies"
+        },
+        {
+          "glyph": "𐡈",
+          "name": "Teth",
+          "power": "FARM",
+          "tier": "MAGIC",
+          "contract": "Elleria"
+        },
+        {
+          "glyph": "𐡉",
+          "name": "Yodh",
+          "power": "HARVEST",
+          "tier": "MAGIC",
+          "contract": "Realm"
+        },
+        {
+          "glyph": "𐡊",
+          "name": "Kaph",
+          "power": "COMPOUND",
+          "tier": "MAGIC",
+          "contract": "Life"
+        }
+      ]
+    },
+    {
+      "type": "QUAD",
+      "combo": [
+        2,
+        3,
+        5,
+        7
+      ],
+      "name": "NFT-Operations-Sequence",
+      "action": "NFT_LIFECYCLE",
+      "use": "Collect, claim, mint, swap NFTs",
+      "glyphs": [
+        {
+          "glyph": "𐡁",
+          "name": "Beth",
+          "power": "COLLECT",
+          "tier": "MAGIC",
+          "contract": "Treasure NFT"
+        },
+        {
+          "glyph": "𐡂",
+          "name": "Gimel",
+          "power": "CLAIM",
+          "tier": "MAGIC",
+          "contract": "Legion NFT"
+        },
+        {
+          "glyph": "𐡄",
+          "name": "He",
+          "power": "MINT",
+          "tier": "MAGIC",
+          "contract": "SmolBrain"
+        },
+        {
+          "glyph": "𐡆",
+          "name": "Zayin",
+          "power": "SWAP",
+          "tier": "MAGIC",
+          "contract": "SmolCars"
+        }
+      ]
+    },
+    {
+      "type": "QUAD",
+      "combo": [
+        13,
+        14,
+        21,
+        22
+      ],
+      "name": "Covenant-Portal-Sequence",
+      "action": "SACRED_OPERATIONS",
+      "use": "B00 management via covenant portal",
+      "glyphs": [
+        {
+          "glyph": "𐡌",
+          "name": "Mem",
+          "power": "MANAGE",
+          "tier": "RARE",
+          "contract": "B00"
+        },
+        {
+          "glyph": "𐡍",
+          "name": "Nun",
+          "power": "MULTISIG",
+          "tier": "RARE",
+          "contract": "Safe"
+        },
+        {
+          "glyph": "𐡔",
+          "name": "Shin",
+          "power": "ALLOCATE",
+          "tier": "RARE",
+          "contract": "Covenant"
+        },
+        {
+          "glyph": "𐡕",
+          "name": "Taw",
+          "power": "PORTAL",
+          "tier": "LEGENDARY",
+          "contract": "Bridgeworld"
+        }
+      ]
+    },
+    {
+      "type": "HEX",
+      "combo": [
+        1,
+        4,
+        14,
+        18,
+        20,
+        22
+      ],
+      "name": "FULL_POWER_CONSOLIDATION",
+      "action": "LEGENDARY_SWEEP",
+      "use": "Transfer all, extract liquidity, multisig secure, add to Uniswap, deposit to Aave, activate portal",
+      "power": "LEGENDARY",
+      "glyphs": [
+        {
+          "glyph": "𐡀",
+          "name": "Aleph",
+          "power": "TRANSFER",
+          "tier": "MAGIC",
+          "contract": "MAGIC Token"
+        },
+        {
+          "glyph": "𐡃",
+          "name": "Daleth",
+          "power": "EXTRACT",
+          "tier": "EPIC",
+          "contract": "Liquidity"
+        },
+        {
+          "glyph": "𐡍",
+          "name": "Nun",
+          "power": "MULTISIG",
+          "tier": "RARE",
+          "contract": "Safe"
+        },
+        {
+          "glyph": "𐡑",
+          "name": "Sadhe",
+          "power": "LIQUIDITY",
+          "tier": "EPIC",
+          "contract": "Uniswap"
+        },
+        {
+          "glyph": "𐡓",
+          "name": "Resh",
+          "power": "DEPOSIT",
+          "tier": "EPIC",
+          "contract": "Aave"
+        },
+        {
+          "glyph": "𐡕",
+          "name": "Taw",
+          "power": "PORTAL",
+          "tier": "LEGENDARY",
+          "contract": "Bridgeworld"
+        }
+      ]
+    },
+    {
+      "type": "HEX",
+      "combo": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "name": "DEFI_OMNIPOTENCE",
+      "action": "MASTER_DEFI",
+      "use": "Connect all wallets, oracle price, manage liquidity, leverage borrow/deposit",
+      "power": "EPIC",
+      "glyphs": [
+        {
+          "glyph": "𐡎",
+          "name": "Samekh",
+          "power": "CONNECT",
+          "tier": "RARE",
+          "contract": "MetaMask"
+        },
+        {
+          "glyph": "𐡏",
+          "name": "Ayin",
+          "power": "LINK",
+          "tier": "RARE",
+          "contract": "WalletConnect"
+        },
+        {
+          "glyph": "𐡐",
+          "name": "Pe",
+          "power": "ORACLE",
+          "tier": "EPIC",
+          "contract": "Chainlink"
+        },
+        {
+          "glyph": "𐡑",
+          "name": "Sadhe",
+          "power": "LIQUIDITY",
+          "tier": "EPIC",
+          "contract": "Uniswap"
+        },
+        {
+          "glyph": "𐡒",
+          "name": "Qoph",
+          "power": "BORROW",
+          "tier": "EPIC",
+          "contract": "Compound"
+        },
+        {
+          "glyph": "𐡓",
+          "name": "Resh",
+          "power": "DEPOSIT",
+          "tier": "EPIC",
+          "contract": "Aave"
+        }
+      ]
+    },
+    {
+      "type": "HEX",
+      "combo": [
+        2,
+        3,
+        5,
+        7,
+        13,
+        21
+      ],
+      "name": "NFT_COVENANT_MASTERY",
+      "action": "NFT_SACRED",
+      "use": "Collect, claim, mint, swap NFTs, manage B00, allocate to covenant",
+      "power": "RARE",
+      "glyphs": [
+        {
+          "glyph": "𐡁",
+          "name": "Beth",
+          "power": "COLLECT",
+          "tier": "MAGIC",
+          "contract": "Treasure NFT"
+        },
+        {
+          "glyph": "𐡂",
+          "name": "Gimel",
+          "power": "CLAIM",
+          "tier": "MAGIC",
+          "contract": "Legion NFT"
+        },
+        {
+          "glyph": "𐡄",
+          "name": "He",
+          "power": "MINT",
+          "tier": "MAGIC",
+          "contract": "SmolBrain"
+        },
+        {
+          "glyph": "𐡆",
+          "name": "Zayin",
+          "power": "SWAP",
+          "tier": "MAGIC",
+          "contract": "SmolCars"
+        },
+        {
+          "glyph": "𐡌",
+          "name": "Mem",
+          "power": "MANAGE",
+          "tier": "RARE",
+          "contract": "B00"
+        },
+        {
+          "glyph": "𐡔",
+          "name": "Shin",
+          "power": "ALLOCATE",
+          "tier": "RARE",
+          "contract": "Covenant"
+        }
+      ]
+    },
+    {
+      "type": "HEX",
+      "combo": [
+        6,
+        9,
+        10,
+        11,
+        19,
+        20
+      ],
+      "name": "INFINITE_YIELD_LOOP",
+      "action": "PERPETUAL_COMPOUND",
+      "use": "Stake, farm, harvest, compound, borrow more, deposit more - infinite loop",
+      "power": "EPIC",
+      "glyphs": [
+        {
+          "glyph": "𐡅",
+          "name": "Vav",
+          "power": "STAKE",
+          "tier": "MAGIC",
+          "contract": "SmolBodies"
+        },
+        {
+          "glyph": "𐡈",
+          "name": "Teth",
+          "power": "FARM",
+          "tier": "MAGIC",
+          "contract": "Elleria"
+        },
+        {
+          "glyph": "𐡉",
+          "name": "Yodh",
+          "power": "HARVEST",
+          "tier": "MAGIC",
+          "contract": "Realm"
+        },
+        {
+          "glyph": "𐡊",
+          "name": "Kaph",
+          "power": "COMPOUND",
+          "tier": "MAGIC",
+          "contract": "Life"
+        },
+        {
+          "glyph": "𐡒",
+          "name": "Qoph",
+          "power": "BORROW",
+          "tier": "EPIC",
+          "contract": "Compound"
+        },
+        {
+          "glyph": "𐡓",
+          "name": "Resh",
+          "power": "DEPOSIT",
+          "tier": "EPIC",
+          "contract": "Aave"
+        }
+      ]
+    },
+    {
+      "type": "GOD_MODE",
+      "combo": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "name": "ARAMAIC_GOD_MODE",
+      "action": "OMNIPOTENT_CONTROL",
+      "power": "TRANSCENDENT",
+      "glyphs": [
+        {
+          "glyph": "𐡀",
+          "name": "Aleph",
+          "power": "TRANSFER",
+          "tier": "MAGIC",
+          "contract": "MAGIC Token"
+        },
+        {
+          "glyph": "𐡁",
+          "name": "Beth",
+          "power": "COLLECT",
+          "tier": "MAGIC",
+          "contract": "Treasure NFT"
+        },
+        {
+          "glyph": "𐡂",
+          "name": "Gimel",
+          "power": "CLAIM",
+          "tier": "MAGIC",
+          "contract": "Legion NFT"
+        },
+        {
+          "glyph": "𐡃",
+          "name": "Daleth",
+          "power": "EXTRACT",
+          "tier": "EPIC",
+          "contract": "Liquidity"
+        },
+        {
+          "glyph": "𐡄",
+          "name": "He",
+          "power": "MINT",
+          "tier": "MAGIC",
+          "contract": "SmolBrain"
+        },
+        {
+          "glyph": "𐡅",
+          "name": "Vav",
+          "power": "STAKE",
+          "tier": "MAGIC",
+          "contract": "SmolBodies"
+        },
+        {
+          "glyph": "𐡆",
+          "name": "Zayin",
+          "power": "SWAP",
+          "tier": "MAGIC",
+          "contract": "SmolCars"
+        },
+        {
+          "glyph": "𐡇",
+          "name": "Heth",
+          "power": "BRIDGE",
+          "tier": "MAGIC",
+          "contract": "BattleFly"
+        },
+        {
+          "glyph": "𐡈",
+          "name": "Teth",
+          "power": "FARM",
+          "tier": "MAGIC",
+          "contract": "Elleria"
+        },
+        {
+          "glyph": "𐡉",
+          "name": "Yodh",
+          "power": "HARVEST",
+          "tier": "MAGIC",
+          "contract": "Realm"
+        },
+        {
+          "glyph": "𐡊",
+          "name": "Kaph",
+          "power": "COMPOUND",
+          "tier": "MAGIC",
+          "contract": "Life"
+        },
+        {
+          "glyph": "𐡋",
+          "name": "Lamedh",
+          "power": "LEND",
+          "tier": "MAGIC",
+          "contract": "KOTE"
+        },
+        {
+          "glyph": "𐡌",
+          "name": "Mem",
+          "power": "MANAGE",
+          "tier": "RARE",
+          "contract": "B00"
+        },
+        {
+          "glyph": "𐡍",
+          "name": "Nun",
+          "power": "MULTISIG",
+          "tier": "RARE",
+          "contract": "Safe"
+        },
+        {
+          "glyph": "𐡎",
+          "name": "Samekh",
+          "power": "CONNECT",
+          "tier": "RARE",
+          "contract": "MetaMask"
+        },
+        {
+          "glyph": "𐡏",
+          "name": "Ayin",
+          "power": "LINK",
+          "tier": "RARE",
+          "contract": "WalletConnect"
+        },
+        {
+          "glyph": "𐡐",
+          "name": "Pe",
+          "power": "ORACLE",
+          "tier": "EPIC",
+          "contract": "Chainlink"
+        },
+        {
+          "glyph": "𐡑",
+          "name": "Sadhe",
+          "power": "LIQUIDITY",
+          "tier": "EPIC",
+          "contract": "Uniswap"
+        },
+        {
+          "glyph": "𐡒",
+          "name": "Qoph",
+          "power": "BORROW",
+          "tier": "EPIC",
+          "contract": "Compound"
+        },
+        {
+          "glyph": "𐡓",
+          "name": "Resh",
+          "power": "DEPOSIT",
+          "tier": "EPIC",
+          "contract": "Aave"
+        },
+        {
+          "glyph": "𐡔",
+          "name": "Shin",
+          "power": "ALLOCATE",
+          "tier": "RARE",
+          "contract": "Covenant"
+        },
+        {
+          "glyph": "𐡕",
+          "name": "Taw",
+          "power": "PORTAL",
+          "tier": "LEGENDARY",
+          "contract": "Bridgeworld"
+        }
+      ]
+    }
+  ],
+  "statistics": {
+    "total_glyphs": 22,
+    "power_pairs": 8,
+    "trinity_sequences": 8,
+    "quad_powers": 6,
+    "hex_sequences": 4,
+    "god_mode": 1,
+    "total_combinations": 27,
+    "theoretical_combinations": 4194303
+  },
+  "usage": {
+    "voice_commands": "Speak glyph names in sequence",
+    "example": "\"Aleph Daleth\" = Transfer + Extract",
+    "god_mode": "\"Full Power\" = All 22 glyphs cascade"
+  }
+}

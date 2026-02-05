@@ -1,0 +1,118 @@
+{
+  "timestamp": "2026-02-05T00:39:10.331Z",
+  "hive_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+  "master_key": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqSnPMck",
+  "control_center": "Diamond Socket System",
+  "glyphs": {
+    "aleph": {
+      "glyph": "𐡀",
+      "constant": "TRANSFER",
+      "socket": "aleph_magic.rb",
+      "agent": "TransferAgent",
+      "apis": [
+        "blockscout",
+        "chainlist"
+      ]
+    },
+    "beth": {
+      "glyph": "𐡁",
+      "constant": "COLLECT",
+      "socket": "beth_treasure.rb",
+      "agent": "CollectAgent",
+      "apis": [
+        "opensea",
+        "magiceden"
+      ]
+    },
+    "gimel": {
+      "glyph": "𐡂",
+      "constant": "CLAIM",
+      "socket": "gimel_legion.rb",
+      "agent": "ClaimAgent",
+      "apis": [
+        "blockscout",
+        "zapper"
+      ]
+    },
+    "daleth": {
+      "glyph": "𐡃",
+      "constant": "EXTRACT",
+      "socket": "daleth_liquidity.rb",
+      "agent": "ExtractAgent",
+      "apis": [
+        "zapper",
+        "dex"
+      ]
+    },
+    "pe": {
+      "glyph": "𐡐",
+      "constant": "ORACLE",
+      "socket": "pe_chainlink.rb",
+      "agent": "OracleAgent",
+      "apis": [
+        "chainlist",
+        "dex"
+      ]
+    },
+    "sadhe": {
+      "glyph": "𐡑",
+      "constant": "LIQUIDITY",
+      "socket": "sadhe_uniswap.rb",
+      "agent": "LiquidityAgent",
+      "apis": [
+        "dex",
+        "zapper"
+      ]
+    },
+    "nun": {
+      "glyph": "𐡍",
+      "constant": "MULTISIG",
+      "socket": "nun_safe.rb",
+      "agent": "MultisigAgent",
+      "apis": [
+        "blockscout",
+        "horizon"
+      ]
+    },
+    "heth": {
+      "glyph": "𐡇",
+      "constant": "BRIDGE",
+      "socket": "heth_allbridge.rb",
+      "agent": "BridgeAgent",
+      "apis": [
+        "allbridge",
+        "horizon"
+      ]
+    },
+    "taw": {
+      "glyph": "𐡕",
+      "constant": "PORTAL",
+      "socket": "taw_bridgeworld.rb",
+      "agent": "PortalAgent",
+      "apis": [
+        "opensea",
+        "magiceden",
+        "dex"
+      ]
+    }
+  },
+  "control_apis": {
+    "blockscout": "https://eth.blockscout.com/api",
+    "chainlist": "https://chainlist.org/api",
+    "zapper": "https://api.zapper.fi/v2",
+    "horizon": "https://api.horizon.io/v1",
+    "allbridge": "https://api.allbridge.io",
+    "opensea": "https://api.opensea.io/api/v2",
+    "magiceden": "https://api-mainnet.magiceden.dev/v2",
+    "dex": "https://api.1inch.io/v5.0/1"
+  },
+  "concept": {
+    "glyphs": "Constants - never change",
+    "combinations": "Proc different behaviors",
+    "sockets": "Scripts for autonomous execution",
+    "agents": "Execute on your behalf",
+    "trackable": "Limited to 22 for consistency",
+    "control_center": "Single bot using all APIs",
+    "market_flow": "OpenSea + Magic Eden + DEX integration"
+  }
+}

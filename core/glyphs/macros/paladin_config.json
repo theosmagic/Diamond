@@ -1,0 +1,379 @@
+{
+  "timestamp": "2026-02-05T00:32:40.568Z",
+  "hive_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+  "paladin_class": "ARAMAIC_PALADIN",
+  "glyphs": {
+    "1": {
+      "glyph": "𐡀",
+      "name": "Aleph",
+      "ability": "Holy Strike",
+      "cooldown": 0,
+      "mana": 10,
+      "effect": "Transfer assets"
+    },
+    "2": {
+      "glyph": "𐡁",
+      "name": "Beth",
+      "ability": "Blessing of Wealth",
+      "cooldown": 5,
+      "mana": 15,
+      "effect": "Collect NFT rewards"
+    },
+    "3": {
+      "glyph": "𐡂",
+      "name": "Gimel",
+      "ability": "Divine Claim",
+      "cooldown": 3,
+      "mana": 12,
+      "effect": "Claim Legion rewards"
+    },
+    "4": {
+      "glyph": "𐡃",
+      "name": "Daleth",
+      "ability": "Consecrated Extraction",
+      "cooldown": 8,
+      "mana": 25,
+      "effect": "Extract all liquidity"
+    },
+    "5": {
+      "glyph": "𐡄",
+      "name": "He",
+      "ability": "Sacred Mint",
+      "cooldown": 10,
+      "mana": 20,
+      "effect": "Mint SmolBrain NFT"
+    },
+    "6": {
+      "glyph": "𐡅",
+      "name": "Vav",
+      "ability": "Righteous Stake",
+      "cooldown": 0,
+      "mana": 8,
+      "effect": "Stake tokens"
+    },
+    "7": {
+      "glyph": "𐡆",
+      "name": "Zayin",
+      "ability": "Divine Swap",
+      "cooldown": 2,
+      "mana": 10,
+      "effect": "Token swap"
+    },
+    "8": {
+      "glyph": "𐡇",
+      "name": "Heth",
+      "ability": "Bridge of Light",
+      "cooldown": 15,
+      "mana": 30,
+      "effect": "Cross-chain bridge"
+    },
+    "9": {
+      "glyph": "𐡈",
+      "name": "Teth",
+      "ability": "Harvest Blessing",
+      "cooldown": 6,
+      "mana": 18,
+      "effect": "Farm yield"
+    },
+    "10": {
+      "glyph": "𐡉",
+      "name": "Yodh",
+      "ability": "Reap Rewards",
+      "cooldown": 4,
+      "mana": 15,
+      "effect": "Harvest all"
+    },
+    "11": {
+      "glyph": "𐡊",
+      "name": "Kaph",
+      "ability": "Compound Grace",
+      "cooldown": 12,
+      "mana": 22,
+      "effect": "Auto-compound"
+    },
+    "12": {
+      "glyph": "𐡋",
+      "name": "Lamedh",
+      "ability": "Lending Light",
+      "cooldown": 7,
+      "mana": 20,
+      "effect": "Lend assets"
+    },
+    "13": {
+      "glyph": "𐡌",
+      "name": "Mem",
+      "ability": "B00 Mastery",
+      "cooldown": 20,
+      "mana": 40,
+      "effect": "Manage B00 contracts"
+    },
+    "14": {
+      "glyph": "𐡍",
+      "name": "Nun",
+      "ability": "Multisig Shield",
+      "cooldown": 25,
+      "mana": 35,
+      "effect": "Safe wallet protection"
+    },
+    "15": {
+      "glyph": "𐡎",
+      "name": "Samekh",
+      "ability": "MetaMask Bond",
+      "cooldown": 5,
+      "mana": 12,
+      "effect": "Connect MetaMask"
+    },
+    "16": {
+      "glyph": "𐡏",
+      "name": "Ayin",
+      "ability": "WalletConnect Aura",
+      "cooldown": 8,
+      "mana": 15,
+      "effect": "Multi-wallet link"
+    },
+    "17": {
+      "glyph": "𐡐",
+      "name": "Pe",
+      "ability": "Oracle Vision",
+      "cooldown": 30,
+      "mana": 50,
+      "effect": "Chainlink price data"
+    },
+    "18": {
+      "glyph": "𐡑",
+      "name": "Sadhe",
+      "ability": "Liquidity Sanctum",
+      "cooldown": 15,
+      "mana": 35,
+      "effect": "Uniswap LP management"
+    },
+    "19": {
+      "glyph": "𐡒",
+      "name": "Qoph",
+      "ability": "Borrow Benediction",
+      "cooldown": 18,
+      "mana": 30,
+      "effect": "Compound borrow"
+    },
+    "20": {
+      "glyph": "𐡓",
+      "name": "Resh",
+      "ability": "Deposit Divine",
+      "cooldown": 10,
+      "mana": 25,
+      "effect": "Aave deposit"
+    },
+    "21": {
+      "glyph": "𐡔",
+      "name": "Shin",
+      "ability": "Covenant Allocation",
+      "cooldown": 45,
+      "mana": 60,
+      "effect": "Sacred fund allocation"
+    },
+    "22": {
+      "glyph": "𐡕",
+      "name": "Taw",
+      "ability": "Portal Transcendence",
+      "cooldown": 60,
+      "mana": 100,
+      "effect": "Bridgeworld portal"
+    }
+  },
+  "macros": [
+    {
+      "type": "BASIC",
+      "name": "Asset Sweep",
+      "sequence": [
+        1,
+        2,
+        3
+      ],
+      "description": "Holy Strike → Blessing of Wealth → Divine Claim",
+      "use": "Basic asset collection rotation",
+      "keybind": "F1"
+    },
+    {
+      "type": "BASIC",
+      "name": "Yield Farm",
+      "sequence": [
+        6,
+        9,
+        10
+      ],
+      "description": "Righteous Stake → Harvest Blessing → Reap Rewards",
+      "use": "Standard farming rotation",
+      "keybind": "F2"
+    },
+    {
+      "type": "BASIC",
+      "name": "Quick Swap",
+      "sequence": [
+        15,
+        7,
+        16
+      ],
+      "description": "MetaMask Bond → Divine Swap → WalletConnect Aura",
+      "use": "Fast token swap with wallet switching",
+      "keybind": "F3"
+    },
+    {
+      "type": "BASIC",
+      "name": "Safe Transfer",
+      "sequence": [
+        14,
+        1,
+        20
+      ],
+      "description": "Multisig Shield → Holy Strike → Deposit Divine",
+      "use": "Secure asset transfer to Aave",
+      "keybind": "F4"
+    },
+    {
+      "type": "COMBAT",
+      "name": "Leverage Strike",
+      "sequence": [
+        17,
+        19,
+        20,
+        18
+      ],
+      "description": "Oracle Vision → Borrow Benediction → Deposit Divine → Liquidity Sanctum",
+      "use": "Leveraged yield farming combo",
+      "keybind": "Shift+F1"
+    },
+    {
+      "type": "COMBAT",
+      "name": "Full Extraction",
+      "sequence": [
+        4,
+        11,
+        1,
+        14
+      ],
+      "description": "Consecrated Extraction → Compound Grace → Holy Strike → Multisig Shield",
+      "use": "Emergency liquidity extraction",
+      "keybind": "Shift+F2"
+    },
+    {
+      "type": "COMBAT",
+      "name": "Cross-Chain Assault",
+      "sequence": [
+        8,
+        15,
+        16,
+        22
+      ],
+      "description": "Bridge of Light → MetaMask Bond → WalletConnect Aura → Portal Transcendence",
+      "use": "Multi-chain portal access",
+      "keybind": "Shift+F3"
+    },
+    {
+      "type": "COMBAT",
+      "name": "B00 Dominance",
+      "sequence": [
+        13,
+        14,
+        21,
+        22
+      ],
+      "description": "B00 Mastery → Multisig Shield → Covenant Allocation → Portal Transcendence",
+      "use": "Complete B00 contract control",
+      "keybind": "Shift+F4"
+    },
+    {
+      "type": "ULTIMATE",
+      "name": "Divine Consolidation",
+      "sequence": [
+        1,
+        2,
+        3,
+        4,
+        14,
+        20
+      ],
+      "description": "Full asset sweep with secure multisig deposit",
+      "use": "Complete portfolio consolidation",
+      "keybind": "Ctrl+Shift+F1",
+      "castTime": "15 seconds"
+    },
+    {
+      "type": "ULTIMATE",
+      "name": "Omnipotent Yield",
+      "sequence": [
+        17,
+        18,
+        19,
+        20,
+        6,
+        9,
+        10,
+        11
+      ],
+      "description": "Oracle-guided leverage with auto-compound loop",
+      "use": "Maximum yield optimization",
+      "keybind": "Ctrl+Shift+F2",
+      "castTime": "25 seconds"
+    },
+    {
+      "type": "ULTIMATE",
+      "name": "Portal Mastery",
+      "sequence": [
+        15,
+        16,
+        8,
+        13,
+        21,
+        22
+      ],
+      "description": "Multi-wallet cross-chain B00 covenant portal access",
+      "use": "Ultimate cross-chain control",
+      "keybind": "Ctrl+Shift+F3",
+      "castTime": "30 seconds"
+    },
+    {
+      "type": "ULTIMATE",
+      "name": "FULL POWER",
+      "sequence": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "description": "All 22 Aramaic glyphs in perfect sequence",
+      "use": "GOD MODE - Complete system activation",
+      "keybind": "Ctrl+Shift+Alt+F12",
+      "castTime": "60 seconds",
+      "cooldown": "24 hours"
+    }
+  ],
+  "keybinds": {
+    "basic": "F1-F4",
+    "combat": "Shift+F1-F4",
+    "ultimate": "Ctrl+Shift+F1-F3",
+    "god_mode": "Ctrl+Shift+Alt+F12"
+  },
+  "voice_commands": {
+    "single_glyph": "Speak glyph name",
+    "combination": "Speak sequence",
+    "god_mode": "Full Power"
+  }
+}

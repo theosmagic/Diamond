@@ -1,0 +1,28 @@
+{
+  "networks": {
+    "mainnet": {
+      "rpc": "https://eth.llamarpc.com",
+      "chainId": 1,
+      "explorer": "https://etherscan.io"
+    },
+    "polygon": {
+      "rpc": "https://polygon-rpc.com",
+      "chainId": 137,
+      "explorer": "https://polygonscan.com"
+    },
+    "arbitrum": {
+      "rpc": "https://arb1.arbitrum.io/rpc",
+      "chainId": 42161,
+      "explorer": "https://arbiscan.io"
+    }
+  },
+  "contracts": {
+    "hive_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+    "master_key": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqSnPMck"
+  },
+  "production": {
+    "mainnet_ready": true,
+    "autonomous_execution": true,
+    "security_level": "MAXIMUM"
+  }
+}

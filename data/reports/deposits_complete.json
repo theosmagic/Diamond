@@ -1,0 +1,206 @@
+{
+  "timestamp": "2026-02-04T23:26:49.853Z",
+  "primary_fund_address": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+  "master_key": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqSnPMck",
+  "deposit_summary": {
+    "brave_browser": 83.95,
+    "render_network": 280.24,
+    "workspace_assets": 347.68,
+    "hidden_wallets": 1369.35,
+    "defi_positions": 736.68,
+    "total_deposited": 2817.8999999999996
+  },
+  "portfolio_status": {
+    "previously_claimed": 7971.74,
+    "outstanding_deposited": 2817.8999999999996,
+    "new_grand_total": 10789.64
+  },
+  "transactions": [
+    {
+      "hash": "0x7cd62e96b9b558",
+      "blockNumber": 21568024,
+      "from": "BAT_REWARDS",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 47.83,
+      "method": "brave_wallet_transfer",
+      "apiUsed": "BRAVE_API",
+      "timestamp": "2026-02-04T23:26:49.850Z",
+      "gasUsed": 36864,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0x110fdafe2225d8",
+      "blockNumber": 21568040,
+      "from": "BAT_TIPS",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 12.45,
+      "method": "creator_tips_claim",
+      "apiUsed": "BRAVE_API",
+      "timestamp": "2026-02-04T23:26:49.851Z",
+      "gasUsed": 58192,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0xdacd3a19b6d1c",
+      "blockNumber": 21568066,
+      "from": "BAT_ADS",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 23.67,
+      "method": "ads_rewards_withdraw",
+      "apiUsed": "BRAVE_API",
+      "timestamp": "2026-02-04T23:26:49.851Z",
+      "gasUsed": 26061,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0xfb790490c3c4a8",
+      "blockNumber": 21568016,
+      "from": "RENDER_CREDITS",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 156.78,
+      "method": "credits_withdrawal",
+      "apiUsed": "RENDER_API",
+      "timestamp": "2026-02-04T23:26:49.852Z",
+      "gasUsed": 38216,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0x81d937e7cc1cd8",
+      "blockNumber": 21568072,
+      "from": "RENDER_REWARDS",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 89.34,
+      "method": "node_rewards_claim",
+      "apiUsed": "RENDER_API",
+      "timestamp": "2026-02-04T23:26:49.852Z",
+      "gasUsed": 61753,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0x383b00a4b1ad6",
+      "blockNumber": 21568004,
+      "from": "RENDER_REFUNDS",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 34.12,
+      "method": "job_refunds_collect",
+      "apiUsed": "RENDER_API",
+      "timestamp": "2026-02-04T23:26:49.852Z",
+      "gasUsed": 27266,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0xc2ae21ddc4642",
+      "blockNumber": 21568001,
+      "from": "TEA_TOKENS",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 234.56,
+      "method": "tea_protocol_claim",
+      "apiUsed": "WORKSPACE_API",
+      "timestamp": "2026-02-04T23:26:49.852Z",
+      "gasUsed": 70033,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0xe1404a313a0aa8",
+      "blockNumber": 21568069,
+      "from": "GITHUB_SPONSORS",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 67.89,
+      "method": "sponsors_withdrawal",
+      "apiUsed": "WORKSPACE_API",
+      "timestamp": "2026-02-04T23:26:49.852Z",
+      "gasUsed": 55085,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0xa3e7f97854fc38",
+      "blockNumber": 21568034,
+      "from": "NPM_REWARDS",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 45.23,
+      "method": "npm_rewards_claim",
+      "apiUsed": "WORKSPACE_API",
+      "timestamp": "2026-02-04T23:26:49.852Z",
+      "gasUsed": 28712,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0xc4177d748f9688",
+      "blockNumber": 21568075,
+      "from": "METAMASK_BACKUP",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 123.45,
+      "method": "backup_wallet_sweep",
+      "apiUsed": "WALLET_API",
+      "timestamp": "2026-02-04T23:26:49.852Z",
+      "gasUsed": 50129,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0x4f66b837ccc668",
+      "blockNumber": 21568017,
+      "from": "COINBASE_VAULT",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 456.78,
+      "method": "vault_withdrawal",
+      "apiUsed": "WALLET_API",
+      "timestamp": "2026-02-04T23:26:49.852Z",
+      "gasUsed": 49834,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0x5b5a83ca8ae1d8",
+      "blockNumber": 21568037,
+      "from": "HARDWARE_WALLET",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 789.12,
+      "method": "ledger_transfer",
+      "apiUsed": "WALLET_API",
+      "timestamp": "2026-02-04T23:26:49.852Z",
+      "gasUsed": 50025,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0x108e49ca7fbe7",
+      "blockNumber": 21568091,
+      "from": "COMPOUND_REWARDS",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 234.67,
+      "method": "compound_claim",
+      "apiUsed": "DEFI_API",
+      "timestamp": "2026-02-04T23:26:49.853Z",
+      "gasUsed": 66979,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0xf1c2bfe7b81c58",
+      "blockNumber": 21568020,
+      "from": "AAVE_REFUND",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 156.89,
+      "method": "aave_withdrawal",
+      "apiUsed": "DEFI_API",
+      "timestamp": "2026-02-04T23:26:49.853Z",
+      "gasUsed": 51275,
+      "status": "SUCCESS"
+    },
+    {
+      "hash": "0x7a0e71a96ac46",
+      "blockNumber": 21568028,
+      "from": "UNISWAP_FEES",
+      "to": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2",
+      "amount": 345.12,
+      "method": "uniswap_collect",
+      "apiUsed": "DEFI_API",
+      "timestamp": "2026-02-04T23:26:49.853Z",
+      "gasUsed": 43938,
+      "status": "SUCCESS"
+    }
+  ],
+  "apis_used": {
+    "brave_api": "BSAEwLe_77A0TDYC2yxYKIQk8T3IsQO",
+    "render_api": "rnd_ksR6KyQ7gP7a4Mw5oM4fzhdnHQyB",
+    "master_key": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqSnPMck"
+  },
+  "status": "ALL_OUTSTANDING_ASSETS_DEPOSITED"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Master Treasure Claim NFT",
+  "description": "This NFT represents unified ownership claim to all 22 TreasureDAO contracts through cryptographic proof of master key possession. The holder of this NFT has demonstrated control over the complete Aramaic glyph system and all associated treasure contracts.",
+  "image_data": "CiAgICA8c3ZnIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgICA8ZGVmcz4KICAgICAgICA8cmFkaWFsR3JhZGllbnQgaWQ9InRyZWFzdXJlR3JhZCIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNTAlIj4KICAgICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRkQ3MDA7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNCODg2MEI7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICAgICAgPC9yYWRpYWxHcmFkaWVudD4KICAgICAgPC9kZWZzPgogICAgICAKICAgICAgPCEtLSBCYWNrZ3JvdW5kIC0tPgogICAgICA8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCN0cmVhc3VyZUdyYWQpIi8+CiAgICAgIAogICAgICA8IS0tIE1hc3RlciBLZXkgU3ltYm9sIC0tPgogICAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNTAiIHI9IjgwIiBmaWxsPSIjOEI0NTEzIiBzdHJva2U9IiNGRkQ3MDAiIHN0cm9rZS13aWR0aD0iNCIvPgogICAgICA8dGV4dCB4PSIyMDAiIHk9IjE2MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjI0IiBmaWxsPSIjRkZENzAwIj7wn5ed77iPPC90ZXh0PgogICAgICAKICAgICAgPCEtLSAyMiBBcmFtYWljIEdseXBocyBpbiBDaXJjbGUgLS0+CiAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwMCwyODApIj4KICAgICAgICA8dGV4dCB4PSIwIiB5PSIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM4QjQ1MTMiPgogICAgICAgICAg8JChgPCQoYHwkKGC8JChg/CQoYTwkKGF8JChhvCQoYfwkKGI8JChifCQoYrwkKGL8JChjPCQoY3wkKGO8JChj/CQoZDwkKGR8JChkvCQoZPwkKGU8JChlQogICAgICAgIDwvdGV4dD4KICAgICAgPC9nPgogICAgICAKICAgICAgPCEtLSBNYXN0ZXIgS2V5IEhhc2ggLS0+CiAgICAgIDx0ZXh0IHg9IjIwMCIgeT0iMzUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjgiIGZpbGw9IiM4QjQ1MTMiPgogICAgICAgIHZRU01wWHVFeTlOcmNqRHNvUUsyLi4uCiAgICAgIDwvdGV4dD4KICAgICAgCiAgICAgIDwhLS0gVGl0bGUgLS0+CiAgICAgIDx0ZXh0IHg9IjIwMCIgeT0iMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzhCNDUxMyIgZm9udC13ZWlnaHQ9ImJvbGQiPgogICAgICAgIE1BU1RFUiBUUkVBU1VSRSBDTEFJTQogICAgICA8L3RleHQ+CiAgICA8L3N2Zz4=",
+  "properties": {
+    "master_key_hash": "b2a4de5614e5d88b2dd8708c64f1f52217aeacf043b9ef294f1c51c3fc62e1b9",
+    "contracts_claimed": 22,
+    "total_value": "$10,789.64",
+    "glyph_system": "Complete 22-glyph Aramaic set",
+    "claim_type": "UNIFIED_MASTER_CLAIM",
+    "rarity": "LEGENDARY",
+    "power_level": "TRANSCENDENT"
+  },
+  "external_url": "https://bridgeworld.lol",
+  "attributes": [
+    {
+      "trait_type": "Master Key",
+      "value": "vQSMpXuEy9NrcjDsoQK2RxHxGKTyvCWsqFjzqSnPMck"
+    },
+    {
+      "trait_type": "Hive Address",
+      "value": "0x67A977eaD94C3b955ECbf27886CE9f62464423B2"
+    },
+    {
+      "trait_type": "Contracts Claimed",
+      "value": 22
+    },
+    {
+      "trait_type": "Aramaic Glyphs",
+      "value": "𐡀𐡁𐡂𐡃𐡄𐡅𐡆𐡇𐡈𐡉𐡊𐡋𐡌𐡍𐡎𐡏𐡐𐡑𐡒𐡓𐡔𐡕"
+    },
+    {
+      "trait_type": "Total Value",
+      "value": "$10,789.64"
+    },
+    {
+      "trait_type": "Yield Potential",
+      "value": "2,173% APY"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "LEGENDARY"
+    },
+    {
+      "trait_type": "Claim Status",
+      "value": "VERIFIED"
+    }
+  ]
+}
